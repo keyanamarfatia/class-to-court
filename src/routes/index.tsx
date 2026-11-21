@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowRight,
   BriefcaseBusiness,
+  Pause,
+  Play,
   Droplets,
   Footprints,
   Laptop,
@@ -22,6 +24,12 @@ const CDN = "https://cdn.shopify.com/s/files/1/0068/7341/5750";
 const img = (path: string, w = 900) => `${path}?width=${w}`;
 
 const LOGO = "https://mokobara.com/cdn/shop/files/Mokobara_SVG_White_Logo.svg";
+const VIDEO = {
+  hero: "https://mokobara.com/cdn/shop/videos/c/o/v/002646c7804e467fa65902775d78aa7f.mp4",
+  goingPlaces:
+    "https://mokobara.com/cdn/shop/videos/c/vp/cab38b3c736c4d4aaaab767c62f5a465/cab38b3c736c4d4aaaab767c62f5a465.HD-720p-4.5Mbps-96094946.mp4",
+};
+
 const LIFE = {
   commute: "https://mokobara.com/cdn/shop/files/tz-story-city-commute.webp",
   group: "https://mokobara.com/cdn/shop/files/tz-story-three-up.webp",
@@ -267,7 +275,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "preconnect", href: "https://cdn.shopify.com" },
-      { rel: "preload", as: "image", href: img(LIFE.commute, 1000) },
+      { rel: "preconnect", href: "https://mokobara.com" },
     ],
     scripts: [
       { type: "application/ld+json", children: JSON.stringify(faqSchema) },
@@ -276,6 +284,36 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
+
+function BgVideo({ src, poster, className, label }: { src: string; poster: string; className?: string; label: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(true);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      ref.current?.pause();
+      setPlaying(false);
+    }
+  }, []);
+  const toggle = () => {
+    const v = ref.current;
+    if (!v) return;
+    if (v.paused) {
+      void v.play();
+      setPlaying(true);
+    } else {
+      v.pause();
+      setPlaying(false);
+    }
+  };
+  return (
+    <>
+      <video ref={ref} className={className} src={src} poster={poster} autoPlay muted loop playsInline preload="auto" aria-hidden="true" />
+      <button type="button" className="video-toggle" onClick={toggle} aria-label={playing ? `Pause ${label}` : `Play ${label}`}>
+        {playing ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
+      </button>
+    </>
+  );
+}
 
 function Quiz() {
   const [step, setStep] = useState(0);
@@ -421,39 +459,28 @@ function Index() {
       </header>
 
       <div className="mk-main">
-        <section className="hero" id="top" aria-labelledby="page-title">
-          <div className="hero-inner">
-            <div className="hero-copy">
-              <p className="pill">The college edit</p>
-              <h1 className="hero-title" id="page-title">
-                The best laptop backpack for college, from class to court
-              </h1>
-              <p className="hero-sub">Campus in the morning. Court after class. One Mokobara that fits both.</p>
-              <div className="hero-actions">
-                <a className="btn-solid" href="#quiz">
-                  Take the 30-second quiz
-                </a>
-                <a className="arrow-link" href="#padel">
-                  First padel game <ArrowRight aria-hidden="true" />
-                </a>
-              </div>
-              <p className="hero-meta">Updated 21 November 2026 · Product facts and prices from mokobara.com</p>
+        <section className="hero-video" id="top" aria-labelledby="page-title">
+          <BgVideo src={VIDEO.hero} poster={img(LIFE.commute, 1200)} className="hero-video-media" label="background video" />
+          <div className="hero-video-shade" aria-hidden="true" />
+          <div className="hero-video-content">
+            <p className="pill">The college edit</p>
+            <h1 className="hero-title" id="page-title">
+              The best laptop backpack for college, from class to court
+            </h1>
+            <p className="hero-sub">Campus in the morning. Court after class. One Mokobara that fits both.</p>
+            <div className="hero-actions">
+              <a className="btn-yellow" href="#quiz">
+                Take the 30-second quiz
+              </a>
+              <a className="arrow-link arrow-link-light" href="#padel">
+                First padel game <ArrowRight aria-hidden="true" />
+              </a>
             </div>
-            <div className="hero-media">
-              <img
-                src={img(LIFE.commute, 1000)}
-                alt="Student on a city commute wearing a Mokobara backpack"
-                width={1000}
-                height={1359}
-                fetchPriority="high"
-              />
-              <div className="hero-specs" aria-hidden="true">
-                <span>16" MacBook</span>
-                <span>19L → 23L</span>
-                <span>Detachable sling</span>
-              </div>
-            </div>
+            <p className="hero-meta">Updated 21 November 2026 · Product facts and prices from mokobara.com</p>
           </div>
+          <a className="scroll-cue" href="#backpacks" aria-label="Scroll to the backpacks">
+            <span />
+          </a>
         </section>
 
         <section className="quick-answer mk-shell" aria-labelledby="quick-title">
@@ -514,18 +541,27 @@ function Index() {
           </div>
         </section>
 
+        <section className="motion-band" aria-label="Designed for going places">
+          <BgVideo src={VIDEO.goingPlaces} poster={img(LIFE.group, 1200)} className="motion-band-media" label="brand film" />
+          <div className="motion-band-shade" aria-hidden="true" />
+          <div className="motion-band-content">
+            <p className="pill">#GoingPlaces</p>
+            <p className="motion-band-title">Lecture. Metro. Court. Repeat.</p>
+            <a className="arrow-link arrow-link-light" href="#details">
+              See the details <ArrowRight aria-hidden="true" />
+            </a>
+          </div>
+        </section>
+
         <section className="lifestyle" aria-label="Mokobara backpacks on the go">
           {[
+            { src: LIFE.commute, alt: "Commuter wearing a Mokobara backpack on the way to class" },
             { src: LIFE.group, alt: "Three friends walking with Mokobara backpacks" },
             { src: LIFE.skate, alt: "Commuter carrying a Mokobara backpack in the city" },
             { src: LIFE.ride, alt: "Rider on a scooter with a Mokobara backpack" },
           ].map((p) => (
-            <img key={p.src} src={img(p.src, 700)} alt={p.alt} loading="lazy" width={700} height={952} />
+            <img key={p.src} src={img(p.src, 600)} alt={p.alt} loading="lazy" width={600} height={816} />
           ))}
-          <p className="lifestyle-caption">
-            <span className="pill">#GoingPlaces</span>
-            Lecture, metro, court, repeat.
-          </p>
         </section>
 
         <section className="mk-section mk-section-grey" id="compare" aria-labelledby="compare-title">
