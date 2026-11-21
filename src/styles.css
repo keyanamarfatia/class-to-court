@@ -915,3 +915,15 @@
 .facts-grid .arrow-link { margin-top: 12px; }
 
 .footer-built a { word-break: break-all; }
+
+/* ---------- Spacing pass: give the short answer room and a calmer type size ---------- */
+.quick-answer { padding-top: 56px !important; padding-bottom: 24px; }
+.quick-text { max-width: 60ch; font-size: 18px; line-height: 1.6; margin-bottom: 28px; }
+.quick-stats b { font-size: 26px; }
+.quick-answer .byline { margin-top: 24px; max-width: 90ch; }
+@media (min-width: 760px) {
+  .quick-answer { padding-top: 88px !important; padding-bottom: 32px; }
+  .quick-text { font-size: 20px; }
+}
+.hero-video-content .hero-actions { margin-top: 28px; }
+.hero-video-content .hero-title { margin-bottom: 0; }
