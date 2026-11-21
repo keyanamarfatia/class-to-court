@@ -1010,3 +1010,7 @@
 .col-hero .byline { max-width: 110ch; }
 .byline-strip { border-top: 1px solid var(--mk-line, #e5e5e5); background: #fff; padding: 20px 0; }
 .byline-strip .byline { margin: 0; font-size: 12px; }
+/* answer box: calmer text size */
+.answer-block p { font-size: 16px !important; line-height: 1.6; max-width: 62ch; }
+.answer-block { padding: 22px 24px !important; }
+@media (min-width: 1024px) { .answer-block p { font-size: 18px !important; } .answer-block { padding: 26px 30px !important; } }
