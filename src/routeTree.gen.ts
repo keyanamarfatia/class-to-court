@@ -10,9 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BagFinderQuizRouteImport } from './routes/bag-finder-quiz'
 import { Route as CabinLuggageRouteImport } from './routes/cabin-luggage'
+import { Route as CompareBackpacksRouteImport } from './routes/compare-backpacks'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as LaptopBagsRouteImport } from './routes/laptop-bags'
 import { Route as TravelBackpacksRouteImport } from './routes/travel-backpacks'
+import { Route as WhatToCarryToPadelRouteImport } from './routes/what-to-carry-to-padel'
 import { Route as CollectionsSlugRouteImport } from './routes/collections/$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -20,9 +24,24 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BagFinderQuizRoute = BagFinderQuizRouteImport.update({
+  id: '/bag-finder-quiz',
+  path: '/bag-finder-quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CabinLuggageRoute = CabinLuggageRouteImport.update({
   id: '/cabin-luggage',
   path: '/cabin-luggage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompareBackpacksRoute = CompareBackpacksRouteImport.update({
+  id: '/compare-backpacks',
+  path: '/compare-backpacks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LaptopBagsRoute = LaptopBagsRouteImport.update({
@@ -35,6 +54,11 @@ const TravelBackpacksRoute = TravelBackpacksRouteImport.update({
   path: '/travel-backpacks',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WhatToCarryToPadelRoute = WhatToCarryToPadelRouteImport.update({
+  id: '/what-to-carry-to-padel',
+  path: '/what-to-carry-to-padel',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CollectionsSlugRoute = CollectionsSlugRouteImport.update({
   id: '/collections/$slug',
   path: '/collections/$slug',
@@ -43,55 +67,83 @@ const CollectionsSlugRoute = CollectionsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bag-finder-quiz': typeof BagFinderQuizRoute
   '/cabin-luggage': typeof CabinLuggageRoute
+  '/compare-backpacks': typeof CompareBackpacksRoute
+  '/faq': typeof FaqRoute
   '/laptop-bags': typeof LaptopBagsRoute
   '/travel-backpacks': typeof TravelBackpacksRoute
+  '/what-to-carry-to-padel': typeof WhatToCarryToPadelRoute
   '/collections/$slug': typeof CollectionsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bag-finder-quiz': typeof BagFinderQuizRoute
   '/cabin-luggage': typeof CabinLuggageRoute
+  '/compare-backpacks': typeof CompareBackpacksRoute
+  '/faq': typeof FaqRoute
   '/laptop-bags': typeof LaptopBagsRoute
   '/travel-backpacks': typeof TravelBackpacksRoute
+  '/what-to-carry-to-padel': typeof WhatToCarryToPadelRoute
   '/collections/$slug': typeof CollectionsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bag-finder-quiz': typeof BagFinderQuizRoute
   '/cabin-luggage': typeof CabinLuggageRoute
+  '/compare-backpacks': typeof CompareBackpacksRoute
+  '/faq': typeof FaqRoute
   '/laptop-bags': typeof LaptopBagsRoute
   '/travel-backpacks': typeof TravelBackpacksRoute
+  '/what-to-carry-to-padel': typeof WhatToCarryToPadelRoute
   '/collections/$slug': typeof CollectionsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/bag-finder-quiz'
     | '/cabin-luggage'
+    | '/compare-backpacks'
+    | '/faq'
     | '/laptop-bags'
     | '/travel-backpacks'
+    | '/what-to-carry-to-padel'
     | '/collections/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/bag-finder-quiz'
     | '/cabin-luggage'
+    | '/compare-backpacks'
+    | '/faq'
     | '/laptop-bags'
     | '/travel-backpacks'
+    | '/what-to-carry-to-padel'
     | '/collections/$slug'
   id:
     | '__root__'
     | '/'
+    | '/bag-finder-quiz'
     | '/cabin-luggage'
+    | '/compare-backpacks'
+    | '/faq'
     | '/laptop-bags'
     | '/travel-backpacks'
+    | '/what-to-carry-to-padel'
     | '/collections/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BagFinderQuizRoute: typeof BagFinderQuizRoute
   CabinLuggageRoute: typeof CabinLuggageRoute
+  CompareBackpacksRoute: typeof CompareBackpacksRoute
+  FaqRoute: typeof FaqRoute
   LaptopBagsRoute: typeof LaptopBagsRoute
   TravelBackpacksRoute: typeof TravelBackpacksRoute
+  WhatToCarryToPadelRoute: typeof WhatToCarryToPadelRoute
   CollectionsSlugRoute: typeof CollectionsSlugRoute
 }
 
@@ -104,11 +156,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bag-finder-quiz': {
+      id: '/bag-finder-quiz'
+      path: '/bag-finder-quiz'
+      fullPath: '/bag-finder-quiz'
+      preLoaderRoute: typeof BagFinderQuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cabin-luggage': {
       id: '/cabin-luggage'
       path: '/cabin-luggage'
       fullPath: '/cabin-luggage'
       preLoaderRoute: typeof CabinLuggageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compare-backpacks': {
+      id: '/compare-backpacks'
+      path: '/compare-backpacks'
+      fullPath: '/compare-backpacks'
+      preLoaderRoute: typeof CompareBackpacksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/laptop-bags': {
@@ -125,6 +198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TravelBackpacksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/what-to-carry-to-padel': {
+      id: '/what-to-carry-to-padel'
+      path: '/what-to-carry-to-padel'
+      fullPath: '/what-to-carry-to-padel'
+      preLoaderRoute: typeof WhatToCarryToPadelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/collections/$slug': {
       id: '/collections/$slug'
       path: '/collections/$slug'
@@ -137,9 +217,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BagFinderQuizRoute: BagFinderQuizRoute,
   CabinLuggageRoute: CabinLuggageRoute,
+  CompareBackpacksRoute: CompareBackpacksRoute,
+  FaqRoute: FaqRoute,
   LaptopBagsRoute: LaptopBagsRoute,
   TravelBackpacksRoute: TravelBackpacksRoute,
+  WhatToCarryToPadelRoute: WhatToCarryToPadelRoute,
   CollectionsSlugRoute: CollectionsSlugRoute,
 }
 export const routeTree = rootRouteImport

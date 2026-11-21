@@ -22,8 +22,7 @@ export function Ticker() {
   );
 }
 
-export function TopBar({ home = false }: { home?: boolean }) {
-  const h = (id: string) => (home ? `#${id}` : `/#${id}`);
+export function TopBar(_: { home?: boolean }) {
   return (
     <header className="mk-topbar">
       <div className="topbar-inner">
@@ -40,14 +39,14 @@ export function TopBar({ home = false }: { home?: boolean }) {
           <Link to="/laptop-bags" activeProps={{ className: "active" }}>
             Laptop bags
           </Link>
-          <a href={h("compare")}>Compare</a>
-          <a href={h("quiz")}>Quiz</a>
-          <a href={h("padel")}>Padel</a>
-          <a href={h("faq")}>FAQ</a>
+          <Link to="/compare-backpacks" activeProps={{ className: "active" }}>Compare</Link>
+          <Link to="/bag-finder-quiz" activeProps={{ className: "active" }}>Quiz</Link>
+          <Link to="/what-to-carry-to-padel" activeProps={{ className: "active" }}>Padel</Link>
+          <Link to="/faq" activeProps={{ className: "active" }}>FAQ</Link>
         </nav>
-        <a className="topbar-cta" href={h("quiz")}>
+        <Link className="topbar-cta" to="/bag-finder-quiz">
           Find my bag <ArrowRight aria-hidden="true" />
-        </a>
+        </Link>
       </div>
     </header>
   );
@@ -63,6 +62,10 @@ export function SiteFooter() {
           <Link to="/cabin-luggage">Cabin luggage</Link>
           <Link to="/travel-backpacks">Travel backpacks</Link>
           <Link to="/laptop-bags">Laptop bags</Link>
+          <Link to="/compare-backpacks">Compare</Link>
+          <Link to="/bag-finder-quiz">Bag finder quiz</Link>
+          <Link to="/what-to-carry-to-padel">Padel guide</Link>
+          <Link to="/faq">FAQ</Link>
           <Link to="/">College edit home</Link>
         </nav>
         <a className="btn-yellow" href="https://mokobara.com" target="_blank" rel="noopener noreferrer">
@@ -78,10 +81,10 @@ export function SiteFooter() {
   );
 }
 
-export function FloatBtn({ home = false }: { home?: boolean }) {
+export function FloatBtn(_: { home?: boolean }) {
   return (
-    <a className="float-btn" href={home ? "#quiz" : "/#quiz"} aria-label="Take the bag quiz">
+    <Link className="float-btn" to="/bag-finder-quiz" aria-label="Take the bag quiz">
       <BriefcaseBusiness aria-hidden="true" />
-    </a>
+    </Link>
   );
 }

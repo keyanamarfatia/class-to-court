@@ -241,12 +241,12 @@ export function CollectionView({ slug }: { slug: string }) {
             ))}
           </Accordion>
           <div className="hero-actions" style={{ marginTop: 28 }}>
-            <a className="btn-solid" href="/#quiz">
+            <Link className="btn-solid" to="/bag-finder-quiz">
               Not sure? Take the quiz
-            </a>
-            <a className="arrow-link" href="/#padel">
+            </Link>
+            <Link className="arrow-link" to="/what-to-carry-to-padel">
               From class to court
-            </a>
+            </Link>
           </div>
         </div>
       </section>

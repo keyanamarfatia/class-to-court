@@ -836,3 +836,16 @@
   .col-title { font-size: 60px; }
   .col-intro { font-size: 18px; }
 }
+
+/* ---------- Explore cards + next steps ---------- */
+.explore-grid { display: grid; gap: 8px; }
+.explore-card { display: flex; flex-direction: column; gap: 8px; border-radius: 8px; background: #fff; padding: 22px; color: #000; text-decoration: none; transition: transform 160ms ease, box-shadow 160ms ease; }
+.explore-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.08); }
+.explore-num { color: var(--mk-muted); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; }
+.explore-card h3 { margin: 0; color: var(--mk-slate); font-size: 22px; font-weight: 500; letter-spacing: -0.02em; }
+.explore-card p { margin: 0 0 8px; color: var(--mk-muted); font-size: 14px; line-height: 1.5; }
+.explore-card .arrow-link { align-self: flex-start; margin-top: auto; }
+.next-steps { padding: 40px 0 56px; }
+.next-steps .col-switch a { background: var(--mk-grey); }
+@media (min-width: 760px) { .explore-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .explore-grid { grid-template-columns: repeat(4, 1fr); } }
