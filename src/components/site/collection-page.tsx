@@ -4,6 +4,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { CatalogCard } from "@/components/site/catalog-card";
 import { FloatBtn, SiteFooter, Ticker, TopBar, img, inr } from "@/components/site/chrome";
 import { catalog, SITE, type Collection, type Product } from "@/data/catalog";
+import { Byline, articleSchema } from "./eeat";
 
 export const find = (slug: string) => catalog.find((c) => c.slug === slug);
 
@@ -103,6 +104,7 @@ export function collectionHead(slug: string) {
         { property: "og:url", content: SITE + c.path },
       ],
       scripts: [
+        { type: "application/ld+json", children: JSON.stringify(articleSchema({ path: c.path, headline: title, description, image: img(c.items[0].img, 1200) })) },
         { type: "application/ld+json", children: JSON.stringify(itemList) },
         { type: "application/ld+json", children: JSON.stringify(crumbs) },
         { type: "application/ld+json", children: JSON.stringify(faq) },
@@ -146,6 +148,13 @@ export function CollectionView({ slug }: { slug: string }) {
           <p className="pill">{c.eyebrow}</p>
           <h1 className="col-title">{c.title}</h1>
           <p className="col-intro">{c.intro}</p>
+          <p className="col-summary">
+            According to mokobara.com on 21 November 2026, Mokobara lists {s.count} {c.label.toLowerCase()}, priced from{" "}
+            {inr(s.min)} ({s.cheapest.name}) to {inr(s.max)}
+            {s.capMin !== null ? `, with capacities from ${s.capMin}L to ${s.capMax}L` : ""}. {s.withLaptop.length} of the{" "}
+            {s.count} list a laptop fit{s.lightest ? `, and the lightest listed is the ${s.lightest.i.name} at ${s.lightest.i.kg} kg` : ""}.
+          </p>
+          <Byline />
           <ul className="quick-stats col-stats">
             <li>
               <b>{s.count}</b>

@@ -870,3 +870,19 @@
 .mk-section-dark .faq-answer { color: #d0d0d0; }
 .padel-media figcaption { color: #d0d0d0; }
 .ticker-track span { color: #000; }
+
+/* ---------- E-E-A-T + citability ---------- */
+.byline { margin: 18px 0 0; color: var(--mk-muted); font-size: 13px; line-height: 1.6; }
+.byline a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.byline-light { color: rgba(255,255,255,0.85); }
+.col-summary { max-width: 70ch; margin: -8px 0 4px; color: var(--mk-slate); font-size: 15px; line-height: 1.6; }
+.key-facts { padding-top: 40px; padding-bottom: 24px; }
+.facts-grid { display: grid; gap: 8px; margin-top: 22px; }
+.facts-grid article { border-left: 3px solid var(--mk-yellow); background: var(--mk-grey); padding: 18px 20px; border-radius: 0 6px 6px 0; }
+.facts-grid h3 { margin: 0 0 8px; color: var(--mk-slate); font-size: 17px; font-weight: 600; }
+.facts-grid p { margin: 0; color: #333; font-size: 15px; line-height: 1.6; }
+.about-grid { display: grid; gap: 36px; max-width: 760px; }
+.about-grid .section-title { font-size: 28px; margin-bottom: 10px; }
+.about-grid p { margin: 0; color: #333; font-size: 16px; line-height: 1.65; }
+.about-grid a { color: #000; text-decoration: underline; text-underline-offset: 3px; }
+@media (min-width: 760px) { .facts-grid { grid-template-columns: repeat(2, 1fr); } }

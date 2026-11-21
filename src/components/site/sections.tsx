@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import type React from "react";
+import { Byline, articleSchema } from "./eeat";
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -767,6 +768,7 @@ export function PageHero({ crumb, eyebrow, title, intro }: { crumb: string; eyeb
         <p className="pill">{eyebrow}</p>
         <h1 className="col-title">{title}</h1>
         <p className="col-intro">{intro}</p>
+        <Byline />
       </div>
     </section>
   );
@@ -780,6 +782,7 @@ export function NextSteps({ hide }: { hide?: string }) {
     { to: "/bag-finder-quiz", label: "Bag finder quiz" },
     { to: "/what-to-carry-to-padel", label: "Padel guide" },
     { to: "/faq", label: "FAQ" },
+    { to: "/about", label: "About this site" },
   ].filter((i) => i.to !== hide);
   return (
     <section className="mk-section next-steps" aria-label="Keep exploring">
@@ -825,7 +828,10 @@ export function pageHead(o: { path: string; title: string; description: string; 
       { property: "og:image", content: o.image },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    scripts: o.schemas.map((s) => ({ type: "application/ld+json", children: JSON.stringify(s) })),
+    scripts: [articleSchema({ path: o.path, headline: o.title, description: o.description, image: o.image }), ...o.schemas].map((s) => ({
+      type: "application/ld+json",
+      children: JSON.stringify(s),
+    })),
   };
 }
 

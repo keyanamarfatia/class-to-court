@@ -30,4 +30,7 @@ First padel game: carry court shoes, a water bottle, a towel and a change of clo
 
 ## Optional
 
+- [Full catalogue](https://class-to-court-carry.lovable.app/llms-full.txt): Every product with price, specs and features.
+- [About this site](https://class-to-court-carry.lovable.app/about): Who made it, methodology and sources.
+
 - [Sitemap](https://class-to-court-carry.lovable.app/sitemap.xml): Every page on this site.

@@ -66,6 +66,7 @@ export function SiteFooter() {
           <Link to="/bag-finder-quiz">Bag finder quiz</Link>
           <Link to="/what-to-carry-to-padel">Padel guide</Link>
           <Link to="/faq">FAQ</Link>
+          <Link to="/about">About us</Link>
           <Link to="/">College edit home</Link>
         </nav>
         <a className="btn-yellow" href="https://mokobara.com" target="_blank" rel="noopener noreferrer">

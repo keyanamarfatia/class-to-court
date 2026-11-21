@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { SITE } from "@/data/catalog";
+import { Byline, articleSchema, organizationSchema, productSchema, totals, websiteSchema } from "@/components/site/eeat";
+import { crumbSchema } from "@/components/site/sections";
 import { FloatBtn, SiteFooter, Ticker, TopBar } from "@/components/site/chrome";
 import {
   BgVideo,
@@ -47,6 +49,21 @@ export const Route = createFileRoute("/")({
       { rel: "preload", as: "image", href: img(LIFE.commute, 1000), imageSrcSet: srcSet(LIFE.commute, [480, 750, 1000, 1400]), imageSizes: "100vw", fetchPriority: "high" },
     ],
     scripts: [
+      { type: "application/ld+json", children: JSON.stringify(websiteSchema) },
+      { type: "application/ld+json", children: JSON.stringify(organizationSchema) },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(
+          articleSchema({ path: "/", headline: "The best laptop backpack for college, from class to court", description, image: img(LIFE.commute, 1200) }),
+        ),
+      },
+      ...bagOrder.map((id) => ({
+        type: "application/ld+json",
+        children: JSON.stringify(
+          productSchema({ name: `Mokobara ${bags[id].name}`, image: bags[id].image, url: bags[id].url, price: Number(bags[id].price.replace(/[^\d]/g, "")), description: bags[id].facts.join(". ") }),
+        ),
+      })),
+      { type: "application/ld+json", children: JSON.stringify({ ...crumbSchema("Best laptop backpack for college", "/"), itemListElement: [{ "@type": "ListItem", position: 1, name: "College edit", item: SITE + "/" }] }) },
       { type: "application/ld+json", children: JSON.stringify(itemListSchema) },
       { type: "application/ld+json", children: JSON.stringify(catalogSchema) },
     ],
@@ -79,7 +96,7 @@ function Index() {
                 First padel game <ArrowRight aria-hidden="true" />
               </Link>
             </div>
-            <p className="hero-meta">Updated 21 November 2026 · Product facts and prices from mokobara.com</p>
+            <Byline light />
           </div>
           <a className="scroll-cue" href="#backpacks" aria-label="Scroll to the backpacks">
             <span />
@@ -102,6 +119,50 @@ function Index() {
             <li><b>30 days</b><span>Trial on mokobara.com</span></li>
             <li><b>12 mo</b><span>Limited warranty</span></li>
           </ul>
+        </section>
+
+        <section className="mk-section key-facts" aria-labelledby="facts-title">
+          <div className="mk-shell">
+            <p className="pill">Key facts</p>
+            <h2 className="section-title" id="facts-title">
+              What we found comparing {totals.products} Mokobara bags
+            </h2>
+            <div className="facts-grid">
+              <article>
+                <h3>Which Mokobara backpack fits a 16-inch laptop?</h3>
+                <p>
+                  According to mokobara.com, the Overnighter Backpack fits a 16-inch MacBook (15.6 inches for other laptops)
+                  and expands from 19L to 23L, priced at ₹8,999 against an MRP of ₹14,999 on 21 November 2026. The
+                  Backpack Pro 21L fits 15.6-inch laptops or a 16-inch MacBook Pro for ₹4,999.
+                </p>
+              </article>
+              <article>
+                <h3>How much does a Mokobara bag cost for students?</h3>
+                <p>
+                  We compared all {totals.products} Mokobara laptop bags, travel backpacks and cabin suitcases listed on
+                  mokobara.com on 21 November 2026. Prices ranged from ₹{totals.min.toLocaleString("en-IN")} for the 14-inch
+                  Aisle Laptop Sleeve to ₹{totals.max.toLocaleString("en-IN")} for the Cabin Pro, and the Backpack 16L,
+                  Kaleido and Spacewalk backpacks all cost ₹3,999.
+                </p>
+              </article>
+              <article>
+                <h3>Which Mokobara cabin bag is lightest?</h3>
+                <p>
+                  Of the 10 Mokobara cabin suitcases, the Aviator Cabin Luggage is the lightest at 2 kg and holds 37L,
+                  according to its mokobara.com listing. Cabin capacities range from 37L to 44L, and 6 of the 10 models
+                  list a laptop compartment, from 14 inches to 15.6 inches.
+                </p>
+              </article>
+              <article>
+                <h3>What does a new padel player need?</h3>
+                <p>
+                  A first padel game needs court shoes, a water bottle, a towel and a change of clothes. 7padel.in lists
+                  racket and ball rental, shower and changing rooms, air-conditioned indoor arenas and night lighting at
+                  7Padel by MS Dhoni, so a beginner can arrive straight from class with one Mokobara backpack.
+                </p>
+              </article>
+            </div>
+          </div>
         </section>
 
         <section className="mk-section" id="backpacks" aria-labelledby="products-title">
