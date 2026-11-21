@@ -57,6 +57,7 @@ export const SOCIALS = [
   { label: "Mokobara on Instagram", href: "https://www.instagram.com/mokobara/" },
   { label: "Mokobara on LinkedIn", href: "https://www.linkedin.com/company/mokobara/" },
   { label: "Mokobara on YouTube", href: "https://www.youtube.com/@mokobara" },
+  { label: "Mokobara on Wikipedia", href: "https://en.wikipedia.org/wiki/Mokobara" },
   { label: "7Padel on X", href: "https://x.com/7Padel_India" },
 ];
 
