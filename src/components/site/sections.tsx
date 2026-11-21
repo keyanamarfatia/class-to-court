@@ -843,7 +843,6 @@ export function PageHero({ crumb, eyebrow, title, intro }: { crumb: string; eyeb
         <p className="pill">{eyebrow}</p>
         <h1 className="col-title">{title}</h1>
         <p className="col-intro">{intro}</p>
-        <Byline />
       </div>
     </section>
   );
@@ -919,6 +918,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
       <Ticker />
       <TopBar />
       {children}
+      <section className="byline-strip" aria-label="About this page"><div className="mk-shell"><Byline /></div></section>
       <SiteFooter />
       <FloatBtn />
     </main>

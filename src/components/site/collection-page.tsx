@@ -155,7 +155,6 @@ export function CollectionView({ slug }: { slug: string }) {
             {s.capMin !== null ? `, with capacities from ${s.capMin}L to ${s.capMax}L` : ""}. {s.withLaptop.length} of the{" "}
             {s.count} list a laptop fit{s.lightest ? `, and the lightest listed is the ${s.lightest.i.name} at ${s.lightest.i.kg} kg` : ""}.
           </p>
-          <Byline />
           <ul className="quick-stats col-stats">
             <li>
               <b>{s.count}</b>
@@ -261,6 +260,7 @@ export function CollectionView({ slug }: { slug: string }) {
         </div>
       </section>
 
+      <section className="byline-strip" aria-label="About this page"><div className="mk-shell"><Byline /></div></section>
       <SiteFooter />
       <FloatBtn />
     </main>

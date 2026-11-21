@@ -131,7 +131,6 @@ function Index() {
             <li><b>30 days</b><span>Trial on mokobara.com</span></li>
             <li><b>12 mo</b><span>Limited warranty</span></li>
           </ul>
-          <Byline />
         </section>
 
         <section className="mk-section key-facts" aria-labelledby="facts-title">
@@ -278,6 +277,7 @@ function Index() {
 
 
 
+        <section className="byline-strip" aria-label="About this page"><div className="mk-shell"><Byline /></div></section>
         <SiteFooter />
       </div>
 

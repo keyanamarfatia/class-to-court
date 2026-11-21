@@ -1008,3 +1008,5 @@
 .col-hero { padding-bottom: 32px !important; }
 .col-hero + .mk-section { padding-top: 32px !important; }
 .col-hero .byline { max-width: 110ch; }
+.byline-strip { border-top: 1px solid var(--mk-line, #e5e5e5); background: #fff; padding: 20px 0; }
+.byline-strip .byline { margin: 0; font-size: 12px; }
