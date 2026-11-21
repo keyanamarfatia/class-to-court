@@ -196,7 +196,8 @@ function Index() {
               <p>
                 <strong>The Mokobara College Edit</strong> is our original comparison of all {totals.products} Mokobara
                 laptop bags, travel backpacks and cabin suitcases listed on mokobara.com on 21 November 2026. As college
-                students in Mumbai ourselves, our research found:
+                students in Mumbai ourselves, we went through every listing first-hand. In our experience, the real question is
+                which one bag lasts the whole day, and our research found:
               </p>
               <ul>
                 <li><strong>{totals.products} products</strong> priced from {inrN(totals.min)} to {inrN(totals.max)}</li>
