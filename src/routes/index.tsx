@@ -4,7 +4,6 @@ import {
   ArrowDown,
   ArrowRight,
   BriefcaseBusiness,
-  Check,
   Droplets,
   Footprints,
   Laptop,
@@ -17,7 +16,6 @@ import {
   Wind,
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 
 /* All product facts below are taken from mokobara.com product pages. Do not add facts that
    are not on the brand's own site. */
@@ -214,16 +212,16 @@ function Quiz() {
   };
 
   return (
-    <div className="quiz-card">
-      <div className="quiz-progress" aria-hidden="true">
-        <span style={{ width: `${(Math.min(step, quizQuestions.length) / quizQuestions.length) * 100}%` }} />
+    <div className="quiz-panel">
+      <div className="quiz-meta">
+        <span>{done ? "Your match" : `Question ${step + 1} / ${quizQuestions.length}`}</span>
+        <div className="quiz-progress" aria-hidden="true">
+          <span style={{ width: `${(Math.min(step, quizQuestions.length) / quizQuestions.length) * 100}%` }} />
+        </div>
       </div>
 
       {!done && (
         <div key={step} className="quiz-step">
-          <p className="quiz-step-count">
-            Question {step + 1} of {quizQuestions.length}
-          </p>
           <h3 className="quiz-question">{quizQuestions[step].question}</h3>
           <div className="quiz-options">
             {quizQuestions[step].options.map((opt) => (
@@ -243,25 +241,25 @@ function Quiz() {
 
       {result && (
         <div className="quiz-result" aria-live="polite">
-          <p className="quiz-step-count">Your match</p>
-          <h3 className="quiz-question">{result.name}</h3>
-          <p className="quiz-result-tagline">{result.tagline}</p>
-          <ul className="fact-list">
-            {result.facts.slice(0, 3).map((f) => (
-              <li key={f}>
-                <Check aria-hidden="true" /> {f}
-              </li>
-            ))}
-          </ul>
-          <div className="quiz-result-actions">
-            <Button asChild>
-              <a href={result.url} target="_blank" rel="noopener noreferrer">
-                View on mokobara.com <ArrowRight aria-hidden="true" />
+          <div className="quiz-result-tile" aria-hidden="true">
+            <result.icon strokeWidth={1.1} />
+          </div>
+          <div>
+            <h3 className="quiz-question">{result.name}</h3>
+            <p className="quiz-result-tagline">{result.tagline}</p>
+            <ul className="fact-list">
+              {result.facts.slice(0, 3).map((f) => (
+                <li key={f}>{f}</li>
+              ))}
+            </ul>
+            <div className="quiz-result-actions">
+              <a className="btn-solid" href={result.url} target="_blank" rel="noopener noreferrer">
+                View on mokobara.com
               </a>
-            </Button>
-            <Button variant="outline" onClick={restart}>
-              <RotateCcw aria-hidden="true" /> Retake
-            </Button>
+              <button type="button" className="btn-outline" onClick={restart}>
+                <RotateCcw aria-hidden="true" /> Retake
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -275,7 +273,6 @@ function FaqList({ items, prefix }: { items: { q: string; a: string }[]; prefix:
       {items.map(({ q, a }, i) => (
         <AccordionItem value={`${prefix}-${i}`} key={q} className="faq-item">
           <AccordionTrigger className="faq-trigger">
-            <span className="faq-number">{String(i + 1).padStart(2, "0")}</span>
             <span className="faq-q">{q}</span>
           </AccordionTrigger>
           <AccordionContent className="faq-answer">{a}</AccordionContent>
@@ -285,163 +282,163 @@ function FaqList({ items, prefix }: { items: { q: string; a: string }[]; prefix:
   );
 }
 
+const badges: Record<BagId, string> = { overnighter: "Class to court", backpack16: "Light", em32: "Weekend" };
+
+function SectionHead({ eyebrow, title, id, link }: { eyebrow: string; title: string; id: string; link?: { href: string; label: string } }) {
+  return (
+    <div className="section-head">
+      <div>
+        <p className="eyebrow">{eyebrow}</p>
+        <h2 className="section-title" id={id}>{/[?.!]$/.test(title) ? title : `${title}.`}</h2>
+      </div>
+      {link && (
+        <a className="view-all" href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer">
+          {link.label}
+        </a>
+      )}
+    </div>
+  );
+}
+
 function Index() {
   return (
-    <main className="mokobara-page">
-      <div className="site-shell">
-        <header className="site-header">
-          <a className="brand-lockup" href="#top" aria-label="Mokobara college edit, back to top">
-            <span className="brand-mark" aria-hidden="true">m</span>
-            <span className="brand-name">mokobara</span>
-          </a>
-          <p className="brand-tagline">The Joy Is in the Details</p>
-          <span className="header-edition">COLLEGE EDIT <span aria-hidden="true">/</span> 2026</span>
-        </header>
+    <main className="mk-page">
+      <div className="announce-bar">
+        <p>Student concept <span aria-hidden="true">·</span> The college edit 2026 <span aria-hidden="true">·</span> <a href="#quiz">Take the quiz</a></p>
+      </div>
 
-        <section className="hero-section" id="top" aria-labelledby="page-title">
+      <header className="mk-header">
+        <div className="mk-shell mk-header-inner">
+          <a className="wordmark" href="#top" aria-label="mokobara college edit, back to top">mokobara</a>
+          <nav className="mk-nav" aria-label="Page sections">
+            <a href="#backpacks">Backpacks</a>
+            <a href="#quiz">Quiz</a>
+            <a href="#padel">Padel</a>
+            <a href="#faq">FAQ</a>
+          </nav>
+          <a className="header-cta" href="#quiz">Find my bag</a>
+        </div>
+      </header>
+
+      <section className="hero" id="top" aria-labelledby="page-title">
+        <div className="mk-shell hero-inner">
           <div className="hero-copy">
-            <p className="eyebrow"><span className="eyebrow-mark" aria-hidden="true" /> THE COLLEGE EDIT</p>
+            <p className="eyebrow">The college edit</p>
             <h1 className="hero-title" id="page-title">
-              The Best Laptop Backpack for College, From Class to <em>Court</em>
+              The best laptop backpack for college, from class to court.
             </h1>
-            <p className="hero-subhead">Campus in the morning. Court after class. One bag that fits both.</p>
-            <Button asChild size="lg" className="hero-cta">
-              <a href="#quiz">
-                Take the 30-second quiz
-                <ArrowDown aria-hidden="true" />
-              </a>
-            </Button>
+            <p className="hero-sub">Campus in the morning. Court after class. One bag that fits both.</p>
+            <div className="hero-actions">
+              <a className="btn-solid" href="#quiz">Take the 30-second quiz</a>
+              <a className="btn-text" href="#padel">First padel game? <ArrowDown aria-hidden="true" /></a>
+            </div>
           </div>
+          <div className="hero-visual" aria-hidden="true">
+            <BriefcaseBusiness strokeWidth={0.9} />
+            <div className="hero-specs">
+              <span>16" laptop</span>
+              <span>19L → 23L</span>
+              <span>Detachable sling</span>
+            </div>
+            <span className="hero-counter">01 / 04</span>
+          </div>
+        </div>
+      </section>
 
-          <div className="hero-art" aria-label="A carry-all for campus and court">
-            <div className="hero-art-topline">
-              <span>CLASS / COURT</span>
-              <Sparkles aria-hidden="true" />
-            </div>
-            <div className="hero-art-center">
-              <div className="bag-icon-frame">
-                <BriefcaseBusiness aria-hidden="true" />
-              </div>
-              <p className="hero-art-title">One bag.<br />All day.</p>
-            </div>
-            <div className="hero-art-footer">
-              <span><Laptop aria-hidden="true" /> 16&quot; laptop</span>
-              <span className="art-footer-divider" aria-hidden="true" />
-              <span><Plane aria-hidden="true" /> Weekend ready</span>
-            </div>
-            <span className="hero-art-index" aria-hidden="true">01</span>
-          </div>
-        </section>
-
-        <section className="content-section product-section" aria-labelledby="products-title">
-          <div className="section-heading-row">
-            <div>
-              <p className="eyebrow section-eyebrow">THE SHORTLIST</p>
-              <h2 className="section-title" id="products-title">Which Mokobara fits your college day?</h2>
-            </div>
-            <span className="section-count" aria-hidden="true">01 — 04</span>
-          </div>
-          <div className="product-grid">
-            {bagOrder.map((id, index) => {
+      <section className="mk-section" id="backpacks" aria-labelledby="products-title">
+        <div className="mk-shell">
+          <SectionHead
+            eyebrow="The shortlist"
+            title="Which Mokobara fits your college day?"
+            id="products-title"
+            link={{ href: "https://mokobara.com/collections/laptop-bags", label: "View all" }}
+          />
+          <div className="product-row">
+            {bagOrder.map((id) => {
               const { name, icon: ProductIcon, tagline, facts, url } = bags[id];
               return (
                 <article className="product-card" key={id}>
-                  <div className={`product-art product-art-${index + 1}`} aria-hidden="true">
-                    <span className="product-card-number">0{index + 1}</span>
-                    <ProductIcon />
-                  </div>
+                  <a className="product-tile" href={url} target="_blank" rel="noopener noreferrer" aria-label={`${name} on mokobara.com`}>
+                    <span className="badge">{badges[id]}</span>
+                    <ProductIcon strokeWidth={0.9} aria-hidden="true" />
+                  </a>
                   <h3 className="product-title">{name}</h3>
                   <p className="product-tagline">{tagline}</p>
                   <ul className="fact-list">
                     {facts.map((f) => (
-                      <li key={f}>
-                        <Check aria-hidden="true" /> {f}
-                      </li>
+                      <li key={f}>{f}</li>
                     ))}
                   </ul>
                   <a className="product-link" href={url} target="_blank" rel="noopener noreferrer">
-                    View on mokobara.com <ArrowRight aria-hidden="true" />
+                    View on mokobara.com
                   </a>
                 </article>
               );
             })}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="content-section quiz-section" id="quiz" aria-labelledby="quiz-title">
-          <div className="section-heading-row">
-            <div>
-              <p className="eyebrow section-eyebrow">YOUR COLLEGE DAY, DECODED</p>
-              <h2 className="section-title" id="quiz-title">Quiz: Which Mokobara fits your plan?</h2>
-            </div>
-            <span className="section-count" aria-hidden="true">02 — 04</span>
-          </div>
+      <section className="mk-section mk-section-grey" id="quiz" aria-labelledby="quiz-title">
+        <div className="mk-shell">
+          <SectionHead eyebrow="Your day, decoded" title="Quiz: Which Mokobara fits your plan?" id="quiz-title" />
           <Quiz />
-        </section>
+        </div>
+      </section>
 
-        <section className="content-section" aria-labelledby="worries-title">
-          <div className="section-heading-row">
-            <div>
-              <p className="eyebrow section-eyebrow">BEFORE YOU BUY</p>
-              <h2 className="section-title" id="worries-title">Why students hesitate, and what fixes it</h2>
-            </div>
-            <span className="section-count" aria-hidden="true">03 — 04</span>
-          </div>
+      <section className="mk-section" aria-labelledby="worries-title">
+        <div className="mk-shell">
+          <SectionHead eyebrow="Before you buy" title="Why students hesitate, and what fixes it" id="worries-title" />
           <div className="worry-grid">
-            {hesitations.map(({ title, body, icon: Icon }) => (
+            {hesitations.map(({ title, body, icon: Icon }, i) => (
               <article className="worry-card" key={title}>
-                <Icon aria-hidden="true" />
-                <h3 className="product-title">{title}</h3>
+                <div className="worry-top">
+                  <span className="worry-num">0{i + 1}</span>
+                  <Icon strokeWidth={1.3} aria-hidden="true" />
+                </div>
+                <h3 className="worry-title">{title}</h3>
                 <p>{body}</p>
               </article>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="content-section padel-section" id="padel" aria-labelledby="padel-title">
-          <div className="section-heading-row">
-            <div>
-              <p className="eyebrow section-eyebrow">FROM CLASS TO COURT</p>
-              <h2 className="section-title" id="padel-title">What should I carry to my first padel game?</h2>
-            </div>
-            <span className="section-count" aria-hidden="true">04 — 04</span>
-          </div>
-          <div className="answer-box">
-            <span className="answer-icon" aria-hidden="true"><Sparkles /></span>
+      <section className="mk-section mk-section-dark" id="padel" aria-labelledby="padel-title">
+        <div className="mk-shell">
+          <SectionHead eyebrow="From class to court" title="What should I carry to my first padel game?" id="padel-title" />
+          <div className="answer-block">
             <p>{padelAnswer}</p>
           </div>
           <ul className="checklist" aria-label="First padel game checklist">
             {checklist.map(({ label, icon: Icon }) => (
               <li key={label}>
-                <Icon aria-hidden="true" />
+                <Icon strokeWidth={1.5} aria-hidden="true" />
                 {label}
               </li>
             ))}
           </ul>
-          <Button asChild size="lg" className="hero-cta">
-            <a href="https://7padel.in" target="_blank" rel="noopener noreferrer">
-              Book a court at 7padel.in <ArrowRight aria-hidden="true" />
-            </a>
-          </Button>
+          <a className="btn-solid btn-invert" href="https://7padel.in" target="_blank" rel="noopener noreferrer">
+            Book a court at 7padel.in
+          </a>
 
-          <h2 className="section-title faq-subtitle" id="padel-faq-title">Padel bag FAQ</h2>
+          <h2 className="section-title faq-subtitle" id="padel-faq-title">Padel bag FAQ.</h2>
           <FaqList items={padelFaqs} prefix="padel" />
-        </section>
+        </div>
+      </section>
 
-        <section className="content-section faq-section" aria-labelledby="faq-title">
-          <div className="section-heading-row">
-            <div>
-              <p className="eyebrow section-eyebrow">GOOD TO KNOW</p>
-              <h2 className="section-title" id="faq-title">College backpack FAQ</h2>
-            </div>
-          </div>
+      <section className="mk-section" id="faq" aria-labelledby="faq-title">
+        <div className="mk-shell">
+          <SectionHead eyebrow="Good to know" title="College backpack FAQ" id="faq-title" />
           <FaqList items={collegeFaqs} prefix="college" />
-        </section>
-      </div>
+        </div>
+      </section>
 
-      <footer className="site-footer">
-        <div className="site-shell footer-inner">
-          <p>
+      <footer className="mk-footer">
+        <div className="mk-shell">
+          <p className="wordmark wordmark-invert">mokobara</p>
+          <p className="footer-tag">The Joy Is in the Details</p>
+          <p className="footer-note">
             Student concept for a Schbang x Atlas SkillTech brief. Not affiliated with or commissioned by
             Mokobara or 7Padel. Product facts from mokobara.com and 7padel.in.
           </p>
