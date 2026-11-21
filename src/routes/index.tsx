@@ -28,18 +28,22 @@ const keyFacts = [
   {
     q: "Which Mokobara backpack fits a 16-inch laptop?",
     a: "Our research found 2 of Mokobara's 4 best college backpacks take a 16-inch MacBook. According to mokobara.com, the Overnighter fits a 16-inch MacBook (15.6 inches for other laptops), expands 21% from 19L to 23L and costs ₹8,999, 40% below its ₹14,999 MRP. The Backpack Pro 21L fits a 16-inch MacBook Pro for ₹4,999, 55% off.",
+    bullets: ["Overnighter: 16-inch MacBook, 19L → 23L, ₹8,999 (40% off)", "Backpack Pro 21L: 16-inch MacBook Pro, ₹4,999 (55% off)", "Source: mokobara.com, 21 Nov 2026"]
   },
   {
     q: "How much does a Mokobara bag cost for students?",
     a: `In our own research, we went through all ${totals.products} Mokobara laptop bags, travel backpacks and cabin suitcases listed on mokobara.com on 21 November 2026 and compared every price and spec ourselves. Prices ranged from ${inrN(totals.min)} for the 14-inch Aisle Laptop Sleeve to ${inrN(totals.max)} for the Cabin Pro, and the Backpack 16L, Kaleido and Spacewalk backpacks all cost ₹3,999.`,
+    bullets: ["Cheapest: Aisle Laptop Sleeve 14-inch, ₹999", "Most expensive: Cabin Pro, ₹13,599", "3 backpacks at ₹3,999: Backpack 16L, Kaleido, Spacewalk"]
   },
   {
     q: "Which Mokobara cabin bag is lightest?",
     a: "Our comparison of all 10 Mokobara cabin suitcases found the Aviator Cabin Luggage is the lightest at 2 kg, about 39% lighter than the 3.27 kg Cabin Luggage, and it holds 37L. Cabin capacities range from 37L to 44L, and 6 of the 10 models (60%) list a laptop compartment of 14 to 15.6 inches, per mokobara.com.",
+    bullets: ["Lightest: Aviator, 2 kg, 37L, ₹4,499", "Heaviest listed: Cabin Pro and Aisle Cabin Pro, 3.65 kg", "Laptop compartment: 6 of 10 models (60%)"]
   },
   {
     q: "What does a new padel player need?",
     a: "Our checklist for a first padel game has 5 items: court shoes, a water bottle, a towel, a change of clothes and a racket, which 7Padel by MS Dhoni rents along with balls, per 7padel.in. Its venues add showers, changing rooms and air-conditioned indoor courts, so 1 Mokobara backpack of 19L to 23L covers class and court.",
+    bullets: ["5 items: court shoes, bottle, towel, clothes, racket", "Rent: rackets and balls at 7Padel by MS Dhoni", "1 bag: Mokobara Overnighter, 19L → 23L"]
   },
 ];
 
@@ -55,16 +59,19 @@ const collectionFacts = (() => {
   return [
     {
       path: "/cabin-luggage", label: "cabin bags", count: cab.n,
+      bullets: [`${cab.n} models, ${inrN(cab.min)}–${inrN(cab.max)}`, "Capacity: 37L–44L", `Laptop compartment: ${cab.lap} of ${cab.n} (${pct(cab.lap, cab.n)}%)`],
       q: "What cabin luggage does Mokobara sell?",
       a: `Our research counted ${cab.n} Mokobara cabin suitcases on mokobara.com on 21 November 2026, priced from ${inrN(cab.min)} to ${inrN(cab.max)}. They hold 37L to 44L, and ${cab.lap} of ${cab.n} (${pct(cab.lap, cab.n)}%) list a laptop compartment, which makes them the pick for students flying home with a laptop.`,
     },
     {
       path: "/laptop-bags", label: "laptop bags", count: lap.n,
+      bullets: [`${lap.n} bags, ${inrN(lap.min)}–${inrN(lap.max)}`, "Laptop fit: 14 to 16 inches", "16-inch laptop: 5 bags"],
       q: "How many Mokobara laptop bags are there?",
       a: `We found ${lap.n} Mokobara laptop backpacks, briefcases and sleeves on mokobara.com, from ${inrN(lap.min)} for the 14-inch Aisle Laptop Sleeve to ${inrN(lap.max)}. ${lap.lap} of ${lap.n} (${pct(lap.lap, lap.n)}%) list a laptop size, from 14 to 16 inches, and 5 of them take a 16-inch laptop.`,
     },
     {
       path: "/travel-backpacks", label: "travel backpacks", count: trv.n,
+      bullets: [`${trv.n} backpacks, ${inrN(trv.min)}–${inrN(trv.max)}`, "Transit 30L: 1–2 day trips, ₹4,999", "Overnighter: 19L → 23L"],
       q: "Which Mokobara backpacks are best for weekend trips?",
       a: `Our comparison covers ${trv.n} Mokobara travel backpacks priced ${inrN(trv.min)} to ${inrN(trv.max)} on mokobara.com. The Transit Backpack 30L is built for 1 to 2 day trips at ₹4,999, 50% below MRP, and the Overnighter expands from 19L to 23L for a weekend away.`,
     },
@@ -145,7 +152,7 @@ function Index() {
             <h1 className="hero-title" id="page-title">
               The best laptop backpack for college, from class to court
             </h1>
-            <p className="hero-sub">Campus in the morning, court after class: the Mokobara Overnighter fits a 16-inch MacBook and expands from 19L to 23L, so one bag covers both.</p>
+            <p className="hero-sub"><strong>The best laptop backpack for college is the Mokobara Overnighter</strong>: it fits a 16-inch MacBook, expands 21% from 19L to 23L and costs ₹8,999 on mokobara.com, 40% below MRP.</p>
             <div className="hero-actions">
               <Link className="btn-yellow" to="/bag-finder-quiz">
                 Take the 30-second quiz
@@ -183,18 +190,31 @@ function Index() {
           <div className="mk-shell">
             <p className="pill">Key facts</p>
             <h2 className="section-title" id="facts-title">
-              What we found comparing {totals.products} Mokobara bags
+              What did we find comparing {totals.products} Mokobara bags?
             </h2>
-            <p className="facts-intro">
-              As college students in Mumbai ourselves, we carry a laptop, chargers, a bottle and often kit for after class
-              every day. In our experience, the question is never just "which bag is best" but "which one bag lasts the
-              whole day", so we checked every Mokobara listing first-hand with that in mind.
-            </p>
+            <div className="facts-intro">
+              <p>
+                <strong>The Mokobara College Edit</strong> is our original comparison of all {totals.products} Mokobara
+                laptop bags, travel backpacks and cabin suitcases listed on mokobara.com on 21 November 2026. As college
+                students in Mumbai ourselves, our research found:
+              </p>
+              <ul>
+                <li><strong>{totals.products} products</strong> priced from {inrN(totals.min)} to {inrN(totals.max)}</li>
+                <li><strong>5 laptop bags</strong> that take a 16-inch laptop</li>
+                <li><strong>6 of 10 cabin bags</strong> (60%) with a laptop compartment</li>
+                <li><strong>Up to 65% off MRP</strong> on the Aviator Cabin Luggage (₹4,499)</li>
+              </ul>
+            </div>
             <div className="facts-grid">
               {keyFacts.map((f) => (
                 <article key={f.q}>
                   <h3>{f.q}</h3>
                   <p>{f.a}</p>
+                  <ul className="facts-list">
+                    {f.bullets.map((b) => (
+                      <li key={b}>{b}</li>
+                    ))}
+                  </ul>
                 </article>
               ))}
             </div>
@@ -219,7 +239,8 @@ function Index() {
                       <img src={img(b.image, 500)} srcSet={srcSet(b.image, [300, 500, 700])} sizes="(min-width: 1024px) 23vw, (min-width: 760px) 45vw, 74vw" alt={b.alt} loading="lazy" decoding="async" width={500} height={600} />
                     </a>
                     <div className="product-body">
-                      <h3 className="product-title">{b.name}</h3>
+                      <h3 className="product-title">Is the {b.name} right for you?</h3>
+                      <p className="cat-summary">{b.summary}</p>
                       <p className="price-row">
                         <strong>{b.price}</strong> <s>{b.mrp}</s>
                         {b.colours > 0 && <span className="colours">{b.colours} colours</span>}
@@ -229,7 +250,6 @@ function Index() {
                           <li key={f}>{f}</li>
                         ))}
                       </ul>
-                      <p className="cat-summary">{b.summary}</p>
                       <a className="product-link" href={b.url} target="_blank" rel="noopener noreferrer" aria-label={`View on mokobara.com: ${b.name}`}>
                         View on mokobara.com
                       </a>
@@ -283,6 +303,11 @@ function Index() {
                 <article key={c.path}>
                   <h3>{c.q}</h3>
                   <p>{c.a}</p>
+                  <ul className="facts-list">
+                    {c.bullets.map((b) => (
+                      <li key={b}>{b}</li>
+                    ))}
+                  </ul>
                   <Link className="arrow-link" to={c.path}>
                     See all {c.count} {c.label} <ArrowRight aria-hidden="true" />
                   </Link>
@@ -323,6 +348,11 @@ function Index() {
             </h2>
             <div className="answer-block" style={{ marginTop: 22 }}>
               <p>{padelAnswer}</p>
+              <ul className="facts-list">
+                <li><strong>5 essentials:</strong> court shoes, water bottle, towel, change of clothes, racket</li>
+                <li><strong>No racket?</strong> 7Padel rents rackets and balls (7padel.in)</li>
+                <li><strong>1 bag:</strong> Mokobara Overnighter, 16-inch MacBook, 19L → 23L</li>
+              </ul>
             </div>
             <div className="hero-actions" style={{ marginTop: 22 }}>
               <Link className="btn-yellow" to="/what-to-carry-to-padel">

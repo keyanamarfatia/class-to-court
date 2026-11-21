@@ -163,24 +163,28 @@ export const details = [
   {
     src: `${OV}-3_50892455-d978-4cb8-b445-4d9baedfa082.jpg`,
     title: "Can the Mokobara Overnighter turn into a sling bag?",
+    bullets: ["1 backpack + 1 detachable sling", "Backpack: 19L → 23L", "Sling: phone, cards, keys"],
     body: "Yes. Our research of the mokobara.com listing confirms the Overnighter Backpack's front pocket detaches into a separate sling bag with its own belt. That makes 1 bag into 2: a 19L to 23L backpack for class, and a small sling for your phone, cards and keys on the padel court.",
     alt: "Overnighter front pocket detaching into a sling bag",
   },
   {
     src: `${OV}-7_2d6d6e9c-2342-4eb0-b931-b72851438572.jpg`,
     title: "How much does the Mokobara Overnighter expand?",
+    bullets: ["Base: 19L", "Expanded: 23L (+4L, +21%)", "Expansion: 6 cm"],
     body: "The Mokobara Overnighter Backpack holds 19L for class and its expandable body adds 6 cm to reach 23L, about 21% more space. Those 4 extra litres fit court shoes, a towel and a change of clothes after class, according to mokobara.com.",
     alt: "Overnighter expanding from 19L to 23L",
   },
   {
     src: `${OV}-8_ad360e32-50b9-4c2d-beb0-918bbbd61166.jpg`,
     title: "Does the Mokobara Overnighter protect a 16-inch MacBook?",
+    bullets: ["16-inch MacBook / 15.6-inch laptop", "180° flat opening", "17 pockets, 5 in the tech compartment"],
     body: "Yes. The Overnighter's padded laptop compartment fits a 16-inch MacBook (15.6-inch for other laptops), opens 180° flat and has microsuede lining. Mokobara lists a separate tech compartment with 5 pockets for an iPad, books and chargers, and 17 pockets in total.",
     alt: "Overnighter flat-opening tech compartment with microsuede lining",
   },
   {
     src: `${OV}-10_dd0eb0e4-54a4-486a-99b1-40606551b06f.jpg`,
     title: "Is the Mokobara Overnighter comfortable for a long commute?",
+    bullets: ["Size: 45 x 31 x 13.5 cm", "Air mesh back + padded straps", "USB charging port"],
     body: "Mokobara built the Overnighter for all-day carrying: padded, adjustable shoulder straps, a breathable air mesh back and a USB port to charge your phone. It measures 45 x 31 x 13.5 cm, so it stays compact on a crowded Mumbai local train.",
     alt: "Overnighter air mesh back panel and padded shoulder straps",
   },
@@ -639,6 +643,11 @@ export function DetailsSection() {
             <figcaption>
               <h3>{d.title}</h3>
               <p>{d.body}</p>
+              <ul className="facts-list">
+                {d.bullets.map((b) => (
+                  <li key={b}>{b}</li>
+                ))}
+              </ul>
             </figcaption>
           </figure>
         ))}
@@ -756,6 +765,11 @@ export function MumbaiSection() {
           at Mumbai Airport, so you can bring your laptop and test the 19L to 23L Overnighter in person. 7Padel's
           official X account lists 54 courts across 5 cities, including Mumbai; book on 7padel.in.
         </p>
+        <ul className="facts-list">
+          <li><strong>8 Mokobara stores</strong> in Mumbai (mokobara.com)</li>
+          <li><strong>54 7Padel courts</strong> in Mumbai, Bengaluru, Chennai, Gurugram and Pune (@7Padel_India)</li>
+          <li><strong>30-day trial</strong> if you buy online instead</li>
+        </ul>
         <div className="hero-actions">
           <a className="btn-solid" href="https://mokobara.com" target="_blank" rel="noopener noreferrer">
             Find a store
