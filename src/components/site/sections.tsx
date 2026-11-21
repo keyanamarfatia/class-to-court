@@ -161,11 +161,11 @@ export const padelAnswer =
 export const OV = `${CDN}/files/The-Overnighter-Backpack_2.0_Headspace`;
 export const details = [
   {
-    src: `${OV}-3_50892455-d978-4cb8-b445-4d9baedfa082.jpg`,
-    title: "Can the Mokobara Overnighter turn into a sling bag?",
-    bullets: ["1 backpack + 1 detachable sling", "Backpack: 19L → 23L", "Sling: phone, cards, keys"],
-    body: "Yes. Our analysis of the mokobara.com listing (November 2026) confirms the Overnighter Backpack's front pocket detaches into a separate sling bag with its own belt. That makes 1 bag into 2: a 19L to 23L backpack for class (21% expandable) and a sling for the padel court, at ₹8,999, 40% below MRP.",
-    alt: "Overnighter front pocket detaching into a sling bag",
+    src: `${OV}-6_51a5f4a4-9b15-4c18-98f5-3695295d535c.jpg`,
+    title: "Can the Mokobara Overnighter pack for a weekend trip?",
+    bullets: ["Suitcase-like front compartment", "Spill-proof zipper pocket + slip pockets", "Front pocket detaches into a sling"],
+    body: "Yes. According to mokobara.com (November 2026), the Overnighter Backpack has a suitcase-like front compartment that stores clothing for a weekend trip, with a spill-proof zipper pocket and slip pockets. Its front pocket also detaches into a sling bag, so 1 bag covers class, a 2-day trip and the padel court, at ₹8,999, 40% below MRP.",
+    alt: "Overnighter suitcase-like front compartment opened to show clothing, a spill-proof pocket and slip pockets",
   },
   {
     src: `${OV}-7_2d6d6e9c-2342-4eb0-b931-b72851438572.jpg`,
