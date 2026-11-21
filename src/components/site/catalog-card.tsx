@@ -3,6 +3,18 @@ import { img, inr } from "./chrome";
 
 const srcSet = (path: string, widths: number[]) => widths.map((w) => `${path}?width=${w} ${w}w`).join(", ");
 
+/* One self-contained, quotable sentence per product, built only from mokobara.com data. */
+export function productSentence(item: Product) {
+  const off = item.mrp > item.price ? Math.round((1 - item.price / item.mrp) * 100) : 0;
+  const parts: string[] = [];
+  if (item.litres) parts.push(`holds ${item.litres}L`);
+  if (item.laptop) parts.push(`fits up to a ${item.laptop}-inch laptop`);
+  if (item.kg) parts.push(`weighs ${item.kg} kg`);
+  parts.push(`costs ${inr(item.price)} on mokobara.com${off ? ` (${off}% below its ${inr(item.mrp)} MRP)` : ""}`);
+  const list = parts.length > 1 ? `${parts.slice(0, -1).join(", ")} and ${parts[parts.length - 1]}` : parts[0];
+  return `The Mokobara ${item.name} ${list}.`;
+}
+
 export function CatalogCard({ item, headingLevel = 4 }: { item: Product; headingLevel?: 3 | 4 }) {
   const off = item.mrp > item.price ? Math.round((1 - item.price / item.mrp) * 100) : 0;
   const url = `https://mokobara.com/products/${item.handle}`;
@@ -30,6 +42,7 @@ export function CatalogCard({ item, headingLevel = 4 }: { item: Product; heading
             <li key={f}>{f}</li>
           ))}
         </ul>
+        <p className="cat-summary">{productSentence(item)}</p>
         {item.dims && <p className="cat-dims">{item.dims}</p>}
         <a className="product-link" href={url} target="_blank" rel="noopener noreferrer" aria-label={`Buy on mokobara.com: ${item.name}`}>
           Buy on mokobara.com

@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { SITE } from "@/data/catalog";
 import { Byline, articleSchema, eeatMeta, offerSchema, organizationSchema, productSchema, totals, websiteSchema } from "@/components/site/eeat";
-import { crumbSchema } from "@/components/site/sections";
+import { crumbSchema, faqSchemaFor } from "@/components/site/sections";
 import { FloatBtn, SiteFooter, Ticker, TopBar } from "@/components/site/chrome";
 import {
   BgVideo,
@@ -21,6 +21,28 @@ import {
   srcSet,
   padelAnswer,
 } from "@/components/site/sections";
+
+const inrN = (n: number) => `₹${n.toLocaleString("en-IN")}`;
+
+/* Self-contained, number-rich answers (also published as FAQPage schema). All figures from mokobara.com / 7padel.in, 21 Nov 2026. */
+const keyFacts = [
+  {
+    q: "Which Mokobara backpack fits a 16-inch laptop?",
+    a: "According to mokobara.com, the Overnighter Backpack fits a 16-inch MacBook (15.6 inches for other laptops) and expands from 19L to 23L, priced at ₹8,999 against an MRP of ₹14,999 on 21 November 2026. The Backpack Pro 21L fits 15.6-inch laptops or a 16-inch MacBook Pro for ₹4,999.",
+  },
+  {
+    q: "How much does a Mokobara bag cost for students?",
+    a: `In our own research, we went through all ${totals.products} Mokobara laptop bags, travel backpacks and cabin suitcases listed on mokobara.com on 21 November 2026 and compared every price and spec ourselves. Prices ranged from ${inrN(totals.min)} for the 14-inch Aisle Laptop Sleeve to ${inrN(totals.max)} for the Cabin Pro, and the Backpack 16L, Kaleido and Spacewalk backpacks all cost ₹3,999.`,
+  },
+  {
+    q: "Which Mokobara cabin bag is lightest?",
+    a: "Of the 10 Mokobara cabin suitcases, the Aviator Cabin Luggage is the lightest at 2 kg and holds 37L, according to its mokobara.com listing. Cabin capacities range from 37L to 44L, and 6 of the 10 models list a laptop compartment, from 14 inches to 15.6 inches.",
+  },
+  {
+    q: "What does a new padel player need?",
+    a: "A first padel game needs court shoes, a water bottle, a towel and a change of clothes. 7padel.in lists racket and ball rental, shower and changing rooms, air-conditioned indoor arenas and night lighting at 7Padel by MS Dhoni, so a beginner can arrive straight from class with one Mokobara backpack.",
+  },
+];
 
 const explore = [
   { to: "/compare-backpacks", num: "01", title: "Compare backpacks", body: "Overnighter vs Backpack Pro vs 16L vs Kaleido: laptop fit, capacity and price at a glance.", cta: "Compare" },
@@ -51,6 +73,10 @@ export const Route = createFileRoute("/")({
     ],
     scripts: [
       { type: "application/ld+json", children: JSON.stringify(websiteSchema) },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(faqSchemaFor([...keyFacts, { q: "What should I carry to my first padel game?", a: padelAnswer }])),
+      },
       { type: "application/ld+json", children: JSON.stringify(organizationSchema) },
       {
         type: "application/ld+json",
@@ -92,7 +118,7 @@ function Index() {
             <h1 className="hero-title" id="page-title">
               The best laptop backpack for college, from class to court
             </h1>
-            <p className="hero-sub">Campus in the morning. Court after class. One Mokobara that fits both.</p>
+            <p className="hero-sub">Campus in the morning, court after class: the Mokobara Overnighter fits a 16-inch MacBook and expands from 19L to 23L, so one bag covers both.</p>
             <div className="hero-actions">
               <Link className="btn-yellow" to="/bag-finder-quiz">
                 Take the 30-second quiz
@@ -133,39 +159,12 @@ function Index() {
               What we found comparing {totals.products} Mokobara bags
             </h2>
             <div className="facts-grid">
-              <article>
-                <h3>Which Mokobara backpack fits a 16-inch laptop?</h3>
-                <p>
-                  According to mokobara.com, the Overnighter Backpack fits a 16-inch MacBook (15.6 inches for other laptops)
-                  and expands from 19L to 23L, priced at ₹8,999 against an MRP of ₹14,999 on 21 November 2026. The
-                  Backpack Pro 21L fits 15.6-inch laptops or a 16-inch MacBook Pro for ₹4,999.
-                </p>
-              </article>
-              <article>
-                <h3>How much does a Mokobara bag cost for students?</h3>
-                <p>
-                  In our own research, we went through all {totals.products} Mokobara laptop bags, travel backpacks and
-                  cabin suitcases listed on mokobara.com on 21 November 2026 and compared every price and spec ourselves. Prices ranged from ₹{totals.min.toLocaleString("en-IN")} for the 14-inch
-                  Aisle Laptop Sleeve to ₹{totals.max.toLocaleString("en-IN")} for the Cabin Pro, and the Backpack 16L,
-                  Kaleido and Spacewalk backpacks all cost ₹3,999.
-                </p>
-              </article>
-              <article>
-                <h3>Which Mokobara cabin bag is lightest?</h3>
-                <p>
-                  Of the 10 Mokobara cabin suitcases, the Aviator Cabin Luggage is the lightest at 2 kg and holds 37L,
-                  according to its mokobara.com listing. Cabin capacities range from 37L to 44L, and 6 of the 10 models
-                  list a laptop compartment, from 14 inches to 15.6 inches.
-                </p>
-              </article>
-              <article>
-                <h3>What does a new padel player need?</h3>
-                <p>
-                  A first padel game needs court shoes, a water bottle, a towel and a change of clothes. 7padel.in lists
-                  racket and ball rental, shower and changing rooms, air-conditioned indoor arenas and night lighting at
-                  7Padel by MS Dhoni, so a beginner can arrive straight from class with one Mokobara backpack.
-                </p>
-              </article>
+              {keyFacts.map((f) => (
+                <article key={f.q}>
+                  <h3>{f.q}</h3>
+                  <p>{f.a}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -198,6 +197,7 @@ function Index() {
                           <li key={f}>{f}</li>
                         ))}
                       </ul>
+                      <p className="cat-summary">{b.summary}</p>
                       <a className="product-link" href={b.url} target="_blank" rel="noopener noreferrer" aria-label={`View on mokobara.com: ${b.name}`}>
                         View on mokobara.com
                       </a>

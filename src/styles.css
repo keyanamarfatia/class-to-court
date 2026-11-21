@@ -904,3 +904,6 @@
 
 .footer-built { margin: 0 0 20px; color: #d0d0d0; font-size: 13px; }
 .footer-built a { color: var(--mk-yellow); text-decoration: underline; text-underline-offset: 3px; }
+
+.cat-summary { margin: 0 0 8px; color: #333; font-size: 12px; line-height: 1.5; }
+@media (min-width: 760px) { .cat-summary { font-size: 13px; } }

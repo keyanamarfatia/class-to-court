@@ -55,11 +55,13 @@ export type Bag = {
   image: string;
   alt: string;
   facts: string[];
+  summary: string;
   url: string;
 };
 
 export const bags: Record<BagId, Bag> = {
   overnighter: {
+    summary: "The Mokobara Overnighter Backpack fits a 16-inch MacBook (15.6-inch for other laptops), expands from 19L to 23L and costs ₹8,999 on mokobara.com, 40% below its ₹14,999 MRP.",
     name: "Overnighter Backpack",
     badge: "Class to court",
     tagline: "Packs like a suitcase, carries like a backpack",
@@ -77,6 +79,7 @@ export const bags: Record<BagId, Bag> = {
     url: "https://mokobara.com/products/the-overnighter-backpack",
   },
   backpackPro: {
+    summary: "The Mokobara Backpack Pro 21L fits 15.6-inch laptops or a 16-inch MacBook Pro and costs ₹4,999 on mokobara.com, 55% below its ₹10,999 MRP.",
     name: "Backpack Pro 21L",
     badge: "Big laptop",
     tagline: "Everyday laptop backpack with a sleek front zip",
@@ -89,6 +92,7 @@ export const bags: Record<BagId, Bag> = {
     url: "https://mokobara.com/products/the-backpack-pro-bags-online",
   },
   backpack16: {
+    summary: "The Mokobara Backpack 16L has a padded sleeve for a 15-inch laptop, a zip-out bottle pocket and costs ₹3,999 on mokobara.com, 56% below its ₹8,999 MRP.",
     name: "Backpack 16L",
     badge: "Light",
     tagline: "The clean, lecture-only pick",
@@ -101,6 +105,7 @@ export const bags: Record<BagId, Bag> = {
     url: "https://mokobara.com/products/the-backpack-bags-online",
   },
   kaleido: {
+    summary: "The Mokobara Kaleido Backpack holds 28L, fits up to a 15.6-inch laptop and costs ₹3,999 on mokobara.com, 43% below its ₹6,999 MRP.",
     name: "Kaleido Backpack",
     badge: "Pocket-friendly",
     tagline: "Front pockets for every daily essential",
@@ -155,10 +160,10 @@ export const padelAnswer =
 
 export const OV = `${CDN}/files/The-Overnighter-Backpack_2.0_Headspace`;
 export const details = [
-  { src: `${OV}-3_50892455-d978-4cb8-b445-4d9baedfa082.jpg`, title: "Front pocket turns into a sling", body: "Unclip it and carry just your phone, cards and keys to the court.", alt: "Overnighter front pocket detaching into a sling bag" },
-  { src: `${OV}-7_2d6d6e9c-2342-4eb0-b931-b72851438572.jpg`, title: "19L to 23L when you need it", body: "Expand the body after class to fit shoes, a towel and a change of clothes.", alt: "Overnighter expanding from 19L to 23L" },
-  { src: `${OV}-8_ad360e32-50b9-4c2d-beb0-918bbbd61166.jpg`, title: "Flat-opening tech compartment", body: "Laptop, iPad, books and chargers sit in their own padded section.", alt: "Overnighter flat-opening tech compartment with microsuede lining" },
-  { src: `${OV}-10_dd0eb0e4-54a4-486a-99b1-40606551b06f.jpg`, title: "Built for the long commute", body: "Breathable air mesh back and padded, adjustable shoulder straps.", alt: "Overnighter air mesh back panel and padded shoulder straps" },
+  { src: `${OV}-3_50892455-d978-4cb8-b445-4d9baedfa082.jpg`, title: "Front pocket turns into a sling", body: "The Overnighter's front pocket unclips into a separate sling bag, so you can carry just your phone, cards and keys onto the padel court.", alt: "Overnighter front pocket detaching into a sling bag" },
+  { src: `${OV}-7_2d6d6e9c-2342-4eb0-b931-b72851438572.jpg`, title: "19L to 23L when you need it", body: "The Overnighter holds 19L for class and expands to 23L after class, enough for court shoes, a towel and a change of clothes.", alt: "Overnighter expanding from 19L to 23L" },
+  { src: `${OV}-8_ad360e32-50b9-4c2d-beb0-918bbbd61166.jpg`, title: "Flat-opening tech compartment", body: "A flat-opening tech compartment with microsuede lining keeps a 16-inch MacBook, an iPad, books and chargers separate from your kit.", alt: "Overnighter flat-opening tech compartment with microsuede lining" },
+  { src: `${OV}-10_dd0eb0e4-54a4-486a-99b1-40606551b06f.jpg`, title: "Built for the long commute", body: "A breathable air mesh back and padded, adjustable shoulder straps make the Overnighter easier to carry on a long Mumbai commute.", alt: "Overnighter air mesh back panel and padded shoulder straps" },
 ];
 
 /* Mumbai stores as listed on the mokobara.com homepage, 21 Nov 2026. */
@@ -228,8 +233,8 @@ export const hesitations = [
     body: "Overnighter: 16\" MacBook. Backpack Pro: 15.6\" or 16\" MacBook Pro. Backpack 16L: 15\".",
     icon: Laptop,
   },
-  { title: "Will it hurt on a long commute?", body: "The Overnighter has padded shoulder straps and a breathable air mesh back.", icon: Train },
-  { title: "What if I don't like it?", body: "30-day trial with a full refund, plus a 12-month limited warranty on mokobara.com.", icon: ShieldCheck },
+  { title: "Will it hurt on a long commute?", body: "The Mokobara Overnighter has padded shoulder straps and a breathable air mesh back, built for all-day carrying on a long commute.", icon: Train },
+  { title: "What if I don't like it?", body: "Mokobara offers a 30-day trial with a full refund and a 12-month limited warranty on bags bought from mokobara.com.", icon: ShieldCheck },
 ];
 
 export const comparison: { label: string; values: Record<BagId, string> }[] = [
@@ -719,8 +724,9 @@ export function MumbaiSection() {
           Try it on in Mumbai, then hit the court.
         </h2>
         <p className="mumbai-text">
-          Not sure about fit? Pack your laptop and try the Overnighter at a Mokobara store before you buy. Then find
-          your nearest 7Padel court on 7padel.in.
+          Not sure about fit? Mokobara's homepage lists 8 stores in Mumbai, from Linking Road in Khar West to T2 at
+          Mumbai Airport, so you can bring your laptop and try the Overnighter in person before you buy. 7Padel's
+          official X account lists courts in Mumbai, Bengaluru, Chennai, Gurugram and Pune; book on 7padel.in.
         </p>
         <div className="hero-actions">
           <a className="btn-solid" href="https://mokobara.com" target="_blank" rel="noopener noreferrer">
