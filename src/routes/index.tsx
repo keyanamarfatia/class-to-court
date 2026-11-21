@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  ArrowDown,
   ArrowRight,
   BriefcaseBusiness,
   Droplets,
   Footprints,
   Laptop,
-  Plane,
   RotateCcw,
   Shirt,
   ShieldCheck,
@@ -17,51 +15,91 @@ import {
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
-/* All product facts below are taken from mokobara.com product pages. Do not add facts that
-   are not on the brand's own site. */
-type BagId = "overnighter" | "backpack16" | "em32";
+/* Every product fact, price and image below comes from mokobara.com (checked 21 Nov 2026).
+   Student concept: images are Mokobara's own and link back to the official store. */
+const CDN = "https://cdn.shopify.com/s/files/1/0068/7341/5750";
+const img = (path: string, w = 900) => `${path}?width=${w}`;
 
-const bags: Record<
-  BagId,
-  { name: string; icon: typeof Laptop; tagline: string; facts: string[]; url: string }
-> = {
+const LOGO = "https://mokobara.com/cdn/shop/files/Mokobara_SVG_White_Logo.svg";
+const LIFE = {
+  commute: "https://mokobara.com/cdn/shop/files/tz-story-city-commute.webp",
+  group: "https://mokobara.com/cdn/shop/files/tz-story-three-up.webp",
+  skate: "https://mokobara.com/cdn/shop/files/tz-story-skate.webp",
+  ride: "https://mokobara.com/cdn/shop/files/tz-story-flower-ride.webp",
+};
+
+type BagId = "overnighter" | "backpackPro" | "backpack16" | "kaleido";
+
+type Bag = {
+  name: string;
+  badge: string;
+  tagline: string;
+  price: string;
+  mrp: string;
+  colours: number;
+  image: string;
+  alt: string;
+  facts: string[];
+  url: string;
+};
+
+const bags: Record<BagId, Bag> = {
   overnighter: {
     name: "Overnighter Backpack",
-    icon: BriefcaseBusiness,
-    tagline: "The class-to-court pick",
+    badge: "Class to court",
+    tagline: "Packs like a suitcase, carries like a backpack",
+    price: "₹8,999",
+    mrp: "₹14,999",
+    colours: 3,
+    image: `${CDN}/files/The-Overnighter-Backpack_2.0_Headspace-1_5d7d9473-adbb-4b42-9714-43961b9644fc.jpg`,
+    alt: "Mokobara Overnighter Backpack in Headspace, showing the detachable front sling pocket",
     facts: [
-      "Fits up to a 16\" laptop",
+      "Fits a 16\" MacBook, 15.6\" for other laptops",
       "19L, expands to 23L",
       "Front pocket detaches into a sling bag",
-      "Breathable air mesh back, padded straps",
+      "USB port, air mesh back, padded straps",
     ],
     url: "https://mokobara.com/products/the-overnighter-backpack",
   },
+  backpackPro: {
+    name: "Backpack Pro 21L",
+    badge: "Big laptop",
+    tagline: "Everyday laptop backpack with a sleek front zip",
+    price: "₹4,999",
+    mrp: "₹10,999",
+    colours: 5,
+    image: `${CDN}/files/The-Backpack-Pro_DD-1.webp`,
+    alt: "Mokobara Backpack Pro 21L in Deep Dive blue",
+    facts: ["Fits 15.6\" laptops or a 16\" MacBook Pro", "Key holder and card holder up front", "Water-resistant nylon body"],
+    url: "https://mokobara.com/products/the-backpack-pro-bags-online",
+  },
   backpack16: {
     name: "Backpack 16L",
-    icon: Laptop,
-    tagline: "The light, lecture-only pick",
-    facts: [
-      "Fits up to a 15\" laptop or 16\" MacBook Pro",
-      "Durable water-resistant materials",
-      "Magnetic pocket for your phone",
-    ],
+    badge: "Light",
+    tagline: "The clean, lecture-only pick",
+    price: "₹3,999",
+    mrp: "₹8,999",
+    colours: 7,
+    image: `${CDN}/products/The-Backpack_DD-1-New.webp`,
+    alt: "Mokobara Backpack 16L in Deep Dive blue",
+    facts: ["Padded sleeve for a 15\" laptop", "Side pocket zips out to fit a water bottle", "Water-resistant nylon, vegan leather trims"],
     url: "https://mokobara.com/products/the-backpack-bags-online",
   },
-  em32: {
-    name: "Em Travel Backpack 32L",
-    icon: Plane,
-    tagline: "The weekend-trip pick",
-    facts: [
-      "Built-in water bottle compartment",
-      "Rain cover compartment",
-      "Water resistant",
-    ],
-    url: "https://www.mokobara.com/products/the-em-duffle-backpack-32l",
+  kaleido: {
+    name: "Kaleido Backpack",
+    badge: "Pocket-friendly",
+    tagline: "Front pockets for every daily essential",
+    price: "₹3,999",
+    mrp: "₹6,999",
+    colours: 0,
+    image: `${CDN}/products/The-Kaleido-Backpack_Crypto-1_4b719e74-24e9-45e6-8009-08124f010bcc.webp`,
+    alt: "Mokobara Kaleido Backpack in black",
+    facts: ["Fits up to a 15.6\" laptop", "Microsuede lining keeps your laptop scratch-free", "Mesh side pocket for a bottle or umbrella"],
+    url: "https://mokobara.com/products/the-kaleido-backpack",
   },
 };
 
-const bagOrder: BagId[] = ["overnighter", "backpack16", "em32"];
+const bagOrder: BagId[] = ["overnighter", "backpackPro", "backpack16", "kaleido"];
 
 const quizQuestions = [
   {
@@ -69,7 +107,7 @@ const quizQuestions = [
     question: "What size is your laptop?",
     options: [
       { value: "15", label: "Up to 15\"" },
-      { value: "16", label: "16\"" },
+      { value: "16", label: "15.6\" or 16\"" },
     ],
   },
   {
@@ -82,24 +120,23 @@ const quizQuestions = [
     ],
   },
   {
-    id: "commute",
-    question: "How's your commute?",
+    id: "style",
+    question: "What matters more?",
     options: [
-      { value: "short", label: "Short and easy" },
-      { value: "long", label: "Long, crowded train" },
+      { value: "light", label: "Light and simple" },
+      { value: "pockets", label: "Lots of pockets" },
     ],
   },
 ] as const;
 
-function pickBag(answers: Record<string, string>): BagId {
-  if (answers.after === "weekend") return "em32";
-  if (answers.after === "court") return "overnighter";
-  if (answers.laptop === "16" || answers.commute === "long") return "overnighter";
-  return "backpack16";
+function pickBag(a: Record<string, string>): BagId {
+  if (a.after === "court" || a.after === "weekend") return "overnighter";
+  if (a.laptop === "16") return a.style === "pockets" ? "overnighter" : "backpackPro";
+  return a.style === "pockets" ? "kaleido" : "backpack16";
 }
 
 const padelAnswer =
-  "For your first padel game, carry your racket, court shoes, a water bottle, a towel and a change of clothes. Coming straight from class? The Mokobara Overnighter Backpack fits up to a 16-inch laptop and expands from 19L to 23L to hold your kit. Then book a court at 7Padel by MS Dhoni on 7padel.in.";
+  "For your first padel game, carry your racket, court shoes, a water bottle, a towel and a change of clothes. Coming straight from class? The Mokobara Overnighter Backpack fits a 16-inch MacBook and expands from 19L to 23L to hold your kit. Then book a court at 7Padel by MS Dhoni on 7padel.in.";
 
 const checklist = [
   { label: "Racket", icon: Sparkles },
@@ -112,7 +149,7 @@ const checklist = [
 const padelFaqs = [
   {
     q: "Can one bag carry my laptop and padel kit?",
-    a: "Yes. The Mokobara Overnighter Backpack fits up to a 16-inch laptop and expands from 19L to 23L for shoes, clothes and a towel. Its front pocket detaches into a sling for your phone and keys on court.",
+    a: "Yes. The Mokobara Overnighter Backpack fits a 16-inch MacBook (15.6-inch for other laptops) and expands from 19L to 23L for shoes, clothes and a towel. Its front pocket detaches into a sling for your phone and keys on court.",
   },
   {
     q: "Do I need a separate bag for a padel racket?",
@@ -120,23 +157,23 @@ const padelFaqs = [
   },
   {
     q: "What size bag do I need for padel straight after class?",
-    a: "For a laptop plus kit, the 23L Overnighter works. If you carry more, the Mokobara Em Travel Backpack 32L has a built-in water bottle compartment and a rain cover.",
+    a: "For a laptop plus kit, the expandable 23L Overnighter works. If you only carry a bottle and a towel, the Mokobara Backpack 16L has a side pocket that zips out to fit a water bottle.",
   },
 ];
 
-/* Replace these with the team's real "People also ask" questions from S2. */
+/* Replace with the team's real "People also ask" questions from S2. */
 const collegeFaqs = [
   {
     q: "What is the best laptop backpack for college?",
-    a: "It depends on your day. For lectures only, the Mokobara Backpack 16L fits up to a 15-inch laptop. If you go somewhere after class, the Overnighter Backpack fits up to a 16-inch laptop and expands from 19L to 23L.",
+    a: "It depends on your day. For lectures only, the Mokobara Backpack 16L fits a 15-inch laptop. If you go somewhere after class, the Overnighter Backpack fits a 16-inch MacBook and expands from 19L to 23L.",
   },
   {
-    q: "What size backpack do I need for a 16-inch laptop?",
-    a: "Look for a padded sleeve rated for 16 inches. The Mokobara Overnighter Backpack fits up to a 16-inch laptop, and the Backpack 16L fits a MacBook Pro up to 16 inches.",
+    q: "Which Mokobara backpack fits a 16-inch laptop?",
+    a: "The Overnighter Backpack fits a 16-inch MacBook or a 15.6-inch laptop, and the Backpack Pro 21L fits 15.6-inch laptops or a 16-inch MacBook Pro.",
   },
   {
     q: "Are Mokobara backpacks water resistant?",
-    a: "The Mokobara Backpack 16L is made with durable water-resistant materials, and the Em Travel Backpack 32L is water resistant with its own rain cover compartment.",
+    a: "The Backpack 16L and Backpack Pro 21L use water-resistant nylon, the Overnighter uses water-resistant vegan leather and nylon, and the Kaleido uses water-resistant polyester.",
   },
   {
     q: "What if the backpack doesn't suit me?",
@@ -147,48 +184,32 @@ const collegeFaqs = [
 const hesitations = [
   {
     title: "Will it fit my laptop?",
-    body: "The Overnighter fits up to 16\". The Backpack 16L fits up to 15\" or a 16\" MacBook Pro.",
+    body: "Overnighter: 16\" MacBook. Backpack Pro: 15.6\" or 16\" MacBook Pro. Backpack 16L: 15\".",
     icon: Laptop,
   },
-  {
-    title: "Will it hurt on a long commute?",
-    body: "The Overnighter has padded shoulder straps and a breathable air mesh back.",
-    icon: Train,
-  },
-  {
-    title: "What if I don't like it?",
-    body: "30-day trial with a full refund, plus a 12-month limited warranty on mokobara.com.",
-    icon: ShieldCheck,
-  },
+  { title: "Will it hurt on a long commute?", body: "The Overnighter has padded shoulder straps and a breathable air mesh back.", icon: Train },
+  { title: "What if I don't like it?", body: "30-day trial with a full refund, plus a 12-month limited warranty on mokobara.com.", icon: ShieldCheck },
 ];
 
-const comparison = [
-  { label: "Laptop fit", overnighter: "Up to 16\"", backpack16: "Up to 15\" (16\" MacBook Pro)", em32: "Not listed" },
-  { label: "Capacity", overnighter: "19L, expands to 23L", backpack16: "16L", em32: "32L" },
-  { label: "Best for", overnighter: "Class, then court or gym", backpack16: "Lectures only", em32: "3–4 day trips" },
-  { label: "Stand-out detail", overnighter: "Front pocket becomes a sling", backpack16: "Magnetic phone pocket", em32: "Bottle compartment + rain cover" },
+const comparison: { label: string; values: Record<BagId, string> }[] = [
+  { label: "Laptop fit", values: { overnighter: "16\" MacBook / 15.6\"", backpackPro: "15.6\" / 16\" MacBook Pro", backpack16: "15\"", kaleido: "15.6\"" } },
+  { label: "Capacity", values: { overnighter: "19L → 23L", backpackPro: "21L", backpack16: "16L", kaleido: "Not listed" } },
+  { label: "Bottle pocket", values: { overnighter: "—", backpackPro: "—", backpack16: "Zip-out side pocket", kaleido: "Mesh side pocket" } },
+  { label: "Stand-out detail", values: { overnighter: "Detachable sling + USB port", backpackPro: "Key + card holder", backpack16: "Vegan leather trims", kaleido: "Microsuede lining" } },
+  { label: "Price*", values: { overnighter: "₹8,999", backpackPro: "₹4,999", backpack16: "₹3,999", kaleido: "₹3,999" } },
 ];
 
 const itemListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
   name: "Mokobara laptop backpacks for college",
-  itemListElement: bagOrder.map((id, i) => ({
-    "@type": "ListItem",
-    position: i + 1,
-    name: bags[id].name,
-    url: bags[id].url,
-  })),
+  itemListElement: bagOrder.map((id, i) => ({ "@type": "ListItem", position: i + 1, name: bags[id].name, url: bags[id].url, image: bags[id].image })),
 };
 
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: [
-    { q: "What should I carry to my first padel game?", a: padelAnswer },
-    ...padelFaqs,
-    ...collegeFaqs,
-  ].map(({ q, a }) => ({
+  mainEntity: [{ q: "What should I carry to my first padel game?", a: padelAnswer }, ...padelFaqs, ...collegeFaqs].map(({ q, a }) => ({
     "@type": "Question",
     name: q,
     acceptedAnswer: { "@type": "Answer", text: a },
@@ -206,8 +227,13 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Best Laptop Backpack for College (2026) | Mokobara" },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: img(LIFE.commute, 1200) },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "keywords", content: "laptop backpack for college, Mokobara backpack, what to carry to padel" },
+    ],
+    links: [
+      { rel: "preconnect", href: "https://cdn.shopify.com" },
+      { rel: "preload", as: "image", href: img(LIFE.commute, 1000) },
     ],
     scripts: [
       { type: "application/ld+json", children: JSON.stringify(faqSchema) },
@@ -222,16 +248,6 @@ function Quiz() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const done = step >= quizQuestions.length;
   const result = done ? bags[pickBag(answers)] : null;
-
-  const choose = (id: string, value: string) => {
-    setAnswers((prev) => ({ ...prev, [id]: value }));
-    setStep((s) => s + 1);
-  };
-
-  const restart = () => {
-    setAnswers({});
-    setStep(0);
-  };
 
   return (
     <div className="quiz-panel">
@@ -251,7 +267,10 @@ function Quiz() {
                 type="button"
                 key={opt.value}
                 className="quiz-option"
-                onClick={() => choose(quizQuestions[step].id, opt.value)}
+                onClick={() => {
+                  setAnswers((p) => ({ ...p, [quizQuestions[step].id]: opt.value }));
+                  setStep((s) => s + 1);
+                }}
               >
                 {opt.label}
                 <ArrowRight aria-hidden="true" />
@@ -263,8 +282,8 @@ function Quiz() {
 
       {result && (
         <div className="quiz-result" aria-live="polite">
-          <div className="quiz-result-tile" aria-hidden="true">
-            <result.icon strokeWidth={1.1} />
+          <div className="quiz-result-tile">
+            <img src={img(result.image, 700)} alt={result.alt} loading="lazy" width={700} height={840} />
           </div>
           <div>
             <h3 className="quiz-question">{result.name}</h3>
@@ -274,11 +293,21 @@ function Quiz() {
                 <li key={f}>{f}</li>
               ))}
             </ul>
+            <p className="price-row">
+              <strong>{result.price}</strong> <s>{result.mrp}</s>
+            </p>
             <div className="quiz-result-actions">
               <a className="btn-solid" href={result.url} target="_blank" rel="noopener noreferrer">
                 View on mokobara.com
               </a>
-              <button type="button" className="btn-outline" onClick={restart}>
+              <button
+                type="button"
+                className="btn-outline"
+                onClick={() => {
+                  setAnswers({});
+                  setStep(0);
+                }}
+              >
                 <RotateCcw aria-hidden="true" /> Retake
               </button>
             </div>
@@ -304,17 +333,17 @@ function FaqList({ items, prefix }: { items: { q: string; a: string }[]; prefix:
   );
 }
 
-const badges: Record<BagId, string> = { overnighter: "Class to court", backpack16: "Light", em32: "Weekend" };
-
 function SectionHead({ eyebrow, title, id, link }: { eyebrow: string; title: string; id: string; link?: { href: string; label: string } }) {
   return (
     <div className="section-head">
       <div>
         <p className="pill">{eyebrow}</p>
-        <h2 className="section-title" id={id}>{/[?.!]$/.test(title) ? title : `${title}.`}</h2>
+        <h2 className="section-title" id={id}>
+          {/[?.!]$/.test(title) ? title : `${title}.`}
+        </h2>
       </div>
       {link && (
-        <a className="view-all" href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer">
+        <a className="view-all" href={link.href} target="_blank" rel="noopener noreferrer">
           {link.label}
         </a>
       )}
@@ -325,17 +354,23 @@ function SectionHead({ eyebrow, title, id, link }: { eyebrow: string; title: str
 function Index() {
   return (
     <main className="mk-page">
-      <div className="ticker" aria-label="Student concept, the college edit 2026">
+      <div className="ticker">
         <div className="ticker-track" aria-hidden="true">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <span key={i}>Student concept <b>•</b> The college edit 2026 <b>•</b> From class to court <b>•</b></span>
+          {Array.from({ length: 6 }).map((_, i) => (
+            <span key={i}>
+              Student concept <b>•</b> The college edit 2026 <b>•</b> From class to court <b>•</b> Shop the real thing on
+              mokobara.com <b>•</b>
+            </span>
           ))}
         </div>
+        <p className="sr-only">Student concept page. Visit the official Mokobara store at mokobara.com.</p>
       </div>
 
       <header className="mk-sidebar">
         <div className="sidebar-dark">
-          <a className="wordmark" href="#top" aria-label="mokobara college edit, back to top">mokobara</a>
+          <a className="wordmark" href="#top" aria-label="Mokobara college edit, back to top">
+            <img src={LOGO} alt="Mokobara" width={130} height={28} />
+          </a>
           <nav className="sidebar-nav" aria-label="Page sections">
             <a href="#backpacks">Backpacks</a>
             <a href="#compare">Compare</a>
@@ -345,163 +380,221 @@ function Index() {
           </nav>
         </div>
         <div className="sidebar-light">
-          <a href="#quiz">Find my bag <ArrowRight aria-hidden="true" /></a>
+          <a href="#quiz">
+            Find my bag <ArrowRight aria-hidden="true" />
+          </a>
+          <a className="official-link" href="https://mokobara.com" target="_blank" rel="noopener noreferrer">
+            Official store <ArrowRight aria-hidden="true" />
+          </a>
         </div>
       </header>
 
       <div className="mk-main">
-      <section className="hero" id="top" aria-labelledby="page-title">
-        <div className="mk-shell hero-inner">
-          <div className="hero-copy">
-            <p className="pill">The college edit</p>
-            <h1 className="hero-title" id="page-title">
-              The best laptop backpack for college, from class to court
-            </h1>
-            <p className="hero-sub">Campus in the morning. Court after class. One Mokobara that fits both.</p>
-            <div className="hero-actions">
-              <a className="btn-solid" href="#quiz">Take the 30-second quiz</a>
-              <a className="arrow-link" href="#padel">First padel game <ArrowRight aria-hidden="true" /></a>
+        <section className="hero" id="top" aria-labelledby="page-title">
+          <div className="hero-inner">
+            <div className="hero-copy">
+              <p className="pill">The college edit</p>
+              <h1 className="hero-title" id="page-title">
+                The best laptop backpack for college, from class to court
+              </h1>
+              <p className="hero-sub">Campus in the morning. Court after class. One Mokobara that fits both.</p>
+              <div className="hero-actions">
+                <a className="btn-solid" href="#quiz">
+                  Take the 30-second quiz
+                </a>
+                <a className="arrow-link" href="#padel">
+                  First padel game <ArrowRight aria-hidden="true" />
+                </a>
+              </div>
+              <p className="hero-meta">Updated 21 November 2026 · Product facts and prices from mokobara.com</p>
             </div>
-            <p className="hero-meta">Updated November 2026 · Product facts from mokobara.com</p>
-          </div>
-          <div className="hero-visual" aria-hidden="true">
-            <BriefcaseBusiness strokeWidth={0.9} />
-            <div className="hero-specs">
-              <span>16" laptop</span>
-              <span>19L → 23L</span>
-              <span>Detachable sling</span>
+            <div className="hero-media">
+              <img
+                src={img(LIFE.commute, 1000)}
+                alt="Student on a city commute wearing a Mokobara backpack"
+                width={1000}
+                height={1359}
+                fetchPriority="high"
+              />
+              <div className="hero-specs" aria-hidden="true">
+                <span>16" MacBook</span>
+                <span>19L → 23L</span>
+                <span>Detachable sling</span>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="mk-section" id="backpacks" aria-labelledby="products-title">
-        <div className="mk-shell">
-          <SectionHead
-            eyebrow="The shortlist"
-            title="Which Mokobara fits your college day?"
-            id="products-title"
-            link={{ href: "https://mokobara.com/collections/laptop-bags", label: "View all" }}
-          />
-          <div className="product-row">
-            {bagOrder.map((id) => {
-              const { name, icon: ProductIcon, tagline, facts, url } = bags[id];
-              return (
-                <article className="product-card" key={id}>
-                  <a className="product-tile" href={url} target="_blank" rel="noopener noreferrer" aria-label={`${name} on mokobara.com`}>
-                    <span className="badge">{badges[id]}</span>
-                    <ProductIcon strokeWidth={0.9} aria-hidden="true" />
-                  </a>
-                  <h3 className="product-title">{name}</h3>
-                  <p className="product-tagline">{tagline}</p>
-                  <ul className="fact-list">
-                    {facts.map((f) => (
-                      <li key={f}>{f}</li>
-                    ))}
-                  </ul>
-                  <a className="product-link" href={url} target="_blank" rel="noopener noreferrer">
-                    View on mokobara.com
-                  </a>
-                </article>
-              );
-            })}
+        <section className="mk-section" id="backpacks" aria-labelledby="products-title">
+          <div className="mk-shell">
+            <SectionHead
+              eyebrow="The shortlist"
+              title="Which Mokobara fits your college day?"
+              id="products-title"
+              link={{ href: "https://mokobara.com/collections/laptop-bags", label: "View all" }}
+            />
+            <div className="product-row">
+              {bagOrder.map((id) => {
+                const b = bags[id];
+                return (
+                  <article className="product-card" key={id}>
+                    <a className="product-tile" href={b.url} target="_blank" rel="noopener noreferrer">
+                      <span className="badge">{b.badge}</span>
+                      <img src={img(b.image, 700)} alt={b.alt} loading="lazy" width={700} height={840} />
+                    </a>
+                    <div className="product-body">
+                      <h3 className="product-title">{b.name}</h3>
+                      <p className="price-row">
+                        <strong>{b.price}</strong> <s>{b.mrp}</s>
+                        {b.colours > 0 && <span className="colours">{b.colours} colours</span>}
+                      </p>
+                      <ul className="fact-list">
+                        {b.facts.map((f) => (
+                          <li key={f}>{f}</li>
+                        ))}
+                      </ul>
+                      <a className="product-link" href={b.url} target="_blank" rel="noopener noreferrer">
+                        View on mokobara.com
+                      </a>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+            <p className="price-note">*Prices as shown on mokobara.com on 21 November 2026 and may change.</p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="mk-section mk-section-grey" id="compare" aria-labelledby="compare-title">
-        <div className="mk-shell">
-          <SectionHead eyebrow="Side by side" title="Mokobara college backpacks compared" id="compare-title" />
-          <div className="table-wrap">
-            <table className="compare-table">
-              <thead>
-                <tr>
-                  <th scope="col"><span className="sr-only">Feature</span></th>
-                  {bagOrder.map((id) => (
-                    <th scope="col" key={id}>{bags[id].name}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {comparison.map((row) => (
-                  <tr key={row.label}>
-                    <th scope="row">{row.label}</th>
+        <section className="lifestyle" aria-label="Mokobara backpacks on the go">
+          {[
+            { src: LIFE.group, alt: "Three friends walking with Mokobara backpacks" },
+            { src: LIFE.skate, alt: "Commuter carrying a Mokobara backpack in the city" },
+            { src: LIFE.ride, alt: "Rider on a scooter with a Mokobara backpack" },
+          ].map((p) => (
+            <img key={p.src} src={img(p.src, 700)} alt={p.alt} loading="lazy" width={700} height={952} />
+          ))}
+          <p className="lifestyle-caption">
+            <span className="pill">#GoingPlaces</span>
+            Lecture, metro, court, repeat.
+          </p>
+        </section>
+
+        <section className="mk-section mk-section-grey" id="compare" aria-labelledby="compare-title">
+          <div className="mk-shell">
+            <SectionHead eyebrow="Side by side" title="Mokobara college backpacks compared" id="compare-title" />
+            <div className="table-wrap">
+              <table className="compare-table">
+                <thead>
+                  <tr>
+                    <th scope="col">
+                      <span className="sr-only">Feature</span>
+                    </th>
                     {bagOrder.map((id) => (
-                      <td key={id}>{row[id]}</td>
+                      <th scope="col" key={id}>
+                        {bags[id].name}
+                      </th>
                     ))}
                   </tr>
+                </thead>
+                <tbody>
+                  {comparison.map((row) => (
+                    <tr key={row.label}>
+                      <th scope="row">{row.label}</th>
+                      {bagOrder.map((id) => (
+                        <td key={id}>{row.values[id]}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section className="mk-section" id="quiz" aria-labelledby="quiz-title">
+          <div className="mk-shell">
+            <SectionHead eyebrow="Your day, decoded" title="Quiz: Which Mokobara fits your plan?" id="quiz-title" />
+            <Quiz />
+          </div>
+        </section>
+
+        <section className="mk-section mk-section-grey" aria-labelledby="worries-title">
+          <div className="mk-shell">
+            <SectionHead eyebrow="Before you buy" title="Why students hesitate, and what fixes it" id="worries-title" />
+            <div className="worry-grid">
+              {hesitations.map(({ title, body, icon: Icon }, i) => (
+                <article className="worry-card" key={title}>
+                  <div className="worry-top">
+                    <span className="worry-num">0{i + 1}</span>
+                    <Icon strokeWidth={1.4} aria-hidden="true" />
+                  </div>
+                  <h3 className="worry-title">{title}</h3>
+                  <p>{body}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mk-section mk-section-dark" id="padel" aria-labelledby="padel-title">
+          <div className="mk-shell padel-grid">
+            <div>
+              <SectionHead eyebrow="From class to court" title="What should I carry to my first padel game?" id="padel-title" />
+              <div className="answer-block">
+                <p>{padelAnswer}</p>
+              </div>
+              <ul className="checklist" aria-label="First padel game checklist">
+                {checklist.map(({ label, icon: Icon }) => (
+                  <li key={label}>
+                    <Icon strokeWidth={1.6} aria-hidden="true" />
+                    {label}
+                  </li>
                 ))}
-              </tbody>
-            </table>
+              </ul>
+              <a className="btn-yellow" href="https://7padel.in" target="_blank" rel="noopener noreferrer">
+                Book a court at 7padel.in
+              </a>
+            </div>
+            <figure className="padel-media">
+              <img
+                src={img(`${CDN}/files/The-Overnighter-Backpack_2.0_Headspace-3_50892455-d978-4cb8-b445-4d9baedfa082.jpg`, 800)}
+                alt="Mokobara Overnighter Backpack carried on the shoulder"
+                loading="lazy"
+                width={800}
+                height={960}
+              />
+              <figcaption>Overnighter Backpack · 19L → 23L</figcaption>
+            </figure>
           </div>
-        </div>
-      </section>
-
-      <section className="mk-section" id="quiz" aria-labelledby="quiz-title">
-        <div className="mk-shell">
-          <SectionHead eyebrow="Your day, decoded" title="Quiz: Which Mokobara fits your plan?" id="quiz-title" />
-          <Quiz />
-        </div>
-      </section>
-
-      <section className="mk-section mk-section-grey" aria-labelledby="worries-title">
-        <div className="mk-shell">
-          <SectionHead eyebrow="Before you buy" title="Why students hesitate, and what fixes it" id="worries-title" />
-          <div className="worry-grid">
-            {hesitations.map(({ title, body, icon: Icon }, i) => (
-              <article className="worry-card" key={title}>
-                <div className="worry-top">
-                  <span className="worry-num">0{i + 1}</span>
-                  <Icon strokeWidth={1.3} aria-hidden="true" />
-                </div>
-                <h3 className="worry-title">{title}</h3>
-                <p>{body}</p>
-              </article>
-            ))}
+          <div className="mk-shell">
+            <h2 className="section-title faq-subtitle" id="padel-faq-title">
+              Padel bag FAQ.
+            </h2>
+            <FaqList items={padelFaqs} prefix="padel" />
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="mk-section mk-section-dark" id="padel" aria-labelledby="padel-title">
-        <div className="mk-shell">
-          <SectionHead eyebrow="From class to court" title="What should I carry to my first padel game?" id="padel-title" />
-          <div className="answer-block">
-            <p>{padelAnswer}</p>
+        <section className="mk-section" id="faq" aria-labelledby="faq-title">
+          <div className="mk-shell">
+            <SectionHead eyebrow="Good to know" title="College backpack FAQ" id="faq-title" />
+            <FaqList items={collegeFaqs} prefix="college" />
           </div>
-          <ul className="checklist" aria-label="First padel game checklist">
-            {checklist.map(({ label, icon: Icon }) => (
-              <li key={label}>
-                <Icon strokeWidth={1.5} aria-hidden="true" />
-                {label}
-              </li>
-            ))}
-          </ul>
-          <a className="btn-yellow" href="https://7padel.in" target="_blank" rel="noopener noreferrer">
-            Book a court at 7padel.in
-          </a>
+        </section>
 
-          <h2 className="section-title faq-subtitle" id="padel-faq-title">Padel bag FAQ.</h2>
-          <FaqList items={padelFaqs} prefix="padel" />
-        </div>
-      </section>
-
-      <section className="mk-section" id="faq" aria-labelledby="faq-title">
-        <div className="mk-shell">
-          <SectionHead eyebrow="Good to know" title="College backpack FAQ" id="faq-title" />
-          <FaqList items={collegeFaqs} prefix="college" />
-        </div>
-      </section>
-
-      <footer className="mk-footer">
-        <div className="mk-shell">
-          <p className="wordmark wordmark-invert">mokobara</p>
-          <p className="footer-tag">The Joy Is in the Details</p>
-          <p className="footer-note">
-            Student concept for a Schbang x Atlas SkillTech brief. Not affiliated with or commissioned by
-            Mokobara or 7Padel. Product facts from mokobara.com and 7padel.in.
-          </p>
-        </div>
-      </footer>
+        <footer className="mk-footer">
+          <div className="mk-shell">
+            <img className="footer-logo" src={LOGO} alt="Mokobara" width={180} height={38} loading="lazy" />
+            <p className="footer-tag">The Joy Is in the Details · #GoingPlaces</p>
+            <a className="btn-yellow" href="https://mokobara.com" target="_blank" rel="noopener noreferrer">
+              Visit the official store
+            </a>
+            <p className="footer-note">
+              Student concept for a Schbang x Atlas SkillTech brief. Not affiliated with or commissioned by Mokobara or
+              7Padel. Product facts, prices and images belong to Mokobara and are taken from mokobara.com; padel venue
+              information from 7padel.in.
+            </p>
+          </div>
+        </footer>
       </div>
 
       <a className="float-btn" href="#quiz" aria-label="Take the bag quiz">

@@ -570,3 +570,71 @@
 @media (prefers-reduced-motion: reduce) {
   .ticker-track, .quiz-step, .quiz-result { animation: none; }
 }
+
+/* ---------- Real imagery (Mokobara photos) ---------- */
+.wordmark img { display: block; width: 118px; height: auto; }
+.official-link { display: none !important; }
+.hero { padding: 0; }
+.hero-inner { display: grid; gap: 0; padding: 0; }
+.hero-copy { padding: 32px 16px 28px; }
+.hero-media { position: relative; overflow: hidden; background: #e8e8e8; aspect-ratio: 4 / 4.4; }
+.hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; }
+.hero-media .hero-specs { left: 14px; bottom: 14px; }
+
+.product-row { grid-auto-columns: 74%; gap: 4px; }
+.product-tile { aspect-ratio: 5 / 6; overflow: hidden; background: #f9f9f9; }
+.product-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 500ms ease; }
+.product-tile:hover img { transform: scale(1.04); }
+.product-body { background: #f9f9f9; padding: 12px 12px 14px; }
+.product-title { margin: 0 0 4px; }
+.price-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; margin: 0 0 10px; font-size: 14px; }
+.price-row strong { font-weight: 600; }
+.price-row s { color: #9a9a9a; font-size: 13px; }
+.colours { margin-left: auto; color: var(--mk-muted); font-size: 12px; }
+.price-note { margin: 14px 0 0; color: var(--mk-muted); font-size: 12px; }
+
+.lifestyle { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.lifestyle img { width: 100%; aspect-ratio: 3 / 4.2; object-fit: cover; display: block; }
+.lifestyle-caption {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+}
+.lifestyle-caption .pill { text-shadow: none; }
+
+.quiz-result-tile { overflow: hidden; aspect-ratio: 5 / 6; background: #f9f9f9; }
+.quiz-result-tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.padel-grid { display: grid; gap: 28px; }
+.padel-media { margin: 0; }
+.padel-media img { width: 100%; aspect-ratio: 5 / 6; object-fit: cover; border-radius: 6px; display: block; }
+.padel-media figcaption { margin-top: 10px; color: #b5b5b5; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+.footer-logo { display: block; width: 170px; height: auto; }
+.mk-footer .btn-yellow { margin-bottom: 28px; }
+
+@media (min-width: 760px) {
+  .hero-inner { grid-template-columns: 1fr 1fr; align-items: stretch; }
+  .hero-copy { display: flex; flex-direction: column; justify-content: center; padding: 56px 40px 56px 32px; }
+  .hero-media { aspect-ratio: auto; min-height: 560px; }
+  .product-row { grid-auto-flow: row; grid-template-columns: repeat(2, 1fr); margin: 0; padding: 0; overflow: visible; }
+  .lifestyle-caption { left: 28px; bottom: 28px; font-size: 34px; }
+  .padel-grid { grid-template-columns: 1.3fr 1fr; align-items: center; gap: 48px; }
+}
+@media (min-width: 1024px) {
+  .wordmark img { width: 150px; }
+  .official-link { display: flex !important; margin-top: 8px; }
+  .sidebar-light { flex-direction: column; }
+  .hero-copy { padding-left: 0; }
+  .hero-media { min-height: 640px; }
+  .product-row { grid-template-columns: repeat(4, 1fr); }
+}
