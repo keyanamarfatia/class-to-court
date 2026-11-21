@@ -18,7 +18,7 @@ export const Route = createFileRoute("/faq")({
         title="Mokobara college backpack FAQ"
         intro="Quick, factual answers to what students ask before buying a Mokobara backpack, taken from mokobara.com."
       />
-      <CollegeFaqSection />
+      <CollegeFaqSection head={false} />
       <NextSteps hide="/faq" />
     </Shell>
   ),

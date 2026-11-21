@@ -1004,3 +1004,7 @@
 .section-fold > summary:focus-visible { outline: 2px solid var(--mk-yellow); outline-offset: 6px; }
 .section-fold .fold-body { margin-top: 28px; }
 .mk-section:has(> .section-fold:not([open])) { padding-top: 48px; padding-bottom: 48px; }
+/* inner pages: no big empty gap under the page hero */
+.col-hero { padding-bottom: 32px !important; }
+.col-hero + .mk-section { padding-top: 32px !important; }
+.col-hero .byline { max-width: 110ch; }

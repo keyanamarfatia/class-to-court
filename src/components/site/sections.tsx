@@ -587,12 +587,12 @@ export function SectionHead({ eyebrow, title, id, link }: { eyebrow: string; tit
 }
 
 
-export function CompareSection() {
+export function CompareSection({ head = true }: { head?: boolean } = {}) {
   return (
     <>
   <section className="mk-section mk-section-grey" id="compare" aria-labelledby="compare-title">
     <div className="mk-shell">
-      <SectionHead eyebrow="Side by side" title="Mokobara college backpacks compared" id="compare-title" />
+      {head ? <SectionHead eyebrow="Side by side" title="Mokobara college backpacks compared" id="compare-title" /> : <h2 className="sr-only" id="compare-title">Overnighter vs Backpack Pro vs Backpack 16L vs Kaleido</h2>}
       <div className="vs-grid">
         {bagOrder.map((id) => {
           const b = bags[id];
@@ -820,12 +820,12 @@ export function MumbaiSection() {
   );
 }
 
-export function CollegeFaqSection() {
+export function CollegeFaqSection({ head = true }: { head?: boolean } = {}) {
   return (
     <>
   <section className="mk-section" id="faq" aria-labelledby="faq-title">
     <div className="mk-shell">
-      <SectionHead eyebrow="Good to know" title="College backpack FAQ" id="faq-title" />
+      {head ? <SectionHead eyebrow="Good to know" title="College backpack FAQ" id="faq-title" /> : <h2 className="sr-only" id="faq-title">Questions and answers</h2>}
       <FaqList items={collegeFaqs} prefix="college" />
     </div>
   </section>

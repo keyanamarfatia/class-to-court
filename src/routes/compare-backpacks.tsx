@@ -18,7 +18,7 @@ export const Route = createFileRoute("/compare-backpacks")({
         title="Mokobara college backpacks compared"
         intro="Four Mokobara backpacks students actually shortlist, compared on what matters for class: laptop fit, capacity, bottle pockets and price."
       />
-      <CompareSection />
+      <CompareSection head={false} />
       <WorriesSection />
       <NextSteps hide="/compare-backpacks" />
     </Shell>
