@@ -58,6 +58,8 @@ export const SOCIALS = [
   { label: "Mokobara on LinkedIn", href: "https://www.linkedin.com/company/mokobara/" },
   { label: "Mokobara on YouTube", href: "https://www.youtube.com/@mokobara" },
   { label: "Mokobara on Wikipedia", href: "https://en.wikipedia.org/wiki/Mokobara" },
+  { label: "Mokobara on Facebook", href: "https://www.facebook.com/mokobara/" },
+  { label: "Mokobara on Crunchbase", href: "https://www.crunchbase.com/organization/mokobara" },
   { label: "7Padel on X", href: "https://x.com/7Padel_India" },
 ];
 
@@ -79,6 +81,7 @@ export function SiteFooter() {
           <Link to="/faq">FAQ</Link>
           <Link to="/about">About us</Link>
           <Link to="/press">Press</Link>
+          <Link to="/contact">Contact us</Link>
           <Link to="/">College edit home</Link>
         </nav>
         <div className="footer-social" aria-label="Official brand profiles">

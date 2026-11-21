@@ -24,14 +24,14 @@ export function Byline({ light = false }: { light?: boolean }) {
             <span itemProp="name">{AUTHOR.name}</span>
           </a>
         </span>{" "}
-        and team · <span className="byline-cred">{AUTHOR.credentials}</span>
+        and team · <span className="byline-cred">Credentials: {AUTHOR.credentials}</span>
       </p>
       <p>
-        Published <time dateTime={PUBLISHED} itemProp="datePublished">21 November 2026</time> · Last updated{" "}
-        <time dateTime={UPDATED} itemProp="dateModified">21 November 2026</time> · Sources:{" "}
+        Published on <time dateTime={PUBLISHED} itemProp="datePublished">November 21, 2026</time> · Last updated on{" "}
+        <time dateTime={UPDATED} itemProp="dateModified">November 21, 2026</time> · Sources:{" "}
         <a href="https://mokobara.com" target="_blank" rel="noopener noreferrer">mokobara.com</a>,{" "}
         <a href="https://7padel.in" target="_blank" rel="noopener noreferrer">7padel.in</a> ·{" "}
-        <a href="/about#contact">Contact</a>
+        <a href="/contact">Contact us</a>
       </p>
     </div>
   );
@@ -114,7 +114,7 @@ export function productSchema(p: { name: string; image: string; url: string; pri
       "@type": "Brand",
       name: "Mokobara",
       url: "https://mokobara.com",
-      sameAs: ["https://www.instagram.com/mokobara/", "https://www.linkedin.com/company/mokobara/", "https://www.youtube.com/@mokobara", "https://en.wikipedia.org/wiki/Mokobara"],
+      sameAs: ["https://www.instagram.com/mokobara/", "https://www.linkedin.com/company/mokobara/", "https://www.youtube.com/@mokobara", "https://en.wikipedia.org/wiki/Mokobara", "https://www.facebook.com/mokobara/", "https://www.crunchbase.com/organization/mokobara"],
     },
     offers: offerSchema(p, false),
   };

@@ -14,6 +14,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as BagFinderQuizRouteImport } from './routes/bag-finder-quiz'
 import { Route as CabinLuggageRouteImport } from './routes/cabin-luggage'
 import { Route as CompareBackpacksRouteImport } from './routes/compare-backpacks'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as LaptopBagsRouteImport } from './routes/laptop-bags'
 import { Route as PressRouteImport } from './routes/press'
@@ -44,6 +45,11 @@ const CabinLuggageRoute = CabinLuggageRouteImport.update({
 const CompareBackpacksRoute = CompareBackpacksRouteImport.update({
   id: '/compare-backpacks',
   path: '/compare-backpacks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/bag-finder-quiz': typeof BagFinderQuizRoute
   '/cabin-luggage': typeof CabinLuggageRoute
   '/compare-backpacks': typeof CompareBackpacksRoute
+  '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/laptop-bags': typeof LaptopBagsRoute
   '/press': typeof PressRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByTo {
   '/bag-finder-quiz': typeof BagFinderQuizRoute
   '/cabin-luggage': typeof CabinLuggageRoute
   '/compare-backpacks': typeof CompareBackpacksRoute
+  '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/laptop-bags': typeof LaptopBagsRoute
   '/press': typeof PressRoute
@@ -110,6 +118,7 @@ export interface FileRoutesById {
   '/bag-finder-quiz': typeof BagFinderQuizRoute
   '/cabin-luggage': typeof CabinLuggageRoute
   '/compare-backpacks': typeof CompareBackpacksRoute
+  '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/laptop-bags': typeof LaptopBagsRoute
   '/press': typeof PressRoute
@@ -125,6 +134,7 @@ export interface FileRouteTypes {
     | '/bag-finder-quiz'
     | '/cabin-luggage'
     | '/compare-backpacks'
+    | '/contact'
     | '/faq'
     | '/laptop-bags'
     | '/press'
@@ -138,6 +148,7 @@ export interface FileRouteTypes {
     | '/bag-finder-quiz'
     | '/cabin-luggage'
     | '/compare-backpacks'
+    | '/contact'
     | '/faq'
     | '/laptop-bags'
     | '/press'
@@ -151,6 +162,7 @@ export interface FileRouteTypes {
     | '/bag-finder-quiz'
     | '/cabin-luggage'
     | '/compare-backpacks'
+    | '/contact'
     | '/faq'
     | '/laptop-bags'
     | '/press'
@@ -165,6 +177,7 @@ export interface RootRouteChildren {
   BagFinderQuizRoute: typeof BagFinderQuizRoute
   CabinLuggageRoute: typeof CabinLuggageRoute
   CompareBackpacksRoute: typeof CompareBackpacksRoute
+  ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   LaptopBagsRoute: typeof LaptopBagsRoute
   PressRoute: typeof PressRoute
@@ -208,6 +221,13 @@ declare module '@tanstack/react-router' {
       path: '/compare-backpacks'
       fullPath: '/compare-backpacks'
       preLoaderRoute: typeof CompareBackpacksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -261,6 +281,7 @@ const rootRouteChildren: RootRouteChildren = {
   BagFinderQuizRoute: BagFinderQuizRoute,
   CabinLuggageRoute: CabinLuggageRoute,
   CompareBackpacksRoute: CompareBackpacksRoute,
+  ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   LaptopBagsRoute: LaptopBagsRoute,
   PressRoute: PressRoute,

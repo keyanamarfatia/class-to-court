@@ -160,10 +160,10 @@ export const padelAnswer =
 
 export const OV = `${CDN}/files/The-Overnighter-Backpack_2.0_Headspace`;
 export const details = [
-  { src: `${OV}-3_50892455-d978-4cb8-b445-4d9baedfa082.jpg`, title: "Front pocket turns into a sling", body: "The Overnighter's front pocket unclips into a separate sling bag, so you can carry just your phone, cards and keys onto the padel court.", alt: "Overnighter front pocket detaching into a sling bag" },
-  { src: `${OV}-7_2d6d6e9c-2342-4eb0-b931-b72851438572.jpg`, title: "19L to 23L when you need it", body: "The Overnighter holds 19L for class and expands to 23L after class, enough for court shoes, a towel and a change of clothes.", alt: "Overnighter expanding from 19L to 23L" },
-  { src: `${OV}-8_ad360e32-50b9-4c2d-beb0-918bbbd61166.jpg`, title: "Flat-opening tech compartment", body: "A flat-opening tech compartment with microsuede lining keeps a 16-inch MacBook, an iPad, books and chargers separate from your kit.", alt: "Overnighter flat-opening tech compartment with microsuede lining" },
-  { src: `${OV}-10_dd0eb0e4-54a4-486a-99b1-40606551b06f.jpg`, title: "Built for the long commute", body: "A breathable air mesh back and padded, adjustable shoulder straps make the Overnighter easier to carry on a long Mumbai commute.", alt: "Overnighter air mesh back panel and padded shoulder straps" },
+  { src: `${OV}-3_50892455-d978-4cb8-b445-4d9baedfa082.jpg`, title: "Front pocket turns into a sling", body: "The Overnighter's front pocket unclips into a separate sling bag with its own belt, so 1 bag becomes 2: a 19L–23L backpack for class and a sling for the padel court.", alt: "Overnighter front pocket detaching into a sling bag" },
+  { src: `${OV}-7_2d6d6e9c-2342-4eb0-b931-b72851438572.jpg`, title: "19L to 23L when you need it", body: "The Overnighter holds 19L for class and its body expands by 6 cm to 23L after class: 4 extra litres, enough for court shoes, a towel and a change of clothes.", alt: "Overnighter expanding from 19L to 23L" },
+  { src: `${OV}-8_ad360e32-50b9-4c2d-beb0-918bbbd61166.jpg`, title: "Flat-opening tech compartment", body: "The 180° flat-opening tech compartment has 5 pockets and microsuede lining for a 16-inch MacBook, an iPad, books and chargers, out of 17 pockets in total.", alt: "Overnighter flat-opening tech compartment with microsuede lining" },
+  { src: `${OV}-10_dd0eb0e4-54a4-486a-99b1-40606551b06f.jpg`, title: "Built for the long commute", body: "A breathable air mesh back, padded adjustable straps and a USB charging port make the 45 x 31 x 13.5 cm Overnighter easier to carry on a long Mumbai commute.", alt: "Overnighter air mesh back panel and padded shoulder straps" },
 ];
 
 /* Mumbai stores as listed on the mokobara.com homepage, 21 Nov 2026. */
