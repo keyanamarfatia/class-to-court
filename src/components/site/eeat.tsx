@@ -66,6 +66,8 @@ export const publisherSchema = {
   sameAs: ["https://github.com/keyanamarfatia/class-to-court"],
   founder: { "@type": "Person", name: "Keyana Marfatia" },
   email: "keyana.marfatia.bba2025@atlasskilltech.university",
+  contactPoint: { "@type": "ContactPoint", contactType: "project team", email: "keyana.marfatia.bba2025@atlasskilltech.university", areaServed: "IN" },
+  email: "keyana.marfatia.bba2025@atlasskilltech.university",
   address: { "@type": "PostalAddress", addressLocality: "Mumbai", addressCountry: "IN" },
   knowsAbout: [
     { "@type": "Brand", name: "Mokobara", url: "https://mokobara.com", sameAs: ["https://www.instagram.com/mokobara/", "https://www.linkedin.com/company/mokobara/", "https://en.wikipedia.org/wiki/Mokobara"] },

@@ -115,6 +115,10 @@ export function SiteFooter() {
           </ul>
         </div>
         <p className="footer-built">
+          Contact the team:{" "}
+          <a href="mailto:keyana.marfatia.bba2025@atlasskilltech.university">keyana.marfatia.bba2025@atlasskilltech.university</a>
+        </p>
+        <p className="footer-built">
           Built in the open with AI:{" "}
           <a href={GITHUB} target="_blank" rel="noopener noreferrer">
             see every change on GitHub
