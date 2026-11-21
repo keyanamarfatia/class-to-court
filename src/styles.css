@@ -1027,3 +1027,28 @@
 .dots { display: flex; gap: 4px; margin-top: 12px; font-style: normal; }
 .dots em { width: 10px; height: 10px; border-radius: 50%; background: rgba(0,0,0,0.18); }
 .dots em.on { background: #000; }
+
+/* ---------- Collection pages: bags above the fold ---------- */
+.col-hero { padding-top: 24px !important; padding-bottom: 20px !important; }
+.col-hero .crumbs { margin-bottom: 10px; }
+.col-hero .pill { display: none; }
+.col-hero .col-title { font-size: clamp(30px, 4vw, 44px) !important; margin: 0 0 6px !important; line-height: 1.1; }
+.col-hero .col-intro { font-size: 15px !important; margin: 0 0 14px !important; max-width: 70ch; }
+.col-stats { display: flex !important; flex-wrap: wrap; gap: 8px !important; margin: 0 0 12px !important; }
+.col-stats li { flex-direction: row !important; align-items: baseline; gap: 6px; padding: 8px 14px !important; border-radius: 999px !important; background: #fff; }
+.col-stats li .stat-ico { display: none; }
+.col-stats b { font-size: 16px !important; font-weight: 600; }
+.col-stats span { font-size: 11px !important; }
+.col-hero .col-switch { margin-top: 0 !important; }
+.col-list { padding-top: 20px !important; }
+.col-toolbar { margin-bottom: 14px !important; }
+@media (max-width: 759px) {
+  .col-hero .col-intro { display: none; }
+  .col-stats, .col-hero .col-switch { flex-wrap: nowrap !important; overflow-x: auto; scrollbar-width: none; margin-right: -28px !important; padding-right: 28px; }
+  .col-stats::-webkit-scrollbar, .col-hero .col-switch::-webkit-scrollbar { display: none; }
+  .col-stats li, .col-hero .col-switch a { flex: 0 0 auto; white-space: nowrap; }
+  .col-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .col-toolbar .col-count { width: 100%; margin: 0; font-size: 18px; }
+  .col-filters { display: flex; flex-wrap: nowrap; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+  .col-filters > * { flex: 0 0 auto; }
+}

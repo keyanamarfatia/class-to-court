@@ -125,7 +125,7 @@ export const catalog = [
     slug: "laptop-bags",
     path: "/laptop-bags",
     label: "Laptop bags",
-    eyebrow: "For class",
+    eyebrow: "For work trips",
     title: "Mokobara laptop bags",
     intro: "Every Mokobara laptop backpack, briefcase and sleeve, sorted by what fits your laptop for work trips.",
     items: laptop,
