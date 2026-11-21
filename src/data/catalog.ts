@@ -102,6 +102,7 @@ export const catalog = [
   {
     id: "cabin",
     slug: "cabin-luggage",
+    path: "/cabin-luggage",
     label: "Cabin luggage",
     eyebrow: "For the flight home",
     title: "Mokobara cabin luggage",
@@ -112,6 +113,7 @@ export const catalog = [
   {
     id: "travel",
     slug: "travel-backpacks",
+    path: "/travel-backpacks",
     label: "Travel backpacks",
     eyebrow: "For the weekend",
     title: "Mokobara travel backpacks",
@@ -121,6 +123,7 @@ export const catalog = [
   {
     id: "laptop",
     slug: "laptop-bags",
+    path: "/laptop-bags",
     label: "Laptop bags",
     eyebrow: "For class",
     title: "Mokobara laptop bags",
@@ -128,5 +131,7 @@ export const catalog = [
     items: laptop,
   },
 ] as const;
+
+export const SITE = "https://class-to-court-carry.lovable.app";
 
 export type Collection = (typeof catalog)[number];

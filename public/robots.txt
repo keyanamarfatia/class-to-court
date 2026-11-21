@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://class-to-court-carry.lovable.app/sitemap.xml

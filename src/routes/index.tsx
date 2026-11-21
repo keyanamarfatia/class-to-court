@@ -16,7 +16,7 @@ import {
   Train,
   Wind,
 } from "lucide-react";
-import { catalog } from "@/data/catalog";
+import { catalog, SITE } from "@/data/catalog";
 import { CatalogCard } from "@/components/site/catalog-card";
 import { FloatBtn, SiteFooter, Ticker, TopBar } from "@/components/site/chrome";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -282,11 +282,13 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Best Laptop Backpack for College (2026) | Mokobara" },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE + "/" },
       { property: "og:image", content: img(LIFE.commute, 1200) },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "keywords", content: "laptop backpack for college, Mokobara backpack, what to carry to padel" },
     ],
     links: [
+      { rel: "canonical", href: SITE + "/" },
       { rel: "preconnect", href: "https://cdn.shopify.com" },
       { rel: "preconnect", href: "https://mokobara.com" },
     ],
@@ -434,7 +436,7 @@ function Catalog() {
           <CatalogCard key={item.handle} item={item} />
         ))}
       </div>
-      <Link className="btn-solid cat-more" to="/collections/$slug" params={{ slug: group.slug }}>
+      <Link className="btn-solid cat-more" to={group.path}>
         View all {group.items.length} {group.label.toLowerCase()}
       </Link>
       <p className="price-note">
@@ -469,7 +471,7 @@ function SectionHead({ eyebrow, title, id, link }: { eyebrow: string; title: str
         </h2>
       </div>
       {link && (
-        <a className="view-all" href={link.href} target="_blank" rel="noopener noreferrer">
+        <a className="view-all" href={link.href} {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
           {link.label}
         </a>
       )}
@@ -532,7 +534,7 @@ function Index() {
               eyebrow="The shortlist"
               title="Which Mokobara fits your college day?"
               id="products-title"
-              link={{ href: "https://mokobara.com/collections/laptop-bags", label: "View all" }}
+              link={{ href: "/laptop-bags", label: "View all laptop bags" }}
             />
             <div className="product-row">
               {bagOrder.map((id) => {

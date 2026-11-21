@@ -10,11 +10,29 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CabinLuggageRouteImport } from './routes/cabin-luggage'
+import { Route as LaptopBagsRouteImport } from './routes/laptop-bags'
+import { Route as TravelBackpacksRouteImport } from './routes/travel-backpacks'
 import { Route as CollectionsSlugRouteImport } from './routes/collections/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CabinLuggageRoute = CabinLuggageRouteImport.update({
+  id: '/cabin-luggage',
+  path: '/cabin-luggage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LaptopBagsRoute = LaptopBagsRouteImport.update({
+  id: '/laptop-bags',
+  path: '/laptop-bags',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBackpacksRoute = TravelBackpacksRouteImport.update({
+  id: '/travel-backpacks',
+  path: '/travel-backpacks',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CollectionsSlugRoute = CollectionsSlugRouteImport.update({
@@ -25,27 +43,55 @@ const CollectionsSlugRoute = CollectionsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cabin-luggage': typeof CabinLuggageRoute
+  '/laptop-bags': typeof LaptopBagsRoute
+  '/travel-backpacks': typeof TravelBackpacksRoute
   '/collections/$slug': typeof CollectionsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cabin-luggage': typeof CabinLuggageRoute
+  '/laptop-bags': typeof LaptopBagsRoute
+  '/travel-backpacks': typeof TravelBackpacksRoute
   '/collections/$slug': typeof CollectionsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cabin-luggage': typeof CabinLuggageRoute
+  '/laptop-bags': typeof LaptopBagsRoute
+  '/travel-backpacks': typeof TravelBackpacksRoute
   '/collections/$slug': typeof CollectionsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/collections/$slug'
+  fullPaths:
+    | '/'
+    | '/cabin-luggage'
+    | '/laptop-bags'
+    | '/travel-backpacks'
+    | '/collections/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/collections/$slug'
-  id: '__root__' | '/' | '/collections/$slug'
+  to:
+    | '/'
+    | '/cabin-luggage'
+    | '/laptop-bags'
+    | '/travel-backpacks'
+    | '/collections/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/cabin-luggage'
+    | '/laptop-bags'
+    | '/travel-backpacks'
+    | '/collections/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CabinLuggageRoute: typeof CabinLuggageRoute
+  LaptopBagsRoute: typeof LaptopBagsRoute
+  TravelBackpacksRoute: typeof TravelBackpacksRoute
   CollectionsSlugRoute: typeof CollectionsSlugRoute
 }
 
@@ -56,6 +102,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cabin-luggage': {
+      id: '/cabin-luggage'
+      path: '/cabin-luggage'
+      fullPath: '/cabin-luggage'
+      preLoaderRoute: typeof CabinLuggageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/laptop-bags': {
+      id: '/laptop-bags'
+      path: '/laptop-bags'
+      fullPath: '/laptop-bags'
+      preLoaderRoute: typeof LaptopBagsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-backpacks': {
+      id: '/travel-backpacks'
+      path: '/travel-backpacks'
+      fullPath: '/travel-backpacks'
+      preLoaderRoute: typeof TravelBackpacksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/collections/$slug': {
@@ -70,6 +137,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CabinLuggageRoute: CabinLuggageRoute,
+  LaptopBagsRoute: LaptopBagsRoute,
+  TravelBackpacksRoute: TravelBackpacksRoute,
   CollectionsSlugRoute: CollectionsSlugRoute,
 }
 export const routeTree = rootRouteImport

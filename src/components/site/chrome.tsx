@@ -31,13 +31,13 @@ export function TopBar({ home = false }: { home?: boolean }) {
           <img src={LOGO} alt="Mokobara" width={130} height={28} />
         </Link>
         <nav className="topbar-nav" aria-label="Site">
-          <Link to="/collections/$slug" params={{ slug: "cabin-luggage" }} activeProps={{ className: "active" }}>
+          <Link to="/cabin-luggage" activeProps={{ className: "active" }}>
             Cabin luggage
           </Link>
-          <Link to="/collections/$slug" params={{ slug: "travel-backpacks" }} activeProps={{ className: "active" }}>
+          <Link to="/travel-backpacks" activeProps={{ className: "active" }}>
             Travel backpacks
           </Link>
-          <Link to="/collections/$slug" params={{ slug: "laptop-bags" }} activeProps={{ className: "active" }}>
+          <Link to="/laptop-bags" activeProps={{ className: "active" }}>
             Laptop bags
           </Link>
           <a href={h("compare")}>Compare</a>
@@ -60,9 +60,9 @@ export function SiteFooter() {
         <img className="footer-logo" src={LOGO} alt="Mokobara" width={180} height={38} loading="lazy" />
         <p className="footer-tag">The Joy Is in the Details · #GoingPlaces</p>
         <nav className="footer-links" aria-label="Collections">
-          <Link to="/collections/$slug" params={{ slug: "cabin-luggage" }}>Cabin luggage</Link>
-          <Link to="/collections/$slug" params={{ slug: "travel-backpacks" }}>Travel backpacks</Link>
-          <Link to="/collections/$slug" params={{ slug: "laptop-bags" }}>Laptop bags</Link>
+          <Link to="/cabin-luggage">Cabin luggage</Link>
+          <Link to="/travel-backpacks">Travel backpacks</Link>
+          <Link to="/laptop-bags">Laptop bags</Link>
           <Link to="/">College edit home</Link>
         </nav>
         <a className="btn-yellow" href="https://mokobara.com" target="_blank" rel="noopener noreferrer">
