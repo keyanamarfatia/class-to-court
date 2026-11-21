@@ -234,6 +234,14 @@ export const padelFaqs = [
 /* Replace with the team's real "People also ask" questions from S2. */
 export const collegeFaqs = [
   {
+    q: "What is the best bag for a weekend trip?",
+    a: "For a 2–3 day trip that starts after class, the Mokobara Overnighter Backpack expands from 19L to 23L and fits a 16-inch MacBook for ₹8,999. If you are flying, the Cabin Overnighter Luggage holds 41L and has a front tech compartment for airport security checks.",
+  },
+  {
+    q: "How many litres bag is needed for a 2-day trip?",
+    a: "Mokobara designs its Transit Backpack 30L for everyday use and 1–2 day trips, and its 25L Astronaut Backpack has a mesh compartment for up to a 2-day trip. The Overnighter Backpack sits between them, expanding from 19L to 23L.",
+  },
+  {
     q: "What is the best laptop backpack for college?",
     a: "It depends on your day. For lectures only, the Mokobara Backpack 16L fits a 15-inch laptop. If you go somewhere after class, the Overnighter Backpack fits a 16-inch MacBook and expands from 19L to 23L.",
   },
@@ -312,7 +320,7 @@ export const faqSchema = {
 };
 
 export const description =
-  "Fits a 16\" laptop, survives the commute, expands for the weekend. Find the Mokobara backpack that fits your college day. Take the 30-second quiz.";
+  "Going away for 2–3 days? Compare Mokobara travel bags by litres, cabin size and laptop fit, from the expandable Overnighter to cabin luggage. Take the quiz.";
 
 /* Performance: the poster <img> paints first (it is the LCP element). The video file is only
    attached after the page has loaded (hero) or when it scrolls near the viewport (lazy), and

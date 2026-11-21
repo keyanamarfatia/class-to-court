@@ -88,15 +88,15 @@ const explore = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Best Laptop Backpack for College (2026) | Mokobara" },
+      { title: "Best Bag for a Weekend Trip (2026): Mokobara Travel Bags" },
       { name: "description", content: description },
-      { property: "og:title", content: "Best Laptop Backpack for College (2026) | Mokobara" },
+      { property: "og:title", content: "Best Bag for a Weekend Trip (2026): Mokobara Travel Bags" },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
       { property: "og:url", content: SITE + "/" },
       { property: "og:image", content: img(LIFE.commute, 1200) },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "keywords", content: "laptop backpack for college, Mokobara backpack, what to carry to padel" },
+      { name: "keywords", content: "best bag for a weekend trip, weekend travel bag, cabin size bag, Mokobara travel bags, what to carry to padel" },
       ...eeatMeta,
     ],
     links: [
@@ -115,7 +115,7 @@ export const Route = createFileRoute("/")({
       {
         type: "application/ld+json",
         children: JSON.stringify(
-          articleSchema({ path: "/", headline: "The best laptop backpack for college, from class to court", description, image: img(LIFE.commute, 1200) }),
+          articleSchema({ path: "/", headline: "The best bag for a weekend trip, from class to court", description, image: img(LIFE.commute, 1200) }),
         ),
       },
       ...bagOrder.map((id) => ({
@@ -128,7 +128,7 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify(offerSchema({ name: `Mokobara ${bags[id].name}`, url: bags[id].url, price: Number(bags[id].price.replace(/[^\d]/g, "")) })),
       })),
-      { type: "application/ld+json", children: JSON.stringify({ ...crumbSchema("Best laptop backpack for college", "/"), itemListElement: [{ "@type": "ListItem", position: 1, name: "College edit", item: SITE + "/" }] }) },
+      { type: "application/ld+json", children: JSON.stringify({ ...crumbSchema("Best bag for a weekend trip", "/"), itemListElement: [{ "@type": "ListItem", position: 1, name: "College edit", item: SITE + "/" }] }) },
       { type: "application/ld+json", children: JSON.stringify(itemListSchema) },
       { type: "application/ld+json", children: JSON.stringify(catalogSchema) },
     ],
@@ -150,9 +150,9 @@ function Index() {
           <div className="hero-video-content">
             <p className="pill">The college edit</p>
             <h1 className="hero-title" id="page-title">
-              The best laptop backpack for college, from class to court
+              The best bag for a weekend trip, from class to court
             </h1>
-            <p className="hero-sub"><strong>The best laptop backpack for college is the Mokobara Overnighter</strong>: it fits a 16-inch MacBook, expands 21% from 19L to 23L and costs ₹8,999 on mokobara.com, 40% below MRP.</p>
+            <p className="hero-sub"><strong>The best bag for a weekend trip is the Mokobara Overnighter Backpack</strong>: it expands 21% from 19L to 23L, fits a 16-inch MacBook and costs ₹8,999 on mokobara.com, 40% below MRP. Flying? The Cabin Overnighter Luggage holds 41L for ₹11,499.</p>
             <div className="hero-actions">
               <Link className="btn-yellow" to="/bag-finder-quiz">
                 Take the 30-second quiz
@@ -171,10 +171,10 @@ function Index() {
         <section className="quick-answer mk-shell" aria-labelledby="quick-title">
           <p className="pill">Short answer</p>
           <h2 id="quick-title" className="sr-only">
-            Short answer: the best Mokobara laptop backpack for college
+            Short answer: the best Mokobara bag for a weekend trip
           </h2>
           <p className="quick-text">
-            <strong>The best laptop backpack for college is the Mokobara Overnighter Backpack.</strong> Our 2026 analysis of
+            <strong>The best bag for a weekend trip is the Mokobara Overnighter Backpack.</strong> Our 2026 analysis of
             40 Mokobara bags found it fits a 16-inch MacBook, expands 21% from 19L to 23L and costs ₹8,999, 40% below MRP,
             according to mokobara.com. For lectures only, the <strong>Backpack 16L</strong> fits a 15-inch laptop for
             ₹3,999, 56% off.
