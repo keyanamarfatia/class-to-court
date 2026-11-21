@@ -99,7 +99,34 @@ export const laptop: Product[] = [
 ];
 
 export const catalog = [
-  { id: "laptop", label: "Laptop bags", eyebrow: "For class", items: laptop },
-  { id: "travel", label: "Travel backpacks", eyebrow: "For the weekend", items: travel },
-  { id: "cabin", label: "Cabin luggage", eyebrow: "For the flight home", items: cabin },
+  {
+    id: "cabin",
+    slug: "cabin-luggage",
+    label: "Cabin luggage",
+    eyebrow: "For the flight home",
+    title: "Mokobara cabin luggage",
+    intro:
+      "Every Mokobara cabin suitcase in one place: hard-shell carry-ons for the flight home, with laptop compartments on the Pro and Overnighter models.",
+    items: cabin,
+  },
+  {
+    id: "travel",
+    slug: "travel-backpacks",
+    label: "Travel backpacks",
+    eyebrow: "For the weekend",
+    title: "Mokobara travel backpacks",
+    intro: "Every Mokobara travel backpack for weekend trips, from the expandable Overnighter to the Toggle series.",
+    items: travel,
+  },
+  {
+    id: "laptop",
+    slug: "laptop-bags",
+    label: "Laptop bags",
+    eyebrow: "For class",
+    title: "Mokobara laptop bags",
+    intro: "Every Mokobara laptop backpack, briefcase and sleeve for college, sorted by what fits your laptop.",
+    items: laptop,
+  },
 ] as const;
+
+export type Collection = (typeof catalog)[number];

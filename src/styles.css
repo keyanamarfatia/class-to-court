@@ -803,3 +803,36 @@
 @media (min-width: 1024px) {
   .cat-grid { grid-template-columns: repeat(4, 1fr); }
 }
+
+/* ---------- Collection pages ---------- */
+.topbar-nav a.active { color: var(--mk-yellow); }
+.col-hero { background: var(--mk-grey); padding: 28px 0 32px; }
+.crumbs { margin-bottom: 16px; color: var(--mk-muted); font-size: 13px; }
+.crumbs a { color: #000; text-decoration: underline; text-underline-offset: 3px; }
+.crumbs span[aria-hidden] { margin: 0 6px; }
+.col-title { margin: 0; color: var(--mk-slate); font-size: 40px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.04; }
+.col-intro { max-width: 60ch; margin: 14px 0 22px; color: var(--mk-muted); font-size: 16px; line-height: 1.5; }
+.col-stats li { background: #fff; }
+.col-switch { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 22px; }
+.col-switch a { border-radius: 999px; background: #fff; padding: 9px 15px; color: #000; font-size: 14px; font-weight: 500; text-decoration: none; }
+.col-switch a span { margin-left: 4px; color: #a0a0a0; font-size: 12px; }
+.col-switch a.active { background: #000; color: #fff; }
+.col-switch a.active span { color: var(--mk-yellow); }
+.col-list { padding-top: 32px; }
+.col-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.col-count { margin: 0; color: var(--mk-slate); font-size: 18px; font-weight: 600; }
+.col-filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.col-filters button { border: 1px solid var(--mk-line); border-radius: 999px; background: #fff; padding: 8px 14px; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; }
+.col-filters button.on { border-color: #000; background: var(--mk-yellow); }
+.col-sort select { border: 1px solid var(--mk-line); border-radius: 999px; background: #fff; padding: 8px 14px; font: inherit; font-size: 13px; }
+.col-list .cat-card { background: #f9f9f9; }
+.col-list .cat-tile { background: #f1f1f1; }
+.col-empty { padding: 40px 0; color: var(--mk-muted); }
+.footer-links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0 0 24px; }
+.footer-links a { color: #fff; font-size: 14px; text-decoration: none; }
+.footer-links a:hover { color: var(--mk-yellow); }
+@media (min-width: 760px) {
+  .col-hero { padding: 44px 0 48px; }
+  .col-title { font-size: 60px; }
+  .col-intro { font-size: 18px; }
+}

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -16,7 +16,9 @@ import {
   Train,
   Wind,
 } from "lucide-react";
-import { catalog, type Product } from "@/data/catalog";
+import { catalog } from "@/data/catalog";
+import { CatalogCard } from "@/components/site/catalog-card";
+import { FloatBtn, SiteFooter, Ticker, TopBar } from "@/components/site/chrome";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 /* Every product fact, price and image below comes from mokobara.com (checked 21 Nov 2026).
@@ -402,48 +404,10 @@ function Quiz() {
   );
 }
 
-const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
-
-function CatalogCard({ item }: { item: Product }) {
-  const off = item.mrp > item.price ? Math.round((1 - item.price / item.mrp) * 100) : 0;
-  const url = `https://mokobara.com/products/${item.handle}`;
-  return (
-    <article className="cat-card">
-      <a className="cat-tile" href={url} target="_blank" rel="noopener noreferrer">
-        {off > 0 && <span className="badge">{off}% off</span>}
-        <img src={img(item.img, 500)} alt={`Mokobara ${item.name}`} loading="lazy" width={500} height={600} />
-      </a>
-      <div className="cat-body">
-        <h4 className="cat-name">{item.name}</h4>
-        <p className="price-row">
-          <strong>{inr(item.price)}</strong>
-          {item.mrp > item.price && <s>{inr(item.mrp)}</s>}
-          {item.colours > 1 && <span className="colours">{item.colours} colours</span>}
-        </p>
-        <ul className="cat-specs">
-          {item.laptop && <li>{item.laptop}" laptop</li>}
-          {item.litres && <li>{item.litres}L</li>}
-          {item.kg && <li>{item.kg} kg</li>}
-        </ul>
-        <ul className="cat-feat">
-          {item.features.map((f) => (
-            <li key={f}>{f}</li>
-          ))}
-        </ul>
-        {item.dims && <p className="cat-dims">{item.dims}</p>}
-        <a className="product-link" href={url} target="_blank" rel="noopener noreferrer">
-          View on mokobara.com
-        </a>
-      </div>
-    </article>
-  );
-}
-
 function Catalog() {
-  const [tab, setTab] = useState<(typeof catalog)[number]["id"]>("laptop");
-  const [all, setAll] = useState(false);
+  const [tab, setTab] = useState<(typeof catalog)[number]["id"]>("cabin");
   const group = catalog.find((g) => g.id === tab)!;
-  const shown = all ? group.items : group.items.slice(0, 8);
+  const shown = group.items.slice(0, 8);
   return (
     <>
       <div className="cat-tabs" role="tablist" aria-label="Product categories">
@@ -456,7 +420,6 @@ function Catalog() {
             className={tab === g.id ? "active" : ""}
             onClick={() => {
               setTab(g.id);
-              setAll(false);
             }}
           >
             {g.label} <span>{g.items.length}</span>
@@ -471,11 +434,9 @@ function Catalog() {
           <CatalogCard key={item.handle} item={item} />
         ))}
       </div>
-      {group.items.length > 8 && (
-        <button type="button" className="btn-outline cat-more" onClick={() => setAll((a) => !a)}>
-          {all ? "Show fewer" : `View all ${group.items.length} ${group.label.toLowerCase()}`}
-        </button>
-      )}
+      <Link className="btn-solid cat-more" to="/collections/$slug" params={{ slug: group.slug }}>
+        View all {group.items.length} {group.label.toLowerCase()}
+      </Link>
       <p className="price-note">
         Prices, colours and specs as listed on mokobara.com on 21 November 2026. Discounts are calculated from Mokobara's listed MRP.
       </p>
@@ -519,38 +480,8 @@ function SectionHead({ eyebrow, title, id, link }: { eyebrow: string; title: str
 function Index() {
   return (
     <main className="mk-page">
-      <div className="ticker">
-        <div className="ticker-track" aria-hidden="true">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <span key={i}>
-              Student concept <b>•</b> The college edit 2026 <b>•</b> From class to court <b>•</b> Shop the real thing on
-              mokobara.com <b>•</b>
-            </span>
-          ))}
-        </div>
-        <p className="sr-only">Student concept page. Visit the official Mokobara store at mokobara.com.</p>
-      </div>
-
-      <header className="mk-topbar">
-        <div className="topbar-inner">
-          <a className="topbar-logo" href="#top" aria-label="Mokobara college edit, back to top">
-            <img src={LOGO} alt="Mokobara" width={130} height={28} />
-          </a>
-          <nav className="topbar-nav" aria-label="Page sections">
-            <a href="#backpacks">Top picks</a>
-            <a href="#shop">Shop all</a>
-            <a href="#compare">Compare</a>
-            <a href="#details">Details</a>
-            <a href="#quiz">Quiz</a>
-            <a href="#padel">Padel</a>
-            <a href="#mumbai">Stores</a>
-            <a href="#faq">FAQ</a>
-          </nav>
-          <a className="topbar-cta" href="#quiz">
-            Find my bag <ArrowRight aria-hidden="true" />
-          </a>
-        </div>
-      </header>
+      <Ticker />
+      <TopBar home />
 
       <div className="mk-main">
         <section className="hero-video" id="top" aria-labelledby="page-title">
@@ -651,7 +582,7 @@ function Index() {
           <div className="mk-shell">
             <SectionHead
               eyebrow="Crowd favourites"
-              title="Shop every Mokobara for college, weekends and flights"
+              title="Shop cabin luggage, travel backpacks and laptop bags"
               id="shop-title"
               link={{ href: "https://mokobara.com/collections/bags-and-backpacks", label: "Official store" }}
             />
@@ -850,25 +781,10 @@ function Index() {
           </div>
         </section>
 
-        <footer className="mk-footer">
-          <div className="mk-shell">
-            <img className="footer-logo" src={LOGO} alt="Mokobara" width={180} height={38} loading="lazy" />
-            <p className="footer-tag">The Joy Is in the Details · #GoingPlaces</p>
-            <a className="btn-yellow" href="https://mokobara.com" target="_blank" rel="noopener noreferrer">
-              Visit the official store
-            </a>
-            <p className="footer-note">
-              Student concept for a Schbang x Atlas SkillTech brief. Not affiliated with or commissioned by Mokobara or
-              7Padel. Product facts, prices and images belong to Mokobara and are taken from mokobara.com; padel venue
-              information from 7padel.in.
-            </p>
-          </div>
-        </footer>
+        <SiteFooter />
       </div>
 
-      <a className="float-btn" href="#quiz" aria-label="Take the bag quiz">
-        <BriefcaseBusiness aria-hidden="true" />
-      </a>
+      <FloatBtn home />
     </main>
   );
 }
