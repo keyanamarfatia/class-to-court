@@ -36,14 +36,13 @@ export function CatalogCard({ item, headingLevel = 4 }: { item: Product; heading
           {item.laptop && <li>{item.laptop}" laptop</li>}
           {item.litres && <li>{item.litres}L</li>}
           {item.kg && <li>{item.kg} kg</li>}
+          {item.dims && <li>{item.dims}</li>}
         </ul>
         <ul className="cat-feat">
-          {item.features.map((f) => (
+          {item.features.slice(0, 2).map((f) => (
             <li key={f}>{f}</li>
           ))}
         </ul>
-        <p className="cat-summary">{productSentence(item)}</p>
-        {item.dims && <p className="cat-dims">{item.dims}</p>}
         <a className="product-link" href={url} target="_blank" rel="noopener noreferrer" aria-label={`Buy on mokobara.com: ${item.name}`}>
           Buy on mokobara.com
         </a>

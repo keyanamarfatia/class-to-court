@@ -149,12 +149,6 @@ export function CollectionView({ slug }: { slug: string }) {
           <p className="pill">{c.eyebrow}</p>
           <h1 className="col-title">{c.title}</h1>
           <p className="col-intro">{c.intro}</p>
-          <p className="col-summary">
-            According to mokobara.com on 21 November 2026, Mokobara lists {s.count} {c.label.toLowerCase()}, priced from{" "}
-            {inr(s.min)} ({s.cheapest.name}) to {inr(s.max)}
-            {s.capMin !== null ? `, with capacities from ${s.capMin}L to ${s.capMax}L` : ""}. {s.withLaptop.length} of the{" "}
-            {s.count} list a laptop fit{s.lightest ? `, and the lightest listed is the ${s.lightest.i.name} at ${s.lightest.i.kg} kg` : ""}.
-          </p>
           <ul className="quick-stats col-stats">
             <li>
               <b>{s.count}</b>
