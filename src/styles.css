@@ -992,3 +992,15 @@
   .detail-grid { margin: 0 -28px !important; padding: 0 28px !important; scroll-padding-left: 28px; grid-auto-columns: 82%; }
 }
 @media (min-width: 1024px) { .facts-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); } }
+
+/* ---------- Collapsible sections ---------- */
+.section-fold > summary { position: relative; display: block; cursor: pointer; list-style: none; padding-right: 64px; }
+.section-fold > summary::-webkit-details-marker { display: none; }
+.section-fold > summary .section-title { margin-bottom: 0; }
+.fold-icon { position: absolute; right: 0; bottom: 6px; width: 44px; height: 44px; border: 1.5px solid currentColor; border-radius: 50%; }
+.fold-icon::before, .fold-icon::after { content: ""; position: absolute; top: 50%; left: 50%; width: 16px; height: 1.5px; background: currentColor; transform: translate(-50%, -50%); }
+.fold-icon::after { transform: translate(-50%, -50%) rotate(90deg); transition: transform 200ms ease; }
+.section-fold[open] .fold-icon::after { transform: translate(-50%, -50%) rotate(0deg); }
+.section-fold > summary:focus-visible { outline: 2px solid var(--mk-yellow); outline-offset: 6px; }
+.section-fold .fold-body { margin-top: 28px; }
+.mk-section:has(> .section-fold:not([open])) { padding-top: 48px; padding-bottom: 48px; }

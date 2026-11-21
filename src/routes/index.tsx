@@ -233,13 +233,18 @@ function Index() {
         <DetailsSection />
 
         <section className="mk-section mk-section-grey" aria-labelledby="explore-title">
-          <div className="mk-shell">
-            <SectionHead eyebrow="Explore the edit" title="What else should I check before buying a Mokobara?" id="explore-title" />
-            <ReadMore label="Our 4-point checklist"><p className="facts-intro">
+          <details className="mk-shell section-fold">
+            <summary>
+              <p className="pill">Explore the edit</p>
+              <h2 className="section-title" id="explore-title">What else should I check before buying a Mokobara?</h2>
+              <span className="fold-icon" aria-hidden="true" />
+            </summary>
+            <div className="fold-body">
+            <p className="facts-intro">
               <strong>Before buying a Mokobara, check 4 things</strong>: laptop fit, capacity, price and returns. Our 2026
               analysis covers all 4 across 40 bags from mokobara.com: 3 of our 4 picks (75%) fit a 15.6-inch laptop or
               larger, prices run from ₹999 to ₹13,599, and every bag bought on mokobara.com comes with a 30-day trial and a 12-month limited warranty.
-            </p></ReadMore>
+            </p>
             <div className="explore-grid">
               {explore.map((e) => (
                 <Link key={e.to} to={e.to} className="explore-card">
@@ -252,15 +257,19 @@ function Index() {
                 </Link>
               ))}
             </div>
-          </div>
+            </div>
+          </details>
         </section>
 
         <section className="mk-section mk-section-dark" aria-labelledby="padel-teaser-title">
-          <div className="mk-shell">
-            <p className="pill">From class to court</p>
-            <h2 className="section-title" id="padel-teaser-title">
-              What should I carry to my first padel game?
-            </h2>
+          <details className="mk-shell section-fold">
+            <summary>
+              <p className="pill">From class to court</p>
+              <h2 className="section-title" id="padel-teaser-title">
+                What should I carry to my first padel game?
+              </h2>
+              <span className="fold-icon" aria-hidden="true" />
+            </summary>
             <div className="answer-block" style={{ marginTop: 22 }}>
               <p>{padelAnswer}</p>
               <ul className="facts-list">
@@ -277,7 +286,7 @@ function Index() {
                 Book at 7padel.in <ArrowRight aria-hidden="true" />
               </a>
             </div>
-          </div>
+          </details>
         </section>
 
         <MumbaiSection />

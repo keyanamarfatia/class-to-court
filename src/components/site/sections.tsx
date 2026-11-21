@@ -771,12 +771,16 @@ export function MumbaiSection() {
   return (
     <>
   <section className="mk-section mk-section-yellow" id="mumbai" aria-labelledby="mumbai-title">
-    <div className="mk-shell mumbai-grid">
-      <div>
+    <details className="mk-shell section-fold">
+      <summary>
         <p className="pill pill-dark">Mumbai</p>
         <h2 className="section-title" id="mumbai-title">
           Where can I try a Mokobara bag in Mumbai?
         </h2>
+        <span className="fold-icon" aria-hidden="true" />
+      </summary>
+    <div className="mumbai-grid fold-body">
+      <div>
         <p className="mumbai-text">
           Our research found 8 Mokobara stores in Mumbai listed on mokobara.com, from Linking Road in Khar West to T2
           at Mumbai Airport, so you can bring your laptop and test the 19L to 23L Overnighter in person. 7Padel's
@@ -810,6 +814,7 @@ export function MumbaiSection() {
         ))}
       </ul>
     </div>
+    </details>
   </section>
     </>
   );
