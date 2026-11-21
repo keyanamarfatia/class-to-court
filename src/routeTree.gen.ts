@@ -17,6 +17,7 @@ import { Route as CompareBackpacksRouteImport } from './routes/compare-backpacks
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as LaptopBagsRouteImport } from './routes/laptop-bags'
+import { Route as MokobaraBagResearchRouteImport } from './routes/mokobara-bag-research'
 import { Route as PressRouteImport } from './routes/press'
 import { Route as TravelBackpacksRouteImport } from './routes/travel-backpacks'
 import { Route as WhatToCarryToPadelRouteImport } from './routes/what-to-carry-to-padel'
@@ -62,6 +63,11 @@ const LaptopBagsRoute = LaptopBagsRouteImport.update({
   path: '/laptop-bags',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MokobaraBagResearchRoute = MokobaraBagResearchRouteImport.update({
+  id: '/mokobara-bag-research',
+  path: '/mokobara-bag-research',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PressRoute = PressRouteImport.update({
   id: '/press',
   path: '/press',
@@ -92,6 +98,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/laptop-bags': typeof LaptopBagsRoute
+  '/mokobara-bag-research': typeof MokobaraBagResearchRoute
   '/press': typeof PressRoute
   '/travel-backpacks': typeof TravelBackpacksRoute
   '/what-to-carry-to-padel': typeof WhatToCarryToPadelRoute
@@ -106,6 +113,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/laptop-bags': typeof LaptopBagsRoute
+  '/mokobara-bag-research': typeof MokobaraBagResearchRoute
   '/press': typeof PressRoute
   '/travel-backpacks': typeof TravelBackpacksRoute
   '/what-to-carry-to-padel': typeof WhatToCarryToPadelRoute
@@ -121,6 +129,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/laptop-bags': typeof LaptopBagsRoute
+  '/mokobara-bag-research': typeof MokobaraBagResearchRoute
   '/press': typeof PressRoute
   '/travel-backpacks': typeof TravelBackpacksRoute
   '/what-to-carry-to-padel': typeof WhatToCarryToPadelRoute
@@ -137,6 +146,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/laptop-bags'
+    | '/mokobara-bag-research'
     | '/press'
     | '/travel-backpacks'
     | '/what-to-carry-to-padel'
@@ -151,6 +161,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/laptop-bags'
+    | '/mokobara-bag-research'
     | '/press'
     | '/travel-backpacks'
     | '/what-to-carry-to-padel'
@@ -165,6 +176,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/laptop-bags'
+    | '/mokobara-bag-research'
     | '/press'
     | '/travel-backpacks'
     | '/what-to-carry-to-padel'
@@ -180,6 +192,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   LaptopBagsRoute: typeof LaptopBagsRoute
+  MokobaraBagResearchRoute: typeof MokobaraBagResearchRoute
   PressRoute: typeof PressRoute
   TravelBackpacksRoute: typeof TravelBackpacksRoute
   WhatToCarryToPadelRoute: typeof WhatToCarryToPadelRoute
@@ -244,6 +257,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LaptopBagsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mokobara-bag-research': {
+      id: '/mokobara-bag-research'
+      path: '/mokobara-bag-research'
+      fullPath: '/mokobara-bag-research'
+      preLoaderRoute: typeof MokobaraBagResearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/press': {
       id: '/press'
       path: '/press'
@@ -284,6 +304,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   LaptopBagsRoute: LaptopBagsRoute,
+  MokobaraBagResearchRoute: MokobaraBagResearchRoute,
   PressRoute: PressRoute,
   TravelBackpacksRoute: TravelBackpacksRoute,
   WhatToCarryToPadelRoute: WhatToCarryToPadelRoute,

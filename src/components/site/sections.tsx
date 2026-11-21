@@ -851,6 +851,7 @@ export function NextSteps({ hide }: { hide?: string }) {
     { to: "/compare-backpacks", label: "Compare backpacks" },
     { to: "/bag-finder-quiz", label: "Bag finder quiz" },
     { to: "/what-to-carry-to-padel", label: "Padel guide" },
+    { to: "/mokobara-bag-research", label: "Our research" },
     { to: "/faq", label: "FAQ" },
     { to: "/about", label: "About this site" },
     { to: "/press", label: "Press" },

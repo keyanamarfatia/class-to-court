@@ -84,6 +84,7 @@ export function SiteFooter() {
           <Link to="/compare-backpacks">Compare</Link>
           <Link to="/bag-finder-quiz">Bag finder quiz</Link>
           <Link to="/what-to-carry-to-padel">Padel guide</Link>
+          <Link to="/mokobara-bag-research">Our research</Link>
           <Link to="/faq">FAQ</Link>
           <Link to="/about">About us</Link>
           <Link to="/press">Press</Link>
