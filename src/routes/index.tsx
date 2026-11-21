@@ -162,6 +162,25 @@ const hesitations = [
   },
 ];
 
+const comparison = [
+  { label: "Laptop fit", overnighter: "Up to 16\"", backpack16: "Up to 15\" (16\" MacBook Pro)", em32: "Not listed" },
+  { label: "Capacity", overnighter: "19L, expands to 23L", backpack16: "16L", em32: "32L" },
+  { label: "Best for", overnighter: "Class, then court or gym", backpack16: "Lectures only", em32: "3–4 day trips" },
+  { label: "Stand-out detail", overnighter: "Front pocket becomes a sling", backpack16: "Magnetic phone pocket", em32: "Bottle compartment + rain cover" },
+];
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Mokobara laptop backpacks for college",
+  itemListElement: bagOrder.map((id, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: bags[id].name,
+    url: bags[id].url,
+  })),
+};
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -190,7 +209,10 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "keywords", content: "laptop backpack for college, Mokobara backpack, what to carry to padel" },
     ],
-    scripts: [{ type: "application/ld+json", children: JSON.stringify(faqSchema) }],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(faqSchema) },
+      { type: "application/ld+json", children: JSON.stringify(itemListSchema) },
+    ],
   }),
   component: Index,
 });
@@ -288,7 +310,7 @@ function SectionHead({ eyebrow, title, id, link }: { eyebrow: string; title: str
   return (
     <div className="section-head">
       <div>
-        <p className="eyebrow">{eyebrow}</p>
+        <p className="pill">{eyebrow}</p>
         <h2 className="section-title" id={id}>{/[?.!]$/.test(title) ? title : `${title}.`}</h2>
       </div>
       {link && (
@@ -303,35 +325,44 @@ function SectionHead({ eyebrow, title, id, link }: { eyebrow: string; title: str
 function Index() {
   return (
     <main className="mk-page">
-      <div className="announce-bar">
-        <p>Student concept <span aria-hidden="true">·</span> The college edit 2026 <span aria-hidden="true">·</span> <a href="#quiz">Take the quiz</a></p>
+      <div className="ticker" aria-label="Student concept, the college edit 2026">
+        <div className="ticker-track" aria-hidden="true">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <span key={i}>Student concept <b>•</b> The college edit 2026 <b>•</b> From class to court <b>•</b></span>
+          ))}
+        </div>
       </div>
 
-      <header className="mk-header">
-        <div className="mk-shell mk-header-inner">
+      <header className="mk-sidebar">
+        <div className="sidebar-dark">
           <a className="wordmark" href="#top" aria-label="mokobara college edit, back to top">mokobara</a>
-          <nav className="mk-nav" aria-label="Page sections">
+          <nav className="sidebar-nav" aria-label="Page sections">
             <a href="#backpacks">Backpacks</a>
+            <a href="#compare">Compare</a>
             <a href="#quiz">Quiz</a>
             <a href="#padel">Padel</a>
             <a href="#faq">FAQ</a>
           </nav>
-          <a className="header-cta" href="#quiz">Find my bag</a>
+        </div>
+        <div className="sidebar-light">
+          <a href="#quiz">Find my bag <ArrowRight aria-hidden="true" /></a>
         </div>
       </header>
 
+      <div className="mk-main">
       <section className="hero" id="top" aria-labelledby="page-title">
         <div className="mk-shell hero-inner">
           <div className="hero-copy">
-            <p className="eyebrow">The college edit</p>
+            <p className="pill">The college edit</p>
             <h1 className="hero-title" id="page-title">
-              The best laptop backpack for college, from class to court.
+              The best laptop backpack for college, from class to court
             </h1>
-            <p className="hero-sub">Campus in the morning. Court after class. One bag that fits both.</p>
+            <p className="hero-sub">Campus in the morning. Court after class. One Mokobara that fits both.</p>
             <div className="hero-actions">
               <a className="btn-solid" href="#quiz">Take the 30-second quiz</a>
-              <a className="btn-text" href="#padel">First padel game? <ArrowDown aria-hidden="true" /></a>
+              <a className="arrow-link" href="#padel">First padel game <ArrowRight aria-hidden="true" /></a>
             </div>
+            <p className="hero-meta">Updated November 2026 · Product facts from mokobara.com</p>
           </div>
           <div className="hero-visual" aria-hidden="true">
             <BriefcaseBusiness strokeWidth={0.9} />
@@ -340,7 +371,6 @@ function Index() {
               <span>19L → 23L</span>
               <span>Detachable sling</span>
             </div>
-            <span className="hero-counter">01 / 04</span>
           </div>
         </div>
       </section>
@@ -379,14 +409,42 @@ function Index() {
         </div>
       </section>
 
-      <section className="mk-section mk-section-grey" id="quiz" aria-labelledby="quiz-title">
+      <section className="mk-section mk-section-grey" id="compare" aria-labelledby="compare-title">
+        <div className="mk-shell">
+          <SectionHead eyebrow="Side by side" title="Mokobara college backpacks compared" id="compare-title" />
+          <div className="table-wrap">
+            <table className="compare-table">
+              <thead>
+                <tr>
+                  <th scope="col"><span className="sr-only">Feature</span></th>
+                  {bagOrder.map((id) => (
+                    <th scope="col" key={id}>{bags[id].name}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {comparison.map((row) => (
+                  <tr key={row.label}>
+                    <th scope="row">{row.label}</th>
+                    {bagOrder.map((id) => (
+                      <td key={id}>{row[id]}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section className="mk-section" id="quiz" aria-labelledby="quiz-title">
         <div className="mk-shell">
           <SectionHead eyebrow="Your day, decoded" title="Quiz: Which Mokobara fits your plan?" id="quiz-title" />
           <Quiz />
         </div>
       </section>
 
-      <section className="mk-section" aria-labelledby="worries-title">
+      <section className="mk-section mk-section-grey" aria-labelledby="worries-title">
         <div className="mk-shell">
           <SectionHead eyebrow="Before you buy" title="Why students hesitate, and what fixes it" id="worries-title" />
           <div className="worry-grid">
@@ -418,7 +476,7 @@ function Index() {
               </li>
             ))}
           </ul>
-          <a className="btn-solid btn-invert" href="https://7padel.in" target="_blank" rel="noopener noreferrer">
+          <a className="btn-yellow" href="https://7padel.in" target="_blank" rel="noopener noreferrer">
             Book a court at 7padel.in
           </a>
 
@@ -444,6 +502,11 @@ function Index() {
           </p>
         </div>
       </footer>
+      </div>
+
+      <a className="float-btn" href="#quiz" aria-label="Take the bag quiz">
+        <BriefcaseBusiness aria-hidden="true" />
+      </a>
     </main>
   );
 }
