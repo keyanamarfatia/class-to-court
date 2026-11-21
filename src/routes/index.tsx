@@ -16,6 +16,7 @@ import {
   Train,
   Wind,
 } from "lucide-react";
+import { catalog, type Product } from "@/data/catalog";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 /* Every product fact, price and image below comes from mokobara.com (checked 21 Nov 2026).
@@ -228,7 +229,7 @@ const hesitations = [
 
 const comparison: { label: string; values: Record<BagId, string> }[] = [
   { label: "Laptop fit", values: { overnighter: "16\" MacBook / 15.6\"", backpackPro: "15.6\" / 16\" MacBook Pro", backpack16: "15\"", kaleido: "15.6\"" } },
-  { label: "Capacity", values: { overnighter: "19L → 23L", backpackPro: "21L", backpack16: "16L", kaleido: "Not listed" } },
+  { label: "Capacity", values: { overnighter: "19L → 23L", backpackPro: "21L", backpack16: "16L", kaleido: "28L" } },
   { label: "Bottle pocket", values: { overnighter: "—", backpackPro: "—", backpack16: "Zip-out side pocket", kaleido: "Mesh side pocket" } },
   { label: "Stand-out detail", values: { overnighter: "Detachable sling + USB port", backpackPro: "Key + card holder", backpack16: "Vegan leather trims", kaleido: "Microsuede lining" } },
   { label: "Price", values: { overnighter: "₹8,999", backpackPro: "₹4,999", backpack16: "₹3,999", kaleido: "₹3,999" } },
@@ -238,7 +239,7 @@ const visualCompare: Record<BagId, { laptop: string; laptopNote: string; litres:
   overnighter: { laptop: "16\"", laptopNote: "MacBook · 15.6\" others", litres: 23, litresLabel: "19L → 23L", bottle: false, highlight: "Detachable sling + USB port" },
   backpackPro: { laptop: "16\"", laptopNote: "MacBook Pro · 15.6\" others", litres: 21, litresLabel: "21L", bottle: false, highlight: "Key + card holder" },
   backpack16: { laptop: "15\"", laptopNote: "laptop sleeve", litres: 16, litresLabel: "16L", bottle: true, highlight: "Vegan leather trims" },
-  kaleido: { laptop: "15.6\"", laptopNote: "laptop sleeve", litres: null, litresLabel: "Not listed", bottle: true, highlight: "Microsuede lining" },
+  kaleido: { laptop: "15.6\"", laptopNote: "laptop sleeve", litres: 28, litresLabel: "28L", bottle: true, highlight: "Microsuede lining" },
 };
 
 const itemListSchema = {
@@ -246,6 +247,16 @@ const itemListSchema = {
   "@type": "ItemList",
   name: "Mokobara laptop backpacks for college",
   itemListElement: bagOrder.map((id, i) => ({ "@type": "ListItem", position: i + 1, name: bags[id].name, url: bags[id].url, image: bags[id].image })),
+};
+
+const catalogSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Mokobara laptop bags, travel backpacks and cabin luggage",
+  itemListElement: catalog
+    .flatMap((g) => g.items)
+    .filter((it, i, arr) => arr.findIndex((x) => x.handle === it.handle) === i)
+    .map((it, i) => ({ "@type": "ListItem", position: i + 1, name: it.name, url: `https://mokobara.com/products/${it.handle}` })),
 };
 
 const faqSchema = {
@@ -280,6 +291,7 @@ export const Route = createFileRoute("/")({
     scripts: [
       { type: "application/ld+json", children: JSON.stringify(faqSchema) },
       { type: "application/ld+json", children: JSON.stringify(itemListSchema) },
+      { type: "application/ld+json", children: JSON.stringify(catalogSchema) },
     ],
   }),
   component: Index,
@@ -390,6 +402,87 @@ function Quiz() {
   );
 }
 
+const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
+
+function CatalogCard({ item }: { item: Product }) {
+  const off = item.mrp > item.price ? Math.round((1 - item.price / item.mrp) * 100) : 0;
+  const url = `https://mokobara.com/products/${item.handle}`;
+  return (
+    <article className="cat-card">
+      <a className="cat-tile" href={url} target="_blank" rel="noopener noreferrer">
+        {off > 0 && <span className="badge">{off}% off</span>}
+        <img src={img(item.img, 500)} alt={`Mokobara ${item.name}`} loading="lazy" width={500} height={600} />
+      </a>
+      <div className="cat-body">
+        <h4 className="cat-name">{item.name}</h4>
+        <p className="price-row">
+          <strong>{inr(item.price)}</strong>
+          {item.mrp > item.price && <s>{inr(item.mrp)}</s>}
+          {item.colours > 1 && <span className="colours">{item.colours} colours</span>}
+        </p>
+        <ul className="cat-specs">
+          {item.laptop && <li>{item.laptop}" laptop</li>}
+          {item.litres && <li>{item.litres}L</li>}
+          {item.kg && <li>{item.kg} kg</li>}
+        </ul>
+        <ul className="cat-feat">
+          {item.features.map((f) => (
+            <li key={f}>{f}</li>
+          ))}
+        </ul>
+        {item.dims && <p className="cat-dims">{item.dims}</p>}
+        <a className="product-link" href={url} target="_blank" rel="noopener noreferrer">
+          View on mokobara.com
+        </a>
+      </div>
+    </article>
+  );
+}
+
+function Catalog() {
+  const [tab, setTab] = useState<(typeof catalog)[number]["id"]>("laptop");
+  const [all, setAll] = useState(false);
+  const group = catalog.find((g) => g.id === tab)!;
+  const shown = all ? group.items : group.items.slice(0, 8);
+  return (
+    <>
+      <div className="cat-tabs" role="tablist" aria-label="Product categories">
+        {catalog.map((g) => (
+          <button
+            key={g.id}
+            type="button"
+            role="tab"
+            aria-selected={tab === g.id}
+            className={tab === g.id ? "active" : ""}
+            onClick={() => {
+              setTab(g.id);
+              setAll(false);
+            }}
+          >
+            {g.label} <span>{g.items.length}</span>
+          </button>
+        ))}
+      </div>
+      <h3 className="cat-heading">
+        {group.label} <span>· {group.eyebrow}</span>
+      </h3>
+      <div className="cat-grid" role="tabpanel">
+        {shown.map((item) => (
+          <CatalogCard key={item.handle} item={item} />
+        ))}
+      </div>
+      {group.items.length > 8 && (
+        <button type="button" className="btn-outline cat-more" onClick={() => setAll((a) => !a)}>
+          {all ? "Show fewer" : `View all ${group.items.length} ${group.label.toLowerCase()}`}
+        </button>
+      )}
+      <p className="price-note">
+        Prices, colours and specs as listed on mokobara.com on 21 November 2026. Discounts are calculated from Mokobara's listed MRP.
+      </p>
+    </>
+  );
+}
+
 function FaqList({ items, prefix }: { items: { q: string; a: string }[]; prefix: string }) {
   return (
     <Accordion type="single" collapsible className="faq-accordion">
@@ -444,7 +537,8 @@ function Index() {
             <img src={LOGO} alt="Mokobara" width={130} height={28} />
           </a>
           <nav className="topbar-nav" aria-label="Page sections">
-            <a href="#backpacks">Backpacks</a>
+            <a href="#backpacks">Top picks</a>
+            <a href="#shop">Shop all</a>
             <a href="#compare">Compare</a>
             <a href="#details">Details</a>
             <a href="#quiz">Quiz</a>
@@ -553,6 +647,18 @@ function Index() {
           </div>
         </section>
 
+        <section className="mk-section mk-section-grey" id="shop" aria-labelledby="shop-title">
+          <div className="mk-shell">
+            <SectionHead
+              eyebrow="Crowd favourites"
+              title="Shop every Mokobara for college, weekends and flights"
+              id="shop-title"
+              link={{ href: "https://mokobara.com/collections/bags-and-backpacks", label: "Official store" }}
+            />
+            <Catalog />
+          </div>
+        </section>
+
         <section className="lifestyle" aria-label="Mokobara backpacks on the go">
           {[
             { src: LIFE.commute, alt: "Commuter wearing a Mokobara backpack on the way to class" },
@@ -594,7 +700,7 @@ function Index() {
                         <b>{v.litresLabel}</b>
                       </div>
                       <div className="vs-bar" aria-hidden="true">
-                        <span style={{ width: v.litres ? `${(v.litres / 23) * 100}%` : "0%" }} />
+                        <span style={{ width: v.litres ? `${(v.litres / 28) * 100}%` : "0%" }} />
                       </div>
                     </div>
                     <ul className="vs-chips">
@@ -609,7 +715,7 @@ function Index() {
                 );
               })}
             </div>
-            <p className="price-note">*Prices as shown on mokobara.com on 21 November 2026 and may change. Capacity bar is relative to the 23L Overnighter.</p>
+            <p className="price-note">*Prices as shown on mokobara.com on 21 November 2026 and may change. Capacity bar is relative to the largest bag shown (28L).</p>
           </div>
         </section>
 
