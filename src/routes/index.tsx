@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { SITE } from "@/data/catalog";
-import { Byline, articleSchema, offerSchema, organizationSchema, productSchema, totals, websiteSchema } from "@/components/site/eeat";
+import { Byline, articleSchema, eeatMeta, offerSchema, organizationSchema, productSchema, totals, websiteSchema } from "@/components/site/eeat";
 import { crumbSchema } from "@/components/site/sections";
 import { FloatBtn, SiteFooter, Ticker, TopBar } from "@/components/site/chrome";
 import {
@@ -41,6 +41,7 @@ export const Route = createFileRoute("/")({
       { property: "og:image", content: img(LIFE.commute, 1200) },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "keywords", content: "laptop backpack for college, Mokobara backpack, what to carry to padel" },
+      ...eeatMeta,
     ],
     links: [
       { rel: "canonical", href: SITE + "/" },
@@ -143,8 +144,8 @@ function Index() {
               <article>
                 <h3>How much does a Mokobara bag cost for students?</h3>
                 <p>
-                  We compared all {totals.products} Mokobara laptop bags, travel backpacks and cabin suitcases listed on
-                  mokobara.com on 21 November 2026. Prices ranged from ₹{totals.min.toLocaleString("en-IN")} for the 14-inch
+                  In our own research, we went through all {totals.products} Mokobara laptop bags, travel backpacks and
+                  cabin suitcases listed on mokobara.com on 21 November 2026 and compared every price and spec ourselves. Prices ranged from ₹{totals.min.toLocaleString("en-IN")} for the 14-inch
                   Aisle Laptop Sleeve to ₹{totals.max.toLocaleString("en-IN")} for the Cabin Pro, and the Backpack 16L,
                   Kaleido and Spacewalk backpacks all cost ₹3,999.
                 </p>

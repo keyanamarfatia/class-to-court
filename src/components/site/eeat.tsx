@@ -6,30 +6,51 @@ export const AUTHOR = {
   name: "Keyana Marfatia",
   team: "Keyana Marfatia and team",
   role: "BBA Marketing students, Atlas SkillTech University, Mumbai",
+  credentials: "BBA Marketing degree students at Atlas SkillTech University, Mumbai, trained in SEO, AEO and digital marketing",
 };
+/* Set to the team's real email to show a mailto: contact link. */
+export const CONTACT_EMAIL: string | null = null;
+
 export const PUBLISHED = "2026-11-21";
 export const UPDATED = "2026-11-21";
 
 export function Byline({ light = false }: { light?: boolean }) {
   return (
-    <p className={`byline${light ? " byline-light" : ""}`}>
-      By <Link to="/about">{AUTHOR.team}</Link> · {AUTHOR.role} · Updated{" "}
-      <time dateTime={UPDATED}>21 November 2026</time> · Sources:{" "}
-      <a href="https://mokobara.com" target="_blank" rel="noopener noreferrer">
-        mokobara.com
-      </a>
-      ,{" "}
-      <a href="https://7padel.in" target="_blank" rel="noopener noreferrer">
-        7padel.in
-      </a>
-    </p>
+    <div className={`byline${light ? " byline-light" : ""}`} itemScope itemType="https://schema.org/Article">
+      <p>
+        Written by{" "}
+        <span itemProp="author" itemScope itemType="https://schema.org/Person">
+          <a href="/about#authors" rel="author" itemProp="url">
+            <span itemProp="name">{AUTHOR.name}</span>
+          </a>
+        </span>{" "}
+        and team · <span className="byline-cred">{AUTHOR.credentials}</span>
+      </p>
+      <p>
+        Published <time dateTime={PUBLISHED} itemProp="datePublished">21 November 2026</time> · Last updated{" "}
+        <time dateTime={UPDATED} itemProp="dateModified">21 November 2026</time> · Sources:{" "}
+        <a href="https://mokobara.com" target="_blank" rel="noopener noreferrer">mokobara.com</a>,{" "}
+        <a href="https://7padel.in" target="_blank" rel="noopener noreferrer">7padel.in</a> ·{" "}
+        <a href="/about#contact">Contact</a>
+      </p>
+    </div>
   );
 }
+
+/* Meta tags crawlers read for authorship and freshness. */
+export const eeatMeta = [
+  { name: "author", content: "Keyana Marfatia and team, Atlas SkillTech University" },
+  { property: "article:author", content: "Keyana Marfatia" },
+  { property: "article:published_time", content: PUBLISHED + "T09:00:00+05:30" },
+  { property: "article:modified_time", content: UPDATED + "T11:00:00+05:30" },
+];
 
 export const personSchema = {
   "@type": "Person",
   name: AUTHOR.name,
   jobTitle: "BBA Marketing student",
+  hasCredential: { "@type": "EducationalOccupationalCredential", credentialCategory: "degree", name: "Bachelor of Business Administration (Marketing), in progress" },
+  knowsAbout: ["Search engine optimisation", "Answer engine optimisation", "Digital marketing"],
   affiliation: { "@type": "CollegeOrUniversity", name: "Atlas SkillTech University", address: "Mumbai, India" },
   url: SITE + "/about",
 };

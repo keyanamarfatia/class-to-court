@@ -4,7 +4,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { CatalogCard } from "@/components/site/catalog-card";
 import { FloatBtn, SiteFooter, Ticker, TopBar, img, inr } from "@/components/site/chrome";
 import { catalog, SITE, type Collection, type Product } from "@/data/catalog";
-import { Byline, articleSchema } from "./eeat";
+import { Byline, articleSchema, eeatMeta } from "./eeat";
 
 export const find = (slug: string) => catalog.find((c) => c.slug === slug);
 
@@ -102,6 +102,7 @@ export function collectionHead(slug: string) {
         { property: "og:description", content: description },
         { property: "og:image", content: img(c.items[0].img, 1200) },
         { property: "og:url", content: SITE + c.path },
+        ...eeatMeta,
       ],
       scripts: [
         { type: "application/ld+json", children: JSON.stringify(articleSchema({ path: c.path, headline: title, description, image: img(c.items[0].img, 1200) })) },

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import type React from "react";
-import { Byline, articleSchema } from "./eeat";
+import { Byline, articleSchema, eeatMeta } from "./eeat";
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -827,6 +827,7 @@ export function pageHead(o: { path: string; title: string; description: string; 
       { property: "og:url", content: url },
       { property: "og:image", content: o.image },
       { name: "twitter:card", content: "summary_large_image" },
+      ...eeatMeta,
     ],
     scripts: [articleSchema({ path: o.path, headline: o.title, description: o.description, image: o.image }), ...o.schemas].map((s) => ({
       type: "application/ld+json",

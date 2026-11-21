@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { NextSteps, PageHero, Shell, crumbSchema, img, pageHead, LIFE } from "@/components/site/sections";
-import { AUTHOR, personSchema, totals } from "@/components/site/eeat";
+import { AUTHOR, CONTACT_EMAIL, personSchema, totals } from "@/components/site/eeat";
 
 export const Route = createFileRoute("/about")({
   head: () =>
@@ -24,10 +24,11 @@ export const Route = createFileRoute("/about")({
       />
       <section className="mk-section">
         <div className="mk-shell about-grid">
-          <article>
+          <article id="authors">
             <h2 className="section-title">Who we are.</h2>
             <p>
-              We are {AUTHOR.team}, {AUTHOR.role}. We built this site for Brief 1 (SEO) at Schbang x Atlas SkillTech on 21
+              We are {AUTHOR.team}: {AUTHOR.credentials}. We built this from first-hand research of every Mokobara product
+              listing, not from press releases or affiliate feeds. We built this site for Brief 1 (SEO) at Schbang x Atlas SkillTech on 21
               November 2026, using AI tools. Neither Mokobara nor 7Padel commissioned or reviewed it.
             </p>
           </article>
@@ -46,6 +47,15 @@ export const Route = createFileRoute("/about")({
               Product facts, prices, photos and videos: <a href="https://mokobara.com" target="_blank" rel="noopener noreferrer">mokobara.com</a>.
               Padel facilities: <a href="https://7padel.in" target="_blank" rel="noopener noreferrer">7padel.in</a>. We do not
               publish ratings or reviews, because we have not collected any.
+            </p>
+          </article>
+          <article id="contact">
+            <h2 className="section-title">Contact.</h2>
+            <p>
+              Questions about this student project:{" "}
+              {CONTACT_EMAIL ? <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> : "the project team"}, Atlas SkillTech
+              University, Mumbai, India. For orders, returns or warranty, contact Mokobara directly through{" "}
+              <a href="https://mokobara.com" target="_blank" rel="noopener noreferrer">mokobara.com</a>.
             </p>
           </article>
           <article>
