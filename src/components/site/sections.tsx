@@ -26,6 +26,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
    Student concept: images are Mokobara's own and link back to the official store. */
 export const CDN = "https://cdn.shopify.com/s/files/1/0068/7341/5750";
 export const img = (path: string, w = 900) => `${path}?width=${w}`;
+export const srcSet = (path: string, widths: number[]) => widths.map((w) => `${path}?width=${w} ${w}w`).join(", ");
 
 export const LOGO = "https://mokobara.com/cdn/shop/files/Mokobara_SVG_White_Logo.svg";
 export const VIDEO = {
@@ -275,18 +276,59 @@ export const faqSchema = {
 export const description =
   "Fits a 16\" laptop, survives the commute, expands for the weekend. Find the Mokobara backpack that fits your college day. Take the 30-second quiz.";
 
-export function BgVideo({ src, poster, className, label }: { src: string; poster: string; className?: string; label: string }) {
+/* Performance: the poster <img> paints first (it is the LCP element). The video file is only
+   attached after the page has loaded (hero) or when it scrolls near the viewport (lazy), and
+   never on Save-Data connections or with reduced motion. */
+export function BgVideo({
+  src,
+  poster,
+  className,
+  label,
+  lazy = false,
+  priority = false,
+}: {
+  src: string;
+  poster: string;
+  className?: string;
+  label: string;
+  lazy?: boolean;
+  priority?: boolean;
+}) {
   const ref = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(true);
+  const [playing, setPlaying] = useState(false);
+  const [ready, setReady] = useState(false);
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      ref.current?.pause();
-      setPlaying(false);
+    const v = ref.current;
+    if (!v) return;
+    const nav = navigator as Navigator & { connection?: { saveData?: boolean } };
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || nav.connection?.saveData) return;
+    const start = () => {
+      if (v.src) return;
+      v.src = src;
+      v.play().then(() => setPlaying(true)).catch(() => {});
+    };
+    if (lazy) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            start();
+            io.disconnect();
+          }
+        },
+        { rootMargin: "200px" },
+      );
+      io.observe(v);
+      return () => io.disconnect();
     }
-  }, []);
+    const kick = () => setTimeout(start, 600);
+    if (document.readyState === "complete") kick();
+    else window.addEventListener("load", kick, { once: true });
+    return () => window.removeEventListener("load", kick);
+  }, [src, lazy]);
   const toggle = () => {
     const v = ref.current;
     if (!v) return;
+    if (!v.src) v.src = src;
     if (v.paused) {
       void v.play();
       setPlaying(true);
@@ -297,7 +339,28 @@ export function BgVideo({ src, poster, className, label }: { src: string; poster
   };
   return (
     <>
-      <video ref={ref} className={className} src={src} poster={poster} autoPlay muted loop playsInline preload="auto" aria-hidden="true" />
+      <img
+        className={className}
+        src={img(poster, 1000)}
+        srcSet={srcSet(poster, [480, 750, 1000, 1400])}
+        sizes="100vw"
+        alt=""
+        aria-hidden="true"
+        width={1400}
+        height={1904}
+        {...(priority ? { fetchPriority: "high" as const } : { loading: "lazy" as const })}
+        decoding="async"
+      />
+      <video
+        ref={ref}
+        className={`${className ?? ""} bg-video${ready ? " is-ready" : ""}`}
+        muted
+        loop
+        playsInline
+        preload="none"
+        aria-hidden="true"
+        onPlaying={() => setReady(true)}
+      />
       <button type="button" className="video-toggle" onClick={toggle} aria-label={playing ? `Pause ${label}` : `Play ${label}`}>
         {playing ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
       </button>
@@ -345,7 +408,7 @@ export function Quiz() {
       {result && (
         <div className="quiz-result" aria-live="polite">
           <div className="quiz-result-tile">
-            <img src={img(result.image, 700)} alt={result.alt} loading="lazy" width={700} height={840} />
+            <img src={img(result.image, 600)} srcSet={srcSet(result.image, [360, 600, 800])} sizes="(min-width: 1024px) 40vw, 90vw" alt={result.alt} loading="lazy" decoding="async" width={600} height={720} />
           </div>
           <div>
             <h3 className="quiz-question">{result.name}</h3>
@@ -359,7 +422,7 @@ export function Quiz() {
               <strong>{result.price}</strong> <s>{result.mrp}</s>
             </p>
             <div className="quiz-result-actions">
-              <a className="btn-solid" href={result.url} target="_blank" rel="noopener noreferrer">
+              <a className="btn-solid" href={result.url} target="_blank" rel="noopener noreferrer" aria-label={`View on mokobara.com: ${result.name}`}>
                 View on mokobara.com
               </a>
               <button
@@ -468,7 +531,7 @@ export function CompareSection() {
             <article className={`vs-card${id === "overnighter" ? " vs-card-top" : ""}`} key={id}>
               {id === "overnighter" && <span className="vs-flag">Our pick</span>}
               <div className="vs-head">
-                <img src={img(b.image, 300)} alt="" loading="lazy" width={300} height={360} />
+                <img src={img(b.image, 160)} srcSet={srcSet(b.image, [80, 160])} sizes="64px" alt="" loading="lazy" decoding="async" width={160} height={192} />
                 <div>
                   <h3>{b.name}</h3>
                   <p className="vs-price">{b.price}<s>{b.mrp}</s></p>
@@ -523,7 +586,7 @@ export function DetailsSection() {
       <div className="detail-grid">
         {details.map((d) => (
           <figure className="detail-card" key={d.title}>
-            <img src={img(d.src, 700)} alt={d.alt} loading="lazy" width={700} height={840} />
+            <img src={img(d.src, 500)} srcSet={srcSet(d.src, [300, 500, 700])} sizes="(min-width: 1024px) 23vw, (min-width: 760px) 45vw, 74vw" alt={d.alt} loading="lazy" decoding="async" width={500} height={600} />
             <figcaption>
               <h3>{d.title}</h3>
               <p>{d.body}</p>
@@ -606,7 +669,10 @@ export function PadelSection() {
       </div>
       <figure className="padel-media">
         <img
-          src={img(`${OV}-4_a42119ab-983a-45f1-b250-9bfa66de0c62.jpg`, 800)}
+          src={img(`${OV}-4_a42119ab-983a-45f1-b250-9bfa66de0c62.jpg`, 600)}
+                srcSet={srcSet(`${OV}-4_a42119ab-983a-45f1-b250-9bfa66de0c62.jpg`, [400, 600, 800])}
+                sizes="(min-width: 760px) 40vw, 92vw"
+                decoding="async"
           alt="Two people wearing the Mokobara Overnighter Backpack"
           loading="lazy"
           width={800}

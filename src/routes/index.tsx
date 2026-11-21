@@ -16,6 +16,7 @@ import {
   description,
   img,
   itemListSchema,
+  srcSet,
   padelAnswer,
 } from "@/components/site/sections";
 
@@ -43,6 +44,7 @@ export const Route = createFileRoute("/")({
       { rel: "canonical", href: SITE + "/" },
       { rel: "preconnect", href: "https://cdn.shopify.com" },
       { rel: "preconnect", href: "https://mokobara.com" },
+      { rel: "preload", as: "image", href: img(LIFE.commute, 1000), imageSrcSet: srcSet(LIFE.commute, [480, 750, 1000, 1400]), imageSizes: "100vw", fetchPriority: "high" },
     ],
     scripts: [
       { type: "application/ld+json", children: JSON.stringify(itemListSchema) },
@@ -61,7 +63,7 @@ function Index() {
 
       <div className="mk-main">
         <section className="hero-video" id="top" aria-labelledby="page-title">
-          <BgVideo src={VIDEO.hero} poster={img(LIFE.commute, 1200)} className="hero-video-media" label="background video" />
+          <BgVideo src={VIDEO.hero} poster={LIFE.commute} className="hero-video-media" label="background video" priority />
           <div className="hero-video-shade" aria-hidden="true" />
           <div className="hero-video-content">
             <p className="pill">The college edit</p>
@@ -117,7 +119,7 @@ function Index() {
                   <article className="product-card" key={id}>
                     <a className="product-tile" href={b.url} target="_blank" rel="noopener noreferrer">
                       <span className="badge">{b.badge}</span>
-                      <img src={img(b.image, 700)} alt={b.alt} loading="lazy" width={700} height={840} />
+                      <img src={img(b.image, 500)} srcSet={srcSet(b.image, [300, 500, 700])} sizes="(min-width: 1024px) 23vw, (min-width: 760px) 45vw, 74vw" alt={b.alt} loading="lazy" decoding="async" width={500} height={600} />
                     </a>
                     <div className="product-body">
                       <h3 className="product-title">{b.name}</h3>
@@ -130,7 +132,7 @@ function Index() {
                           <li key={f}>{f}</li>
                         ))}
                       </ul>
-                      <a className="product-link" href={b.url} target="_blank" rel="noopener noreferrer">
+                      <a className="product-link" href={b.url} target="_blank" rel="noopener noreferrer" aria-label={`View on mokobara.com: ${b.name}`}>
                         View on mokobara.com
                       </a>
                     </div>
@@ -143,7 +145,7 @@ function Index() {
         </section>
 
         <section className="motion-band" aria-label="Designed for going places">
-          <BgVideo src={VIDEO.goingPlaces} poster={img(LIFE.group, 1200)} className="motion-band-media" label="brand film" />
+          <BgVideo src={VIDEO.goingPlaces} poster={LIFE.group} className="motion-band-media" label="brand film" lazy />
           <div className="motion-band-shade" aria-hidden="true" />
           <div className="motion-band-content">
             <p className="pill">#GoingPlaces</p>
@@ -173,7 +175,7 @@ function Index() {
             { src: LIFE.skate, alt: "Commuter carrying a Mokobara backpack in the city" },
             { src: LIFE.ride, alt: "Rider on a scooter with a Mokobara backpack" },
           ].map((p) => (
-            <img key={p.src} src={img(p.src, 600)} alt={p.alt} loading="lazy" width={600} height={816} />
+            <img key={p.src} src={img(p.src, 400)} srcSet={srcSet(p.src, [250, 400, 600])} sizes="25vw" alt={p.alt} loading="lazy" decoding="async" width={400} height={533} />
           ))}
         </section>
 

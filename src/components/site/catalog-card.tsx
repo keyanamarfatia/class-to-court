@@ -1,6 +1,8 @@
 import type { Product } from "@/data/catalog";
 import { img, inr } from "./chrome";
 
+const srcSet = (path: string, widths: number[]) => widths.map((w) => `${path}?width=${w} ${w}w`).join(", ");
+
 export function CatalogCard({ item, headingLevel = 4 }: { item: Product; headingLevel?: 3 | 4 }) {
   const off = item.mrp > item.price ? Math.round((1 - item.price / item.mrp) * 100) : 0;
   const url = `https://mokobara.com/products/${item.handle}`;
@@ -9,7 +11,7 @@ export function CatalogCard({ item, headingLevel = 4 }: { item: Product; heading
     <article className="cat-card">
       <a className="cat-tile" href={url} target="_blank" rel="noopener noreferrer">
         {off > 0 && <span className="badge">{off}% off</span>}
-        <img src={img(item.img, 500)} alt={`Mokobara ${item.name}`} loading="lazy" width={500} height={600} />
+        <img src={img(item.img, 400)} srcSet={srcSet(item.img, [240, 400, 600])} sizes="(min-width: 1024px) 22vw, (min-width: 760px) 30vw, 48vw" alt={`Mokobara ${item.name}`} loading="lazy" decoding="async" width={400} height={480} />
       </a>
       <div className="cat-body">
         <H className="cat-name">{item.name}</H>
@@ -29,7 +31,7 @@ export function CatalogCard({ item, headingLevel = 4 }: { item: Product; heading
           ))}
         </ul>
         {item.dims && <p className="cat-dims">{item.dims}</p>}
-        <a className="product-link" href={url} target="_blank" rel="noopener noreferrer">
+        <a className="product-link" href={url} target="_blank" rel="noopener noreferrer" aria-label={`Buy on mokobara.com: ${item.name}`}>
           Buy on mokobara.com
         </a>
       </div>

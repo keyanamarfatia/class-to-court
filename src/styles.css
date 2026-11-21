@@ -8,6 +8,10 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "@fontsource/hanken-grotesk/latin-400.css";
+@import "@fontsource/hanken-grotesk/latin-500.css";
+@import "@fontsource/hanken-grotesk/latin-600.css";
+@import "@fontsource/hanken-grotesk/latin-700.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -178,7 +182,7 @@
   --mk-grey: #f1f1f1;
   --mk-tile: #f9f9f9;
   --mk-line: #e5e7eb;
-  --mk-muted: #6b6f7b;
+  --mk-muted: #545864;
   overflow-x: clip;
   background: #fff;
   color: #000;
@@ -849,3 +853,18 @@
 .next-steps .col-switch a { background: var(--mk-grey); }
 @media (min-width: 760px) { .explore-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) { .explore-grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* ---------- Performance + contrast fixes ---------- */
+.bg-video { opacity: 0; transition: opacity 600ms ease; }
+.bg-video.is-ready { opacity: 1; }
+.hero-video-media { object-position: center 30%; }
+.price-row s, .vs-price s { color: #6e6e6e; }
+.cat-tabs button span, .col-switch a span { color: #6e6e6e; }
+.vs-chips li.no { color: #6e6e6e; }
+.hero-video .hero-meta { color: rgba(255,255,255,0.85); }
+.footer-note { color: #b0b0b0; }
+.cat-dims { color: #5a5a5a; }
+.worry-num, .explore-num { color: #5a5a5a; }
+.mk-section-dark .faq-answer { color: #d0d0d0; }
+.padel-media figcaption { color: #d0d0d0; }
+.ticker-track span { color: #000; }
