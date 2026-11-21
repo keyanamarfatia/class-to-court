@@ -61,6 +61,8 @@ export const SOCIALS = [
   { label: "7Padel on X", href: "https://x.com/7Padel_India" },
 ];
 
+export const GITHUB = "https://github.com/keyanamarfatia/class-to-court";
+
 export function SiteFooter() {
   return (
     <footer className="mk-footer">
@@ -91,6 +93,12 @@ export function SiteFooter() {
             ))}
           </ul>
         </div>
+        <p className="footer-built">
+          Built in the open with AI:{" "}
+          <a href={GITHUB} target="_blank" rel="noopener noreferrer">
+            see every change on GitHub
+          </a>
+        </p>
         <a className="btn-yellow" href="https://mokobara.com" target="_blank" rel="noopener noreferrer">
           Visit the official store
         </a>

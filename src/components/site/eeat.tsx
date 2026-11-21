@@ -61,6 +61,7 @@ export const publisherSchema = {
   name: "Mokobara College Edit (student concept)",
   url: SITE + "/",
   logo: { "@type": "ImageObject", url: SITE + "/logo.png", width: 512, height: 512 },
+  sameAs: ["https://github.com/keyanamarfatia/class-to-court"],
   founder: { "@type": "Person", name: "Keyana Marfatia" },
   address: { "@type": "PostalAddress", addressLocality: "Mumbai", addressCountry: "IN" },
   knowsAbout: [

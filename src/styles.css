@@ -901,3 +901,6 @@
 .press-list h2 a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .press-list p { margin: 0; color: var(--mk-muted); font-size: 13px; }
 @media (min-width: 760px) { .press-list { grid-template-columns: repeat(2, 1fr); } }
+
+.footer-built { margin: 0 0 20px; color: #d0d0d0; font-size: 13px; }
+.footer-built a { color: var(--mk-yellow); text-decoration: underline; text-underline-offset: 3px; }

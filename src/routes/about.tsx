@@ -29,7 +29,9 @@ export const Route = createFileRoute("/about")({
             <p>
               We are {AUTHOR.team}: {AUTHOR.credentials}. We built this from first-hand research of every Mokobara product
               listing, not from press releases or affiliate feeds. We built this site for Brief 1 (SEO) at Schbang x Atlas SkillTech on 21
-              November 2026, using AI tools. Neither Mokobara nor 7Padel commissioned or reviewed it.
+              November 2026, using AI tools. Every change is public on{" "}
+              <a href="https://github.com/keyanamarfatia/class-to-court" target="_blank" rel="noopener noreferrer">GitHub</a>.
+              Neither Mokobara nor 7Padel commissioned or reviewed it.
             </p>
           </article>
           <article>
