@@ -63,6 +63,10 @@ export const publisherSchema = {
   logo: { "@type": "ImageObject", url: SITE + "/logo.png", width: 512, height: 512 },
   founder: { "@type": "Person", name: "Keyana Marfatia" },
   address: { "@type": "PostalAddress", addressLocality: "Mumbai", addressCountry: "IN" },
+  knowsAbout: [
+    { "@type": "Brand", name: "Mokobara", url: "https://mokobara.com", sameAs: ["https://www.instagram.com/mokobara/", "https://www.linkedin.com/company/mokobara/"] },
+    { "@type": "SportsActivityLocation", name: "7Padel by MS Dhoni", url: "https://7padel.in", sameAs: ["https://x.com/7Padel_India"] },
+  ],
   description: "A student concept guide to Mokobara bags for college students, made for a Schbang x Atlas SkillTech brief. Not affiliated with Mokobara.",
 };
 
@@ -105,7 +109,12 @@ export function productSchema(p: { name: string; image: string; url: string; pri
     image: p.image,
     url: p.url,
     description: p.description,
-    brand: { "@type": "Brand", name: "Mokobara", url: "https://mokobara.com" },
+    brand: {
+      "@type": "Brand",
+      name: "Mokobara",
+      url: "https://mokobara.com",
+      sameAs: ["https://www.instagram.com/mokobara/", "https://www.linkedin.com/company/mokobara/", "https://www.youtube.com/@mokobara"],
+    },
     offers: offerSchema(p, false),
   };
 }

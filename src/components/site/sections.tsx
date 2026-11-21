@@ -783,6 +783,7 @@ export function NextSteps({ hide }: { hide?: string }) {
     { to: "/what-to-carry-to-padel", label: "Padel guide" },
     { to: "/faq", label: "FAQ" },
     { to: "/about", label: "About this site" },
+    { to: "/press", label: "Press" },
   ].filter((i) => i.to !== hide);
   return (
     <section className="mk-section next-steps" aria-label="Keep exploring">

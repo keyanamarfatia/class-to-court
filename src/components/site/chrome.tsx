@@ -52,6 +52,14 @@ export function TopBar(_: { home?: boolean }) {
   );
 }
 
+/* Official profiles, each checked by opening it on 21 Nov 2026. */
+export const SOCIALS = [
+  { label: "Mokobara on Instagram", href: "https://www.instagram.com/mokobara/" },
+  { label: "Mokobara on LinkedIn", href: "https://www.linkedin.com/company/mokobara/" },
+  { label: "Mokobara on YouTube", href: "https://www.youtube.com/@mokobara" },
+  { label: "7Padel on X", href: "https://x.com/7Padel_India" },
+];
+
 export function SiteFooter() {
   return (
     <footer className="mk-footer">
@@ -67,8 +75,21 @@ export function SiteFooter() {
           <Link to="/what-to-carry-to-padel">Padel guide</Link>
           <Link to="/faq">FAQ</Link>
           <Link to="/about">About us</Link>
+          <Link to="/press">Press</Link>
           <Link to="/">College edit home</Link>
         </nav>
+        <div className="footer-social" aria-label="Official brand profiles">
+          <p>Follow the brands</p>
+          <ul>
+            {SOCIALS.map((s) => (
+              <li key={s.href}>
+                <a href={s.href} target="_blank" rel="noopener noreferrer me">
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
         <a className="btn-yellow" href="https://mokobara.com" target="_blank" rel="noopener noreferrer">
           Visit the official store
         </a>

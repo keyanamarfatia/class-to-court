@@ -16,6 +16,7 @@ import { Route as CabinLuggageRouteImport } from './routes/cabin-luggage'
 import { Route as CompareBackpacksRouteImport } from './routes/compare-backpacks'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as LaptopBagsRouteImport } from './routes/laptop-bags'
+import { Route as PressRouteImport } from './routes/press'
 import { Route as TravelBackpacksRouteImport } from './routes/travel-backpacks'
 import { Route as WhatToCarryToPadelRouteImport } from './routes/what-to-carry-to-padel'
 import { Route as CollectionsSlugRouteImport } from './routes/collections/$slug'
@@ -55,6 +56,11 @@ const LaptopBagsRoute = LaptopBagsRouteImport.update({
   path: '/laptop-bags',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PressRoute = PressRouteImport.update({
+  id: '/press',
+  path: '/press',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TravelBackpacksRoute = TravelBackpacksRouteImport.update({
   id: '/travel-backpacks',
   path: '/travel-backpacks',
@@ -79,6 +85,7 @@ export interface FileRoutesByFullPath {
   '/compare-backpacks': typeof CompareBackpacksRoute
   '/faq': typeof FaqRoute
   '/laptop-bags': typeof LaptopBagsRoute
+  '/press': typeof PressRoute
   '/travel-backpacks': typeof TravelBackpacksRoute
   '/what-to-carry-to-padel': typeof WhatToCarryToPadelRoute
   '/collections/$slug': typeof CollectionsSlugRoute
@@ -91,6 +98,7 @@ export interface FileRoutesByTo {
   '/compare-backpacks': typeof CompareBackpacksRoute
   '/faq': typeof FaqRoute
   '/laptop-bags': typeof LaptopBagsRoute
+  '/press': typeof PressRoute
   '/travel-backpacks': typeof TravelBackpacksRoute
   '/what-to-carry-to-padel': typeof WhatToCarryToPadelRoute
   '/collections/$slug': typeof CollectionsSlugRoute
@@ -104,6 +112,7 @@ export interface FileRoutesById {
   '/compare-backpacks': typeof CompareBackpacksRoute
   '/faq': typeof FaqRoute
   '/laptop-bags': typeof LaptopBagsRoute
+  '/press': typeof PressRoute
   '/travel-backpacks': typeof TravelBackpacksRoute
   '/what-to-carry-to-padel': typeof WhatToCarryToPadelRoute
   '/collections/$slug': typeof CollectionsSlugRoute
@@ -118,6 +127,7 @@ export interface FileRouteTypes {
     | '/compare-backpacks'
     | '/faq'
     | '/laptop-bags'
+    | '/press'
     | '/travel-backpacks'
     | '/what-to-carry-to-padel'
     | '/collections/$slug'
@@ -130,6 +140,7 @@ export interface FileRouteTypes {
     | '/compare-backpacks'
     | '/faq'
     | '/laptop-bags'
+    | '/press'
     | '/travel-backpacks'
     | '/what-to-carry-to-padel'
     | '/collections/$slug'
@@ -142,6 +153,7 @@ export interface FileRouteTypes {
     | '/compare-backpacks'
     | '/faq'
     | '/laptop-bags'
+    | '/press'
     | '/travel-backpacks'
     | '/what-to-carry-to-padel'
     | '/collections/$slug'
@@ -155,6 +167,7 @@ export interface RootRouteChildren {
   CompareBackpacksRoute: typeof CompareBackpacksRoute
   FaqRoute: typeof FaqRoute
   LaptopBagsRoute: typeof LaptopBagsRoute
+  PressRoute: typeof PressRoute
   TravelBackpacksRoute: typeof TravelBackpacksRoute
   WhatToCarryToPadelRoute: typeof WhatToCarryToPadelRoute
   CollectionsSlugRoute: typeof CollectionsSlugRoute
@@ -211,6 +224,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LaptopBagsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/press': {
+      id: '/press'
+      path: '/press'
+      fullPath: '/press'
+      preLoaderRoute: typeof PressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/travel-backpacks': {
       id: '/travel-backpacks'
       path: '/travel-backpacks'
@@ -243,6 +263,7 @@ const rootRouteChildren: RootRouteChildren = {
   CompareBackpacksRoute: CompareBackpacksRoute,
   FaqRoute: FaqRoute,
   LaptopBagsRoute: LaptopBagsRoute,
+  PressRoute: PressRoute,
   TravelBackpacksRoute: TravelBackpacksRoute,
   WhatToCarryToPadelRoute: WhatToCarryToPadelRoute,
   CollectionsSlugRoute: CollectionsSlugRoute,

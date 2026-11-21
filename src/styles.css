@@ -886,3 +886,18 @@
 .about-grid p { margin: 0; color: #333; font-size: 16px; line-height: 1.65; }
 .about-grid a { color: #000; text-decoration: underline; text-underline-offset: 3px; }
 @media (min-width: 760px) { .facts-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ---------- Brand presence ---------- */
+.footer-social { margin: 0 0 24px; }
+.footer-social p { margin: 0 0 8px; color: var(--mk-yellow); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.footer-social ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.footer-social a { display: inline-block; border: 1px solid #3a3a3a; border-radius: 999px; padding: 8px 14px; color: #fff; font-size: 13px; text-decoration: none; }
+.footer-social a:hover { border-color: var(--mk-yellow); color: var(--mk-yellow); }
+.press-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.press-list li { border-radius: 8px; background: var(--mk-grey); padding: 20px; }
+.press-list .pill { margin-bottom: 10px; }
+.press-list h2 { margin: 0 0 6px; color: var(--mk-slate); font-size: 20px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.3; }
+.press-list h2 a { color: inherit; text-decoration: none; }
+.press-list h2 a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.press-list p { margin: 0; color: var(--mk-muted); font-size: 13px; }
+@media (min-width: 760px) { .press-list { grid-template-columns: repeat(2, 1fr); } }
