@@ -330,7 +330,7 @@ function Index() {
             <p className="facts-intro">
               <strong>Before buying a Mokobara, check 4 things</strong>: laptop fit, capacity, price and returns. Our 2026
               analysis covers all 4 across 40 bags from mokobara.com: 3 of our 4 picks (75%) fit a 15.6-inch laptop or
-              larger, prices run from ₹999 to ₹13,599, and every bag comes with a 30-day trial and a 12-month warranty.
+              larger, prices run from ₹999 to ₹13,599, and every bag bought on mokobara.com comes with a 30-day trial and a 12-month limited warranty.
             </p>
             <div className="explore-grid">
               {explore.map((e) => (
