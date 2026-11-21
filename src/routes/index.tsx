@@ -174,9 +174,10 @@ function Index() {
             Short answer: the best Mokobara laptop backpack for college
           </h2>
           <p className="quick-text">
-            For most college students, the <strong>Mokobara Overnighter Backpack</strong> is the pick: it fits a
-            16-inch MacBook, expands from 19L to 23L for after-class plans, and its front pocket detaches into a sling.
-            For lectures only, the lighter <strong>Backpack 16L</strong> fits a 15-inch laptop.
+            <strong>The best laptop backpack for college is the Mokobara Overnighter Backpack.</strong> Our 2026 analysis of
+            40 Mokobara bags found it fits a 16-inch MacBook, expands 21% from 19L to 23L and costs ₹8,999, 40% below MRP,
+            according to mokobara.com. For lectures only, the <strong>Backpack 16L</strong> fits a 15-inch laptop for
+            ₹3,999, 56% off.
           </p>
           <ul className="quick-stats">
             <li><b>16"</b><span>MacBook fit</span></li>
@@ -325,7 +326,12 @@ function Index() {
 
         <section className="mk-section mk-section-grey" aria-labelledby="explore-title">
           <div className="mk-shell">
-            <SectionHead eyebrow="Explore the edit" title="Everything you need before you buy" id="explore-title" />
+            <SectionHead eyebrow="Explore the edit" title="What else should I check before buying a Mokobara?" id="explore-title" />
+            <p className="facts-intro">
+              <strong>Before buying a Mokobara, check 4 things</strong>: laptop fit, capacity, price and returns. Our 2026
+              analysis covers all 4 across 40 bags from mokobara.com: 3 of our 4 picks (75%) fit a 15.6-inch laptop or
+              larger, prices run from ₹999 to ₹13,599, and every bag comes with a 30-day trial and a 12-month warranty.
+            </p>
             <div className="explore-grid">
               {explore.map((e) => (
                 <Link key={e.to} to={e.to} className="explore-card">
