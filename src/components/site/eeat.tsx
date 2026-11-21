@@ -60,7 +60,7 @@ export const personSchema = {
 export const publisherSchema = {
   "@type": "Organization",
   "@id": SITE + "/#organization",
-  name: "Mokobara College Edit (student concept)",
+  name: "Mokobara Travel Edit (student concept)",
   url: SITE + "/",
   logo: { "@type": "ImageObject", url: SITE + "/logo.png", width: 512, height: 512 },
   sameAs: ["https://github.com/keyanamarfatia/class-to-court"],
@@ -73,13 +73,13 @@ export const publisherSchema = {
     { "@type": "Brand", name: "Mokobara", url: "https://mokobara.com", sameAs: ["https://www.instagram.com/mokobara/", "https://www.linkedin.com/company/mokobara/", "https://en.wikipedia.org/wiki/Mokobara"] },
     { "@type": "SportsActivityLocation", name: "7Padel by MS Dhoni", url: "https://7padel.in", sameAs: ["https://x.com/7Padel_India"] },
   ],
-  description: "A student concept guide to Mokobara bags for college students, made for a Schbang x Atlas SkillTech brief. Not affiliated with Mokobara.",
+  description: "A student concept guide to Mokobara cabin and travel bags, made for a Schbang x Atlas SkillTech brief. Not affiliated with Mokobara.",
 };
 
 export const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Mokobara College Edit",
+  name: "Mokobara Travel Edit",
   url: SITE + "/",
   inLanguage: "en-IN",
   publisher: publisherSchema,

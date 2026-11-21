@@ -64,9 +64,9 @@ function faqs(c: Collection) {
 
 export function collectionHead(slug: string) {
     const c = find(slug);
-    if (!c) return { meta: [{ title: "Collection not found | Mokobara College Edit" }] };
+    if (!c) return { meta: [{ title: "Collection not found | Mokobara Travel Edit" }] };
     const s = stats(c);
-    const title = `${c.title}: All ${s.count} Compared (2026) | Mokobara College Edit`;
+    const title = `${c.title}: All ${s.count} Compared (2026) | Mokobara Travel Edit`;
     const description = `Compare all ${s.count} ${c.title} side by side: prices from ${inr(s.min)}, laptop fit, capacity and weight, taken from mokobara.com.`;
     const itemList = {
       "@context": "https://schema.org",
@@ -84,7 +84,7 @@ export function collectionHead(slug: string) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "College edit", item: SITE + "/" },
+        { "@type": "ListItem", position: 1, name: "Travel edit", item: SITE + "/" },
         { "@type": "ListItem", position: 2, name: c.label, item: SITE + c.path },
       ],
     };
@@ -144,7 +144,7 @@ export function CollectionView({ slug }: { slug: string }) {
       <section className="col-hero">
         <div className="mk-shell">
           <nav className="crumbs" aria-label="Breadcrumb">
-            <Link to="/">College edit</Link> <span aria-hidden="true">/</span> <span>{c.label}</span>
+            <Link to="/">Travel edit</Link> <span aria-hidden="true">/</span> <span>{c.label}</span>
           </nav>
           <p className="pill">{c.eyebrow}</p>
           <h1 className="col-title">{c.title}</h1>

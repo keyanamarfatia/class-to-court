@@ -6,17 +6,17 @@ export const Route = createFileRoute("/contact")({
   head: () =>
     pageHead({
       path: "/contact",
-      title: "Contact Us | Mokobara College Edit (Student Concept)",
-      description: "How to reach the student team behind the Mokobara College Edit, and where to contact Mokobara and 7Padel directly for orders and bookings.",
+      title: "Contact Us | Mokobara Travel Edit (Student Concept)",
+      description: "How to reach the student team behind the Mokobara Travel Edit, and where to contact Mokobara and 7Padel directly for orders and bookings.",
       image: img(LIFE.commute, 1200),
       schemas: [
         {
           "@context": "https://schema.org",
           "@type": "ContactPage",
-          name: "Contact the Mokobara College Edit team",
+          name: "Contact the Mokobara Travel Edit team",
           about: {
             "@type": "Organization",
-            name: "Mokobara College Edit (student concept)",
+            name: "Mokobara Travel Edit (student concept)",
             address: { "@type": "PostalAddress", addressLocality: "Mumbai", addressRegion: "Maharashtra", addressCountry: "IN" },
             ...(CONTACT_EMAIL ? { email: CONTACT_EMAIL } : {}),
           },

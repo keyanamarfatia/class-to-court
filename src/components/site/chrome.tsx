@@ -12,7 +12,7 @@ export function Ticker() {
       <div className="ticker-track" aria-hidden="true">
         {Array.from({ length: 6 }).map((_, i) => (
           <span key={i}>
-            Student concept <b>•</b> The college edit 2026 <b>•</b> From class to court <b>•</b> Shop the real thing on
+            Student concept <b>•</b> The travel edit 2026 <b>•</b> From class to court <b>•</b> Shop the real thing on
             mokobara.com <b>•</b>
           </span>
         ))}
@@ -26,7 +26,7 @@ export function TopBar(_: { home?: boolean }) {
   return (
     <header className="mk-topbar">
       <div className="topbar-inner">
-        <Link className="topbar-logo" to="/" aria-label="Mokobara college edit, home">
+        <Link className="topbar-logo" to="/" aria-label="Mokobara travel edit, home">
           <img src={LOGO} alt="Mokobara" width={130} height={28} />
         </Link>
         <nav className="topbar-nav" aria-label="Site">
@@ -43,6 +43,7 @@ export function TopBar(_: { home?: boolean }) {
           <Link to="/bag-finder-quiz" activeProps={{ className: "active" }}>Quiz</Link>
           <Link to="/what-to-carry-to-padel" activeProps={{ className: "active" }}>Padel</Link>
           <Link to="/faq" activeProps={{ className: "active" }}>FAQ</Link>
+          <Link to="/about" activeProps={{ className: "active" }}>About</Link>
         </nav>
         <Link className="topbar-cta" to="/bag-finder-quiz">
           Find my bag <ArrowRight aria-hidden="true" />
@@ -89,7 +90,7 @@ export function SiteFooter() {
           <Link to="/about">About us</Link>
           <Link to="/press">Press</Link>
           <Link to="/contact">Contact us</Link>
-          <Link to="/">College edit home</Link>
+          <Link to="/">Travel edit home</Link>
         </nav>
         <div className="footer-social" aria-label="Official brand profiles">
           <p>Follow the brands</p>

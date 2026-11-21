@@ -10,7 +10,7 @@ const inrN = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 const keyFacts = [
   {
     q: "Which Mokobara backpack fits a 16-inch laptop?",
-    a: "Our research found 2 of Mokobara's 4 best college backpacks take a 16-inch MacBook. According to mokobara.com, the Overnighter fits a 16-inch MacBook (15.6 inches for other laptops), expands 21% from 19L to 23L and costs ₹8,999, 40% below its ₹14,999 MRP. The Backpack Pro 21L fits a 16-inch MacBook Pro for ₹4,999, 55% off.",
+    a: "Our research found 2 of Mokobara's 4 best travel backpacks take a 16-inch MacBook. According to mokobara.com, the Overnighter fits a 16-inch MacBook (15.6 inches for other laptops), expands 21% from 19L to 23L and costs ₹8,999, 40% below its ₹14,999 MRP. The Backpack Pro 21L fits a 16-inch MacBook Pro for ₹4,999, 55% off.",
     bullets: ["Overnighter: 16-inch MacBook, 19L → 23L, ₹8,999 (40% off)", "Backpack Pro 21L: 16-inch MacBook Pro, ₹4,999 (55% off)", "Source: mokobara.com, 21 Nov 2026"]
   },
   {
@@ -79,7 +79,7 @@ function Research() {
     <Shell>
       <PageHero
         crumb="Our research"
-        eyebrow="The College Edit research"
+        eyebrow="The Travel Edit research"
         title={`What we found comparing ${totals.products} Mokobara bags`}
         intro="Every Mokobara cabin bag, travel backpack and laptop bag listed on mokobara.com on 21 November 2026, compared on price, laptop fit, capacity and weight."
       />
@@ -98,8 +98,8 @@ function Research() {
             <ReadMore label="How we compared them">
             <div className="facts-intro">
               <p>
-                <strong>The Mokobara College Edit</strong> is our original comparison of all {totals.products} Mokobara
-                laptop bags, travel backpacks and cabin suitcases listed on mokobara.com on 21 November 2026. As college
+                <strong>The Mokobara Travel Edit</strong> is our original comparison of all {totals.products} Mokobara
+                laptop bags, travel backpacks and cabin suitcases listed on mokobara.com on 21 November 2026. As
                 students in Mumbai ourselves, we went through every listing first-hand. In our experience, the real question is
                 which one bag lasts the whole day, and our research found:
               </p>

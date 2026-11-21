@@ -51,8 +51,8 @@ export const Route = createFileRoute("/press")({
   head: () =>
     pageHead({
       path: "/press",
-      title: "Press: Mokobara and 7Padel in the News | Mokobara College Edit",
-      description: "Independent press coverage of Mokobara and 7Padel by MS Dhoni, from funding news to new padel venues, collected for the Mokobara College Edit.",
+      title: "Press: Mokobara and 7Padel in the News | Mokobara Travel Edit",
+      description: "Independent press coverage of Mokobara and 7Padel by MS Dhoni, from funding news to new padel venues, collected for the Mokobara Travel Edit.",
       image: img(LIFE.commute, 1200),
       schemas: [
         {

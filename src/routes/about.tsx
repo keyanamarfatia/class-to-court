@@ -6,11 +6,11 @@ export const Route = createFileRoute("/about")({
   head: () =>
     pageHead({
       path: "/about",
-      title: "About the Mokobara College Edit: Who Made It and How We Compared the Bags",
+      title: "About the Mokobara Travel Edit: Who Made It and How We Compared the Bags",
       description: "A student concept by BBA Marketing students at Atlas SkillTech University. How we compared every Mokobara bag, where the facts come from, and what this site is not.",
       image: img(LIFE.commute, 1200),
       schemas: [
-        { "@context": "https://schema.org", "@type": "AboutPage", name: "About the Mokobara College Edit", author: personSchema },
+        { "@context": "https://schema.org", "@type": "AboutPage", name: "About the Mokobara Travel Edit", author: personSchema },
         crumbSchema("About", "/about"),
       ],
     }),
@@ -19,8 +19,8 @@ export const Route = createFileRoute("/about")({
       <PageHero
         crumb="About"
         eyebrow="Who made this"
-        title="About the Mokobara College Edit"
-        intro="A student concept that answers the bag questions college students actually search for, using only facts from Mokobara and 7Padel."
+        title="About the Mokobara Travel Edit"
+        intro="A student concept that answers the cabin and travel bag questions people actually search for, using only facts from Mokobara and 7Padel."
       />
       <section className="mk-section">
         <div className="mk-shell about-grid">

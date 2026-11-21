@@ -95,7 +95,7 @@ export const bags: Record<BagId, Bag> = {
     summary: "The Mokobara Backpack 16L has a padded sleeve for a 15-inch laptop, a zip-out bottle pocket and costs ₹3,999 on mokobara.com, 56% below its ₹8,999 MRP.",
     name: "Backpack 16L",
     badge: "Light",
-    tagline: "The clean, lecture-only pick",
+    tagline: "The light day-trip pick",
     price: "₹3,999",
     mrp: "₹8,999",
     colours: 7,
@@ -242,8 +242,8 @@ export const collegeFaqs = [
     a: "Mokobara designs its Transit Backpack 30L for everyday use and 1–2 day trips, and its 25L Astronaut Backpack has a mesh compartment for up to a 2-day trip. The Overnighter Backpack sits between them, expanding from 19L to 23L.",
   },
   {
-    q: "What is the best laptop backpack for college?",
-    a: "It depends on your day. For lectures only, the Mokobara Backpack 16L fits a 15-inch laptop. If you go somewhere after class, the Overnighter Backpack fits a 16-inch MacBook and expands from 19L to 23L.",
+    q: "Which Mokobara bag is best for a short trip?",
+    a: "It depends on how you travel. By road or train, the Mokobara Overnighter Backpack expands from 19L to 23L and fits a 16-inch MacBook. If you are flying, the Cabin Overnighter Luggage holds 41L and has a front tech compartment for airport security checks.",
   },
   {
     q: "Which Mokobara backpack fits a 16-inch laptop?",
@@ -295,7 +295,7 @@ export const visualCompare: Record<BagId, { laptop: string; laptopNote: string; 
 export const itemListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "Mokobara laptop backpacks for college",
+  name: "Mokobara travel backpacks for weekend trips",
   itemListElement: bagOrder.map((id, i) => ({ "@type": "ListItem", position: i + 1, name: bags[id].name, url: bags[id].url, image: bags[id].image })),
 };
 
@@ -592,7 +592,7 @@ export function CompareSection({ head = true }: { head?: boolean } = {}) {
     <>
   <section className="mk-section mk-section-grey" id="compare" aria-labelledby="compare-title">
     <div className="mk-shell">
-      {head ? <SectionHead eyebrow="Side by side" title="Mokobara college backpacks compared" id="compare-title" /> : <h2 className="sr-only" id="compare-title">Overnighter vs Backpack Pro vs Backpack 16L vs Kaleido</h2>}
+      {head ? <SectionHead eyebrow="Side by side" title="Mokobara travel backpacks compared" id="compare-title" /> : <h2 className="sr-only" id="compare-title">Overnighter vs Backpack Pro vs Backpack 16L vs Kaleido</h2>}
       <div className="vs-grid">
         {bagOrder.map((id) => {
           const b = bags[id];
@@ -825,7 +825,7 @@ export function CollegeFaqSection({ head = true }: { head?: boolean } = {}) {
     <>
   <section className="mk-section" id="faq" aria-labelledby="faq-title">
     <div className="mk-shell">
-      {head ? <SectionHead eyebrow="Good to know" title="College backpack FAQ" id="faq-title" /> : <h2 className="sr-only" id="faq-title">Questions and answers</h2>}
+      {head ? <SectionHead eyebrow="Good to know" title="Cabin & travel bag FAQ" id="faq-title" /> : <h2 className="sr-only" id="faq-title">Questions and answers</h2>}
       <FaqList items={collegeFaqs} prefix="college" />
     </div>
   </section>
@@ -838,7 +838,7 @@ export function PageHero({ crumb, eyebrow, title, intro }: { crumb: string; eyeb
     <section className="col-hero">
       <div className="mk-shell">
         <nav className="crumbs" aria-label="Breadcrumb">
-          <Link to="/">College edit</Link> <span aria-hidden="true">/</span> <span>{crumb}</span>
+          <Link to="/">Travel edit</Link> <span aria-hidden="true">/</span> <span>{crumb}</span>
         </nav>
         <p className="pill">{eyebrow}</p>
         <h1 className="col-title">{title}</h1>
@@ -887,7 +887,7 @@ export const crumbSchema = (name: string, path: string) => ({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "College edit", item: "https://class-to-court-carry.lovable.app/" },
+    { "@type": "ListItem", position: 1, name: "Travel edit", item: "https://class-to-court-carry.lovable.app/" },
     { "@type": "ListItem", position: 2, name, item: "https://class-to-court-carry.lovable.app" + path },
   ],
 });

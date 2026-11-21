@@ -127,7 +127,7 @@ export const catalog = [
     label: "Laptop bags",
     eyebrow: "For class",
     title: "Mokobara laptop bags",
-    intro: "Every Mokobara laptop backpack, briefcase and sleeve for college, sorted by what fits your laptop.",
+    intro: "Every Mokobara laptop backpack, briefcase and sleeve, sorted by what fits your laptop for work trips.",
     items: laptop,
   },
 ] as const;

@@ -29,7 +29,7 @@ const explore = [
   { to: "/compare-backpacks", num: "01", title: "Compare backpacks", body: "Overnighter vs Backpack Pro vs 16L vs Kaleido: laptop fit, capacity and price at a glance.", cta: "Compare" },
   { to: "/bag-finder-quiz", num: "02", title: "Bag finder quiz", body: "Three questions about your laptop and your day. One Mokobara that fits.", cta: "Take the quiz" },
   { to: "/what-to-carry-to-padel", num: "03", title: "First padel game guide", body: "What to pack from class to court, and where to play at 7Padel by MS Dhoni.", cta: "Read the guide" },
-  { to: "/faq", num: "04", title: "College backpack FAQ", body: "Laptop fit, water resistance, the 30-day trial and the warranty, answered.", cta: "Read the FAQ" },
+  { to: "/faq", num: "04", title: "Cabin & travel bag FAQ", body: "Laptop fit, water resistance, the 30-day trial and the warranty, answered.", cta: "Read the FAQ" },
 ] as const;
 
 export const Route = createFileRoute("/")({
@@ -75,7 +75,7 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify(offerSchema({ name: `Mokobara ${bags[id].name}`, url: bags[id].url, price: Number(bags[id].price.replace(/[^\d]/g, "")) })),
       })),
-      { type: "application/ld+json", children: JSON.stringify({ ...crumbSchema("Best bag for a weekend trip", "/"), itemListElement: [{ "@type": "ListItem", position: 1, name: "College edit", item: SITE + "/" }] }) },
+      { type: "application/ld+json", children: JSON.stringify({ ...crumbSchema("Best bag for a weekend trip", "/"), itemListElement: [{ "@type": "ListItem", position: 1, name: "Travel edit", item: SITE + "/" }] }) },
       { type: "application/ld+json", children: JSON.stringify(itemListSchema) },
       { type: "application/ld+json", children: JSON.stringify(catalogSchema) },
     ],
@@ -95,7 +95,7 @@ function Index() {
           <BgVideo src={VIDEO.hero} poster={LIFE.commute} className="hero-video-media" label="background video" priority />
           <div className="hero-video-shade" aria-hidden="true" />
           <div className="hero-video-content">
-            <p className="pill">The college edit</p>
+            <p className="pill">The travel edit</p>
             <h1 className="hero-title" id="page-title">
               The best bag for a weekend trip, from class to court
             </h1>
@@ -121,7 +121,7 @@ function Index() {
           <ReadMore>
             <p>
               Our 2026 analysis of 40 Mokobara bags found it fits a 16-inch MacBook, expands 21% from 19L to 23L and costs
-              ₹8,999, 40% below MRP, according to mokobara.com. For lectures only, the <strong>Backpack 16L</strong> fits a
+              ₹8,999, 40% below MRP, according to mokobara.com. For a light day trip, the <strong>Backpack 16L</strong> fits a
               15-inch laptop for ₹3,999, 56% off.
             </p>
           </ReadMore>
@@ -156,7 +156,7 @@ function Index() {
           <div className="mk-shell">
             <SectionHead
               eyebrow="The shortlist"
-              title="Which Mokobara fits your college day?"
+              title="Which Mokobara fits your trip?"
               id="products-title"
               link={{ href: "/laptop-bags", label: "View all laptop bags" }}
             />
@@ -190,27 +190,9 @@ function Index() {
               })}
             </div>
             <p className="price-note">*Prices as shown on mokobara.com on 21 November 2026 and may change.</p>
-            <div className="table-wrap home-table">
-              <table className="compare-table">
-                <caption>Mokobara college backpacks at a glance (mokobara.com, 21 November 2026)</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">Backpack</th>
-                    <th scope="col">Laptop fit</th>
-                    <th scope="col">Capacity</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">MRP</th>
-                    <th scope="col">Discount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><th scope="row">Overnighter Backpack</th><td>16" MacBook / 15.6"</td><td>19L → 23L</td><td>₹8,999</td><td>₹14,999</td><td>40%</td></tr>
-                  <tr><th scope="row">Backpack Pro 21L</th><td>15.6" / 16" MacBook Pro</td><td>21L</td><td>₹4,999</td><td>₹10,999</td><td>55%</td></tr>
-                  <tr><th scope="row">Kaleido Backpack</th><td>15.6"</td><td>28L</td><td>₹3,999</td><td>₹6,999</td><td>43%</td></tr>
-                  <tr><th scope="row">Backpack 16L</th><td>15"</td><td>16L</td><td>₹3,999</td><td>₹8,999</td><td>56%</td></tr>
-                </tbody>
-              </table>
-            </div>
+            <Link className="btn-solid" to="/compare-backpacks" style={{ marginTop: 24 }}>
+              Compare all 4 side by side
+            </Link>
           </div>
         </section>
 

@@ -81,15 +81,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Mokobara College Backpack Guide | Student Concept" },
+      { title: "Mokobara Cabin & Travel Bag Guide | Student Concept" },
       {
         name: "description",
-        content: "A student concept exploring the Mokobara backpack for campus, commutes, and court days.",
+        content: "A student concept guide to Mokobara cabin luggage and travel bags for weekend trips, flights and court days.",
       },
-      { property: "og:title", content: "Mokobara College Backpack Guide | Student Concept" },
+      { property: "og:title", content: "Mokobara Cabin & Travel Bag Guide | Student Concept" },
       {
         property: "og:description",
-        content: "A student concept exploring the Mokobara backpack for campus, commutes, and court days.",
+        content: "A student concept guide to Mokobara cabin luggage and travel bags for weekend trips, flights and court days.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
