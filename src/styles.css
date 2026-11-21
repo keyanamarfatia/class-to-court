@@ -1052,3 +1052,12 @@
   .col-filters { display: flex; flex-wrap: nowrap; gap: 6px; overflow-x: auto; scrollbar-width: none; }
   .col-filters > * { flex: 0 0 auto; }
 }
+/* stats = plain facts line, tabs = pills (so they don't look alike) */
+.col-stats { gap: 0 !important; margin: 4px 0 18px !important; }
+.col-stats li { background: none !important; border-radius: 0 !important; padding: 0 18px 0 0 !important; margin-right: 18px; border-right: 1px solid rgba(0,0,0,0.15); }
+.col-stats li:last-child { border-right: 0; margin-right: 0; }
+.col-stats b { font-size: 15px !important; color: #000; }
+.col-stats span { font-size: 12px !important; letter-spacing: 0.02em !important; text-transform: none !important; color: var(--mk-muted) !important; font-weight: 500 !important; }
+.col-hero .col-switch a { border: 1.5px solid #000; background: transparent; }
+.col-hero .col-switch a.active { background: #000; }
+@media (max-width: 759px) { .col-stats li { padding-right: 12px !important; margin-right: 12px; } }
