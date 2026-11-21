@@ -1014,3 +1014,16 @@
 .answer-block p { font-size: 16px !important; line-height: 1.6; max-width: 62ch; }
 .answer-block { padding: 22px 24px !important; }
 @media (min-width: 1024px) { .answer-block p { font-size: 18px !important; } .answer-block { padding: 26px 30px !important; } }
+
+/* ---------- Visual stat boxes ---------- */
+.quick-stats li, .stat-tiles li { position: relative; padding-top: 62px !important; }
+.stat-ico { position: absolute; top: 16px; left: 16px; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #000; font-style: normal; }
+.stat-tiles .stat-ico { background: #000; color: var(--mk-yellow); }
+.stat-ico svg { width: 18px; height: 18px; stroke-width: 1.8; }
+.stat-bar { position: relative; display: block; height: 6px; margin-top: 12px; border-radius: 99px; background: rgba(0,0,0,0.12); overflow: hidden; font-style: normal; }
+.stat-bar > em { position: absolute; inset: 0 auto 0 0; display: block; border-radius: 99px; background: #000; }
+.quick-stats .stat-bar > em { background: var(--mk-yellow); }
+.quick-stats .stat-bar > .stat-bar-base { background: var(--mk-slate); }
+.dots { display: flex; gap: 4px; margin-top: 12px; font-style: normal; }
+.dots em { width: 10px; height: 10px; border-radius: 50%; background: rgba(0,0,0,0.18); }
+.dots em.on { background: #000; }

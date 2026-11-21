@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BadgePercent, IndianRupee, Laptop, Layers, Luggage, Maximize2, RotateCcw, ShieldCheck } from "lucide-react";
 import { SITE, catalog } from "@/data/catalog";
 import { Byline, articleSchema, eeatMeta, offerSchema, organizationSchema, productSchema, totals, websiteSchema } from "@/components/site/eeat";
 import { crumbSchema, faqSchemaFor,
@@ -126,10 +126,10 @@ function Index() {
             </p>
           </ReadMore>
           <ul className="quick-stats">
-            <li><b>16"</b><span>MacBook fit</span></li>
-            <li><b>23L</b><span>Expanded</span></li>
-            <li><b>30 days</b><span>Trial on mokobara.com</span></li>
-            <li><b>12 mo</b><span>Limited warranty</span></li>
+            <li><i className="stat-ico" aria-hidden="true"><Laptop /></i><b>16"</b><span>MacBook fit</span></li>
+            <li><i className="stat-ico" aria-hidden="true"><Maximize2 /></i><b>23L</b><span>Expanded</span><em className="stat-bar" aria-hidden="true"><em style={{ width: "100%" }} /><em className="stat-bar-base" style={{ width: "83%" }} /></em></li>
+            <li><i className="stat-ico" aria-hidden="true"><RotateCcw /></i><b>30 days</b><span>Trial on mokobara.com</span></li>
+            <li><i className="stat-ico" aria-hidden="true"><ShieldCheck /></i><b>12 mo</b><span>Limited warranty</span></li>
           </ul>
         </section>
 
@@ -140,10 +140,10 @@ function Index() {
               What did we find comparing {totals.products} Mokobara bags?
             </h2>
             <ul className="stat-tiles">
-              <li><b>{totals.products}</b><span>bags compared</span></li>
-              <li><b>{inrN(totals.min)}–{inrN(totals.max)}</b><span>price range</span></li>
-              <li><b>6 of 10</b><span>cabin bags fit a laptop</span></li>
-              <li><b>65%</b><span>max off MRP (Aviator)</span></li>
+              <li><i className="stat-ico" aria-hidden="true"><Layers /></i><b>{totals.products}</b><span>bags compared</span></li>
+              <li><i className="stat-ico" aria-hidden="true"><IndianRupee /></i><b>{inrN(totals.min)}–{inrN(totals.max)}</b><span>price range</span></li>
+              <li><i className="stat-ico" aria-hidden="true"><Luggage /></i><b>6 of 10</b><span>cabin bags fit a laptop</span><em className="dots" aria-hidden="true">{Array.from({ length: 10 }, (_, i) => <em key={i} className={i < 6 ? "on" : ""} />)}</em></li>
+              <li><i className="stat-ico" aria-hidden="true"><BadgePercent /></i><b>65%</b><span>max off MRP (Aviator)</span><em className="stat-bar" aria-hidden="true"><em style={{ width: "65%" }} /></em></li>
             </ul>
             <Link className="arrow-link" to="/mokobara-bag-research">
               See the full research <ArrowRight aria-hidden="true" />
