@@ -63,6 +63,12 @@ export const SOCIALS = [
   { label: "7Padel on X", href: "https://x.com/7Padel_India" },
 ];
 
+/* Real customer reviews of Mokobara's Mumbai stores on Google Maps. */
+export const REVIEWS = [
+  { label: "Mokobara store reviews on Google", href: "https://www.google.com/maps/search/Mokobara+store+Mumbai" },
+  { label: "7Padel reviews on Google", href: "https://www.google.com/maps/search/7Padel+Mumbai" },
+];
+
 export const GITHUB = "https://github.com/keyanamarfatia/class-to-court";
 
 export function SiteFooter() {
@@ -91,6 +97,18 @@ export function SiteFooter() {
               <li key={s.href}>
                 <a href={s.href} target="_blank" rel="noopener noreferrer me">
                   {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="footer-social" aria-label="Customer reviews">
+          <p>Read real reviews</p>
+          <ul>
+            {REVIEWS.map((r) => (
+              <li key={r.href}>
+                <a href={r.href} target="_blank" rel="noopener noreferrer">
+                  {r.label}
                 </a>
               </li>
             ))}

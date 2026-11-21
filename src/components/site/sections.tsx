@@ -769,6 +769,11 @@ export function MumbaiSection() {
           <li><strong>8 Mokobara stores</strong> in Mumbai (mokobara.com)</li>
           <li><strong>54 7Padel courts</strong> in Mumbai, Bengaluru, Chennai, Gurugram and Pune (@7Padel_India)</li>
           <li><strong>30-day trial</strong> if you buy online instead</li>
+          <li>
+            <a href="https://www.google.com/maps/search/Mokobara+store+Mumbai" target="_blank" rel="noopener noreferrer">
+              Read Google reviews of Mokobara's Mumbai stores
+            </a>
+          </li>
         </ul>
         <div className="hero-actions">
           <a className="btn-solid" href="https://mokobara.com" target="_blank" rel="noopener noreferrer">
