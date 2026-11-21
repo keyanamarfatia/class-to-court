@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { SITE } from "@/data/catalog";
-import { Byline, articleSchema, organizationSchema, productSchema, totals, websiteSchema } from "@/components/site/eeat";
+import { Byline, articleSchema, offerSchema, organizationSchema, productSchema, totals, websiteSchema } from "@/components/site/eeat";
 import { crumbSchema } from "@/components/site/sections";
 import { FloatBtn, SiteFooter, Ticker, TopBar } from "@/components/site/chrome";
 import {
@@ -62,6 +62,10 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify(
           productSchema({ name: `Mokobara ${bags[id].name}`, image: bags[id].image, url: bags[id].url, price: Number(bags[id].price.replace(/[^\d]/g, "")), description: bags[id].facts.join(". ") }),
         ),
+      })),
+      ...bagOrder.map((id) => ({
+        type: "application/ld+json",
+        children: JSON.stringify(offerSchema({ name: `Mokobara ${bags[id].name}`, url: bags[id].url, price: Number(bags[id].price.replace(/[^\d]/g, "")) })),
       })),
       { type: "application/ld+json", children: JSON.stringify({ ...crumbSchema("Best laptop backpack for college", "/"), itemListElement: [{ "@type": "ListItem", position: 1, name: "College edit", item: SITE + "/" }] }) },
       { type: "application/ld+json", children: JSON.stringify(itemListSchema) },

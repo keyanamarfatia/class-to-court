@@ -36,8 +36,12 @@ export const personSchema = {
 
 export const publisherSchema = {
   "@type": "Organization",
+  "@id": SITE + "/#organization",
   name: "Mokobara College Edit (student concept)",
   url: SITE + "/",
+  logo: { "@type": "ImageObject", url: SITE + "/logo.png", width: 512, height: 512 },
+  founder: { "@type": "Person", name: "Keyana Marfatia" },
+  address: { "@type": "PostalAddress", addressLocality: "Mumbai", addressCountry: "IN" },
   description: "A student concept guide to Mokobara bags for college students, made for a Schbang x Atlas SkillTech brief. Not affiliated with Mokobara.",
 };
 
@@ -75,18 +79,28 @@ export function productSchema(p: { name: string; image: string; url: string; pri
   return {
     "@context": "https://schema.org",
     "@type": "Product",
+    "@id": p.url + "#product",
     name: p.name,
     image: p.image,
+    url: p.url,
     description: p.description,
     brand: { "@type": "Brand", name: "Mokobara", url: "https://mokobara.com" },
-    offers: {
-      "@type": "Offer",
-      price: p.price,
-      priceCurrency: "INR",
-      availability: "https://schema.org/InStock",
-      url: p.url,
-      seller: { "@type": "Organization", name: "Mokobara", url: "https://mokobara.com" },
-    },
+    offers: offerSchema(p, false),
+  };
+}
+
+/* Standalone Offer (also nested above) so crawlers that only read top-level types find it. */
+export function offerSchema(p: { name: string; url: string; price: number }, standalone = true) {
+  return {
+    ...(standalone ? { "@context": "https://schema.org" } : {}),
+    "@type": "Offer",
+    ...(standalone ? { "@id": p.url + "#offer", itemOffered: { "@id": p.url + "#product", name: p.name } } : {}),
+    price: p.price,
+    priceCurrency: "INR",
+    availability: "https://schema.org/InStock",
+    itemCondition: "https://schema.org/NewCondition",
+    url: p.url,
+    seller: { "@type": "Organization", name: "Mokobara", url: "https://mokobara.com" },
   };
 }
 
