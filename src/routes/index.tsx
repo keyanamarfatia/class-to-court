@@ -152,16 +152,11 @@ function Index() {
             <h1 className="hero-title" id="page-title">
               The best bag for a weekend trip, from class to court
             </h1>
-            <p className="hero-sub"><strong>The best bag for a weekend trip is the Mokobara Overnighter Backpack</strong>: it expands 21% from 19L to 23L, fits a 16-inch MacBook and costs ₹8,999 on mokobara.com, 40% below MRP. Flying? The Cabin Overnighter Luggage holds 41L for ₹11,499.</p>
             <div className="hero-actions">
               <Link className="btn-yellow" to="/bag-finder-quiz">
                 Take the 30-second quiz
               </Link>
-              <Link className="arrow-link arrow-link-light" to="/what-to-carry-to-padel">
-                First padel game <ArrowRight aria-hidden="true" />
-              </Link>
             </div>
-            <Byline light />
           </div>
           <a className="scroll-cue" href="#backpacks" aria-label="Scroll to the backpacks">
             <span />
@@ -185,6 +180,7 @@ function Index() {
             <li><b>30 days</b><span>Trial on mokobara.com</span></li>
             <li><b>12 mo</b><span>Limited warranty</span></li>
           </ul>
+          <Byline />
         </section>
 
         <section className="mk-section key-facts" aria-labelledby="facts-title">
