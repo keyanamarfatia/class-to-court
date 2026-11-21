@@ -320,7 +320,22 @@ export function BgVideo({
       io.observe(v);
       return () => io.disconnect();
     }
-    const kick = () => setTimeout(start, 600);
+    // Phones: wait for the first scroll/tap (or 4s) so the video never competes with first paint.
+    const small = window.matchMedia("(max-width: 759px)").matches;
+    const kick = () => {
+      if (!small) return void setTimeout(start, 600);
+      const go = () => {
+        cleanup();
+        start();
+      };
+      const t = setTimeout(go, 4000);
+      const evs = ["scroll", "touchstart", "pointerdown", "keydown"] as const;
+      const cleanup = () => {
+        clearTimeout(t);
+        evs.forEach((e) => window.removeEventListener(e, go));
+      };
+      evs.forEach((e) => window.addEventListener(e, go, { once: true, passive: true }));
+    };
     if (document.readyState === "complete") kick();
     else window.addEventListener("load", kick, { once: true });
     return () => window.removeEventListener("load", kick);

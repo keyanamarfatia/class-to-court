@@ -7,6 +7,8 @@
  */
 @import "tailwindcss" source(none);
 @source "../src";
+@source not "./components/ui";
+@source "./components/ui/accordion.tsx";
 @import "tw-animate-css";
 @import "@fontsource/hanken-grotesk/latin-400.css";
 @import "@fontsource/hanken-grotesk/latin-500.css";
