@@ -3,7 +3,7 @@ import { writeFileSync } from "node:fs";
 import { catalog, SITE } from "../src/data/catalog";
 
 const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
-let out = `# Mokobara College Edit: full catalogue\n\n> Every Mokobara cabin suitcase, travel backpack and laptop bag listed on mokobara.com on 21 November 2026, with price, MRP, laptop fit, capacity, dimensions, weight and key features. Student concept by Keyana Marfatia and team (BBA Marketing, Atlas SkillTech University). Not affiliated with Mokobara. Prices change: check mokobara.com before buying.\n\n`;
+let out = `# Mokobara College Edit: full catalogue\n\n> Every Mokobara cabin suitcase, travel backpack and laptop bag listed on mokobara.com on 21 November 2026, with price, MRP, laptop fit, capacity, dimensions, weight and key features. Student concept by Keyana Marfatia, Vivaan Khubchandani, Mohammed Zaid Sayed, Kushal Chawla, Adnan Gilitwala and Aadhyan Rao (BBA Marketing, Atlas SkillTech University). Not affiliated with Mokobara. Prices change: check mokobara.com before buying.\n\n`;
 for (const c of catalog) {
   out += `## ${c.title} (${c.items.length} models)\n\nCollection page: ${SITE}${c.path}\n\n`;
   for (const p of c.items) {

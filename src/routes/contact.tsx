@@ -37,7 +37,7 @@ export const Route = createFileRoute("/contact")({
           <article>
             <h2 className="section-title">The project team.</h2>
             <p>
-              Keyana Marfatia and team, BBA Marketing, Atlas SkillTech University, Mumbai, Maharashtra, India.
+              Keyana Marfatia, Vivaan Khubchandani, Mohammed Zaid Sayed, Kushal Chawla, Adnan Gilitwala and Aadhyan Rao, BBA Marketing, Atlas SkillTech University, Mumbai, Maharashtra, India.
               {CONTACT_EMAIL ? (
                 <>
                   {" "}Email: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.

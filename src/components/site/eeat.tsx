@@ -4,12 +4,13 @@ import { catalog, SITE } from "@/data/catalog";
 /* E-E-A-T: who wrote this, when, from which sources. */
 export const AUTHOR = {
   name: "Keyana Marfatia",
-  team: "Keyana Marfatia and team",
+  team: "Keyana Marfatia, Vivaan Khubchandani, Mohammed Zaid Sayed, Kushal Chawla, Adnan Gilitwala and Aadhyan Rao",
+  members: ["Keyana Marfatia", "Vivaan Khubchandani", "Mohammed Zaid Sayed", "Kushal Chawla", "Adnan Gilitwala", "Aadhyan Rao"],
   role: "BBA Marketing students, Atlas SkillTech University, Mumbai",
   credentials: "BBA Marketing degree students at Atlas SkillTech University, Mumbai, trained in SEO, AEO and digital marketing",
 };
 /* Set to the team's real email to show a mailto: contact link. */
-export const CONTACT_EMAIL: string | null = null;
+export const CONTACT_EMAIL: string | null = "keyana.marfatia.bba2025@atlasskilltech.university";
 
 export const PUBLISHED = "2026-11-21";
 export const UPDATED = "2026-11-21";
@@ -23,15 +24,16 @@ export function Byline({ light = false }: { light?: boolean }) {
           <a href="/about#authors" rel="author" itemProp="url">
             <span itemProp="name">{AUTHOR.name}</span>
           </a>
-        </span>{" "}
-        and team · <span className="byline-cred">Credentials: {AUTHOR.credentials}</span>
+        </span>
+        , Vivaan Khubchandani, Mohammed Zaid Sayed, Kushal Chawla, Adnan Gilitwala and Aadhyan Rao ·{" "}
+        <span className="byline-cred">Credentials: {AUTHOR.credentials}</span>
       </p>
       <p>
         Published on <time dateTime={PUBLISHED} itemProp="datePublished">November 21, 2026</time> · Last updated on{" "}
         <time dateTime={UPDATED} itemProp="dateModified">November 21, 2026</time> · Sources:{" "}
         <a href="https://mokobara.com" target="_blank" rel="noopener noreferrer">mokobara.com</a>,{" "}
         <a href="https://7padel.in" target="_blank" rel="noopener noreferrer">7padel.in</a> ·{" "}
-        <a href="/contact">Contact us</a>
+        <a href="/contact">Contact us</a>: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
       </p>
     </div>
   );
@@ -39,7 +41,7 @@ export function Byline({ light = false }: { light?: boolean }) {
 
 /* Meta tags crawlers read for authorship and freshness. */
 export const eeatMeta = [
-  { name: "author", content: "Keyana Marfatia and team, Atlas SkillTech University" },
+  { name: "author", content: "Keyana Marfatia, Vivaan Khubchandani, Mohammed Zaid Sayed, Kushal Chawla, Adnan Gilitwala, Aadhyan Rao (Atlas SkillTech University)" },
   { property: "article:author", content: "Keyana Marfatia" },
   { property: "article:published_time", content: PUBLISHED + "T09:00:00+05:30" },
   { property: "article:modified_time", content: UPDATED + "T11:00:00+05:30" },
@@ -63,6 +65,7 @@ export const publisherSchema = {
   logo: { "@type": "ImageObject", url: SITE + "/logo.png", width: 512, height: 512 },
   sameAs: ["https://github.com/keyanamarfatia/class-to-court"],
   founder: { "@type": "Person", name: "Keyana Marfatia" },
+  email: "keyana.marfatia.bba2025@atlasskilltech.university",
   address: { "@type": "PostalAddress", addressLocality: "Mumbai", addressCountry: "IN" },
   knowsAbout: [
     { "@type": "Brand", name: "Mokobara", url: "https://mokobara.com", sameAs: ["https://www.instagram.com/mokobara/", "https://www.linkedin.com/company/mokobara/", "https://en.wikipedia.org/wiki/Mokobara"] },
@@ -94,7 +97,7 @@ export function articleSchema(o: { path: string; headline: string; description: 
     inLanguage: "en-IN",
     datePublished: PUBLISHED,
     dateModified: UPDATED,
-    author: personSchema,
+    author: [personSchema, ...AUTHOR.members.slice(1).map((name) => ({ "@type": "Person", name, affiliation: personSchema.affiliation }))],
     publisher: publisherSchema,
     citation: ["https://mokobara.com", "https://7padel.in"],
   };
