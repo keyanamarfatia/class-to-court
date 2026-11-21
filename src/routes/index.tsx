@@ -2,7 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { SITE, catalog } from "@/data/catalog";
 import { Byline, articleSchema, eeatMeta, offerSchema, organizationSchema, productSchema, totals, websiteSchema } from "@/components/site/eeat";
-import { crumbSchema, faqSchemaFor } from "@/components/site/sections";
+import { crumbSchema, faqSchemaFor,
+  ReadMore,
+} from "@/components/site/sections";
 import { FloatBtn, SiteFooter, Ticker, TopBar } from "@/components/site/chrome";
 import {
   BgVideo,
@@ -169,11 +171,15 @@ function Index() {
             Short answer: the best Mokobara bag for a weekend trip
           </h2>
           <p className="quick-text">
-            <strong>The best bag for a weekend trip is the Mokobara Overnighter Backpack.</strong> Our 2026 analysis of
-            40 Mokobara bags found it fits a 16-inch MacBook, expands 21% from 19L to 23L and costs ₹8,999, 40% below MRP,
-            according to mokobara.com. For lectures only, the <strong>Backpack 16L</strong> fits a 15-inch laptop for
-            ₹3,999, 56% off.
+            <strong>The best bag for a weekend trip is the Mokobara Overnighter Backpack.</strong>
           </p>
+          <ReadMore>
+            <p>
+              Our 2026 analysis of 40 Mokobara bags found it fits a 16-inch MacBook, expands 21% from 19L to 23L and costs
+              ₹8,999, 40% below MRP, according to mokobara.com. For lectures only, the <strong>Backpack 16L</strong> fits a
+              15-inch laptop for ₹3,999, 56% off.
+            </p>
+          </ReadMore>
           <ul className="quick-stats">
             <li><b>16"</b><span>MacBook fit</span></li>
             <li><b>23L</b><span>Expanded</span></li>
@@ -189,6 +195,13 @@ function Index() {
             <h2 className="section-title" id="facts-title">
               What did we find comparing {totals.products} Mokobara bags?
             </h2>
+            <ul className="stat-tiles">
+              <li><b>{totals.products}</b><span>bags compared</span></li>
+              <li><b>{inrN(totals.min)}–{inrN(totals.max)}</b><span>price range</span></li>
+              <li><b>6 of 10</b><span>cabin bags fit a laptop</span></li>
+              <li><b>65%</b><span>max off MRP (Aviator)</span></li>
+            </ul>
+            <ReadMore label="How we compared them">
             <div className="facts-intro">
               <p>
                 <strong>The Mokobara College Edit</strong> is our original comparison of all {totals.products} Mokobara
@@ -203,16 +216,17 @@ function Index() {
                 <li><strong>Up to 65% off MRP</strong> on the Aviator Cabin Luggage (₹4,499)</li>
               </ul>
             </div>
+            </ReadMore>
             <div className="facts-grid">
               {keyFacts.map((f) => (
                 <article key={f.q}>
                   <h3>{f.q}</h3>
-                  <p>{f.a}</p>
                   <ul className="facts-list">
                     {f.bullets.map((b) => (
                       <li key={b}>{b}</li>
                     ))}
                   </ul>
+                  <ReadMore><p>{f.a}</p></ReadMore>
                 </article>
               ))}
             </div>
@@ -238,7 +252,7 @@ function Index() {
                     </a>
                     <div className="product-body">
                       <h3 className="product-title">Is the {b.name} right for you?</h3>
-                      <p className="cat-summary">{b.summary}</p>
+                      <ReadMore label="Why we picked it"><p className="cat-summary">{b.summary}</p></ReadMore>
                       <p className="price-row">
                         <strong>{b.price}</strong> <s>{b.mrp}</s>
                         {b.colours > 0 && <span className="colours">{b.colours} colours</span>}
@@ -300,12 +314,12 @@ function Index() {
               {collectionFacts.map((c) => (
                 <article key={c.path}>
                   <h3>{c.q}</h3>
-                  <p>{c.a}</p>
                   <ul className="facts-list">
                     {c.bullets.map((b) => (
                       <li key={b}>{b}</li>
                     ))}
                   </ul>
+                  <ReadMore><p>{c.a}</p></ReadMore>
                   <Link className="arrow-link" to={c.path}>
                     See all {c.count} {c.label} <ArrowRight aria-hidden="true" />
                   </Link>
@@ -323,11 +337,11 @@ function Index() {
         <section className="mk-section mk-section-grey" aria-labelledby="explore-title">
           <div className="mk-shell">
             <SectionHead eyebrow="Explore the edit" title="What else should I check before buying a Mokobara?" id="explore-title" />
-            <p className="facts-intro">
+            <ReadMore label="Our 4-point checklist"><p className="facts-intro">
               <strong>Before buying a Mokobara, check 4 things</strong>: laptop fit, capacity, price and returns. Our 2026
               analysis covers all 4 across 40 bags from mokobara.com: 3 of our 4 picks (75%) fit a 15.6-inch laptop or
               larger, prices run from ₹999 to ₹13,599, and every bag bought on mokobara.com comes with a 30-day trial and a 12-month limited warranty.
-            </p>
+            </p></ReadMore>
             <div className="explore-grid">
               {explore.map((e) => (
                 <Link key={e.to} to={e.to} className="explore-card">

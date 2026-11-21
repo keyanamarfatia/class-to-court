@@ -559,6 +559,15 @@ export function FaqList({ items, prefix }: { items: { q: string; a: string }[]; 
   );
 }
 
+export function ReadMore({ children, label = "Read more" }: { children: React.ReactNode; label?: string }) {
+  return (
+    <details className="more">
+      <summary>{label}</summary>
+      <div className="more-body">{children}</div>
+    </details>
+  );
+}
+
 export function SectionHead({ eyebrow, title, id, link }: { eyebrow: string; title: string; id: string; link?: { href: string; label: string } }) {
   return (
     <div className="section-head">
@@ -650,12 +659,12 @@ export function DetailsSection() {
             <img src={img(d.src, 500)} srcSet={srcSet(d.src, [300, 500, 700])} sizes="(min-width: 1024px) 23vw, (min-width: 760px) 45vw, 74vw" alt={d.alt} loading="lazy" decoding="async" width={500} height={600} />
             <figcaption>
               <h3>{d.title}</h3>
-              <p>{d.body}</p>
               <ul className="facts-list">
                 {d.bullets.map((b) => (
                   <li key={b}>{b}</li>
                 ))}
               </ul>
+              <ReadMore><p>{d.body}</p></ReadMore>
             </figcaption>
           </figure>
         ))}
