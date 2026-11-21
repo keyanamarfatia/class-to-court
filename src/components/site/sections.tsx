@@ -160,10 +160,30 @@ export const padelAnswer =
 
 export const OV = `${CDN}/files/The-Overnighter-Backpack_2.0_Headspace`;
 export const details = [
-  { src: `${OV}-3_50892455-d978-4cb8-b445-4d9baedfa082.jpg`, title: "Front pocket turns into a sling", body: "The Overnighter's front pocket unclips into a separate sling bag with its own belt, so 1 bag becomes 2: a 19L–23L backpack for class and a sling for the padel court.", alt: "Overnighter front pocket detaching into a sling bag" },
-  { src: `${OV}-7_2d6d6e9c-2342-4eb0-b931-b72851438572.jpg`, title: "19L to 23L when you need it", body: "The Overnighter holds 19L for class and its body expands by 6 cm to 23L after class: 4 extra litres, enough for court shoes, a towel and a change of clothes.", alt: "Overnighter expanding from 19L to 23L" },
-  { src: `${OV}-8_ad360e32-50b9-4c2d-beb0-918bbbd61166.jpg`, title: "Flat-opening tech compartment", body: "The 180° flat-opening tech compartment has 5 pockets and microsuede lining for a 16-inch MacBook, an iPad, books and chargers, out of 17 pockets in total.", alt: "Overnighter flat-opening tech compartment with microsuede lining" },
-  { src: `${OV}-10_dd0eb0e4-54a4-486a-99b1-40606551b06f.jpg`, title: "Built for the long commute", body: "A breathable air mesh back, padded adjustable straps and a USB charging port make the 45 x 31 x 13.5 cm Overnighter easier to carry on a long Mumbai commute.", alt: "Overnighter air mesh back panel and padded shoulder straps" },
+  {
+    src: `${OV}-3_50892455-d978-4cb8-b445-4d9baedfa082.jpg`,
+    title: "Can the Mokobara Overnighter turn into a sling bag?",
+    body: "Yes. According to mokobara.com, the Overnighter Backpack's front pocket detaches into a separate sling bag with its own belt. That makes 1 bag into 2: a 19L to 23L backpack for class, and a small sling for your phone, cards and keys on the padel court.",
+    alt: "Overnighter front pocket detaching into a sling bag",
+  },
+  {
+    src: `${OV}-7_2d6d6e9c-2342-4eb0-b931-b72851438572.jpg`,
+    title: "How much does the Mokobara Overnighter expand?",
+    body: "The Mokobara Overnighter Backpack holds 19L for class and its expandable body adds 6 cm to reach 23L, about 21% more space. Those 4 extra litres fit court shoes, a towel and a change of clothes after class, according to mokobara.com.",
+    alt: "Overnighter expanding from 19L to 23L",
+  },
+  {
+    src: `${OV}-8_ad360e32-50b9-4c2d-beb0-918bbbd61166.jpg`,
+    title: "Does the Mokobara Overnighter protect a 16-inch MacBook?",
+    body: "Yes. The Overnighter's padded laptop compartment fits a 16-inch MacBook (15.6-inch for other laptops), opens 180° flat and has microsuede lining. Mokobara lists a separate tech compartment with 5 pockets for an iPad, books and chargers, and 17 pockets in total.",
+    alt: "Overnighter flat-opening tech compartment with microsuede lining",
+  },
+  {
+    src: `${OV}-10_dd0eb0e4-54a4-486a-99b1-40606551b06f.jpg`,
+    title: "Is the Mokobara Overnighter comfortable for a long commute?",
+    body: "Mokobara built the Overnighter for all-day carrying: padded, adjustable shoulder straps, a breathable air mesh back and a USB port to charge your phone. It measures 45 x 31 x 13.5 cm, so it stays compact on a crowded Mumbai local train.",
+    alt: "Overnighter air mesh back panel and padded shoulder straps",
+  },
 ];
 
 /* Mumbai stores as listed on the mokobara.com homepage, 21 Nov 2026. */
@@ -229,12 +249,20 @@ export const collegeFaqs = [
 
 export const hesitations = [
   {
-    title: "Will it fit my laptop?",
-    body: "Overnighter: 16\" MacBook. Backpack Pro: 15.6\" or 16\" MacBook Pro. Backpack 16L: 15\".",
+    title: "Will a Mokobara backpack fit my laptop?",
+    body: "Check the sleeve size. According to mokobara.com, the Overnighter fits a 16-inch MacBook (15.6-inch for other laptops), the Backpack Pro 21L fits 15.6-inch laptops or a 16-inch MacBook Pro, and the Backpack 16L fits a 15-inch laptop. 3 of our 4 picks take a 15.6-inch laptop or larger.",
     icon: Laptop,
   },
-  { title: "Will it hurt on a long commute?", body: "The Mokobara Overnighter has padded shoulder straps and a breathable air mesh back, built for all-day carrying on a long commute.", icon: Train },
-  { title: "What if I don't like it?", body: "Mokobara offers a 30-day trial with a full refund and a 12-month limited warranty on bags bought from mokobara.com.", icon: ShieldCheck },
+  {
+    title: "Will a Mokobara backpack hurt on a long commute?",
+    body: "The Mokobara Overnighter has padded, adjustable shoulder straps and a breathable air mesh back designed for all-day carrying. At 13.5 cm deep it is slimmer than Mokobara's 16 cm deep Transit Backpack 30L, and its 19L base size keeps the load light on days without padel.",
+    icon: Train,
+  },
+  {
+    title: "What if I don't like my Mokobara bag?",
+    body: "Mokobara offers a 30-day trial on mokobara.com: if the bag isn't right, you can return it for a full refund. Every bag bought there also carries a 12-month limited warranty covering defective materials or components, though not normal wear and tear.",
+    icon: ShieldCheck,
+  },
 ];
 
 export const comparison: { label: string; values: Record<BagId, string> }[] = [
