@@ -163,7 +163,7 @@ export const details = [
   {
     src: `${OV}-3_50892455-d978-4cb8-b445-4d9baedfa082.jpg`,
     title: "Can the Mokobara Overnighter turn into a sling bag?",
-    body: "Yes. According to mokobara.com, the Overnighter Backpack's front pocket detaches into a separate sling bag with its own belt. That makes 1 bag into 2: a 19L to 23L backpack for class, and a small sling for your phone, cards and keys on the padel court.",
+    body: "Yes. Our research of the mokobara.com listing confirms the Overnighter Backpack's front pocket detaches into a separate sling bag with its own belt. That makes 1 bag into 2: a 19L to 23L backpack for class, and a small sling for your phone, cards and keys on the padel court.",
     alt: "Overnighter front pocket detaching into a sling bag",
   },
   {
@@ -749,12 +749,12 @@ export function MumbaiSection() {
       <div>
         <p className="pill pill-dark">Mumbai</p>
         <h2 className="section-title" id="mumbai-title">
-          Try it on in Mumbai, then hit the court.
+          Where can I try a Mokobara bag in Mumbai?
         </h2>
         <p className="mumbai-text">
-          Not sure about fit? Mokobara's homepage lists 8 stores in Mumbai, from Linking Road in Khar West to T2 at
-          Mumbai Airport, so you can bring your laptop and try the Overnighter in person before you buy. 7Padel's
-          official X account lists courts in Mumbai, Bengaluru, Chennai, Gurugram and Pune; book on 7padel.in.
+          Our research found 8 Mokobara stores in Mumbai listed on mokobara.com, from Linking Road in Khar West to T2
+          at Mumbai Airport, so you can bring your laptop and test the 19L to 23L Overnighter in person. 7Padel's
+          official X account lists 54 courts across 5 cities, including Mumbai; book on 7padel.in.
         </p>
         <div className="hero-actions">
           <a className="btn-solid" href="https://mokobara.com" target="_blank" rel="noopener noreferrer">

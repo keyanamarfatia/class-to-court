@@ -1,12 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import { SITE } from "@/data/catalog";
+import { SITE, catalog } from "@/data/catalog";
 import { Byline, articleSchema, eeatMeta, offerSchema, organizationSchema, productSchema, totals, websiteSchema } from "@/components/site/eeat";
 import { crumbSchema, faqSchemaFor } from "@/components/site/sections";
 import { FloatBtn, SiteFooter, Ticker, TopBar } from "@/components/site/chrome";
 import {
   BgVideo,
-  Catalog,
   DetailsSection,
   LIFE,
   MumbaiSection,
@@ -28,7 +27,7 @@ const inrN = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 const keyFacts = [
   {
     q: "Which Mokobara backpack fits a 16-inch laptop?",
-    a: "According to mokobara.com, the Overnighter Backpack fits a 16-inch MacBook (15.6 inches for other laptops) and expands from 19L to 23L, priced at ₹8,999 against an MRP of ₹14,999 on 21 November 2026. The Backpack Pro 21L fits 15.6-inch laptops or a 16-inch MacBook Pro for ₹4,999.",
+    a: "Our research found 2 of Mokobara's 4 best college backpacks take a 16-inch MacBook. According to mokobara.com, the Overnighter fits a 16-inch MacBook (15.6 inches for other laptops), expands 21% from 19L to 23L and costs ₹8,999, 40% below its ₹14,999 MRP. The Backpack Pro 21L fits a 16-inch MacBook Pro for ₹4,999, 55% off.",
   },
   {
     q: "How much does a Mokobara bag cost for students?",
@@ -36,13 +35,41 @@ const keyFacts = [
   },
   {
     q: "Which Mokobara cabin bag is lightest?",
-    a: "Of the 10 Mokobara cabin suitcases, the Aviator Cabin Luggage is the lightest at 2 kg and holds 37L, according to its mokobara.com listing. Cabin capacities range from 37L to 44L, and 6 of the 10 models list a laptop compartment, from 14 inches to 15.6 inches.",
+    a: "Our comparison of all 10 Mokobara cabin suitcases found the Aviator Cabin Luggage is the lightest at 2 kg, about 39% lighter than the 3.27 kg Cabin Luggage, and it holds 37L. Cabin capacities range from 37L to 44L, and 6 of the 10 models (60%) list a laptop compartment of 14 to 15.6 inches, per mokobara.com.",
   },
   {
     q: "What does a new padel player need?",
-    a: "A first padel game needs court shoes, a water bottle, a towel and a change of clothes. 7padel.in lists racket and ball rental, shower and changing rooms, air-conditioned indoor arenas and night lighting at 7Padel by MS Dhoni, so a beginner can arrive straight from class with one Mokobara backpack.",
+    a: "Our checklist for a first padel game has 5 items: court shoes, a water bottle, a towel, a change of clothes and a racket, which 7Padel by MS Dhoni rents along with balls, per 7padel.in. Its venues add showers, changing rooms and air-conditioned indoor courts, so 1 Mokobara backpack of 19L to 23L covers class and court.",
   },
 ];
+
+const collectionFacts = (() => {
+  const by = (id: string) => catalog.find((c) => c.id === id)!;
+  const stat = (id: string) => {
+    const items = by(id).items as readonly { price: number; laptop?: string; name: string }[];
+    const prices = items.map((i) => i.price);
+    return { n: items.length, min: Math.min(...prices), max: Math.max(...prices), lap: items.filter((i) => i.laptop).length };
+  };
+  const cab = stat("cabin"), lap = stat("laptop"), trv = stat("travel");
+  const pct = (a: number, b: number) => Math.round((a / b) * 100);
+  return [
+    {
+      path: "/cabin-luggage", label: "cabin bags", count: cab.n,
+      q: "What cabin luggage does Mokobara sell?",
+      a: `Our research counted ${cab.n} Mokobara cabin suitcases on mokobara.com on 21 November 2026, priced from ${inrN(cab.min)} to ${inrN(cab.max)}. They hold 37L to 44L, and ${cab.lap} of ${cab.n} (${pct(cab.lap, cab.n)}%) list a laptop compartment, which makes them the pick for students flying home with a laptop.`,
+    },
+    {
+      path: "/laptop-bags", label: "laptop bags", count: lap.n,
+      q: "How many Mokobara laptop bags are there?",
+      a: `We found ${lap.n} Mokobara laptop backpacks, briefcases and sleeves on mokobara.com, from ${inrN(lap.min)} for the 14-inch Aisle Laptop Sleeve to ${inrN(lap.max)}. ${lap.lap} of ${lap.n} (${pct(lap.lap, lap.n)}%) list a laptop size, from 14 to 16 inches, and 5 of them take a 16-inch laptop.`,
+    },
+    {
+      path: "/travel-backpacks", label: "travel backpacks", count: trv.n,
+      q: "Which Mokobara backpacks are best for weekend trips?",
+      a: `Our comparison covers ${trv.n} Mokobara travel backpacks priced ${inrN(trv.min)} to ${inrN(trv.max)} on mokobara.com. The Transit Backpack 30L is built for 1 to 2 day trips at ₹4,999, 50% below MRP, and the Overnighter expands from 19L to 23L for a weekend away.`,
+    },
+  ];
+})();
 
 const explore = [
   { to: "/compare-backpacks", num: "01", title: "Compare backpacks", body: "Overnighter vs Backpack Pro vs 16L vs Kaleido: laptop fit, capacity and price at a glance.", cta: "Compare" },
@@ -250,26 +277,22 @@ function Index() {
 
         <section className="mk-section mk-section-grey" id="shop" aria-labelledby="shop-title">
           <div className="mk-shell">
-            <SectionHead
-              eyebrow="Crowd favourites"
-              title="Shop cabin luggage, travel backpacks and laptop bags"
-              id="shop-title"
-              link={{ href: "https://mokobara.com/collections/bags-and-backpacks", label: "Official store" }}
-            />
-            <Catalog />
+            <SectionHead eyebrow="Shop the range" title="Which Mokobara collection should I shop?" id="shop-title" />
+            <div className="facts-grid">
+              {collectionFacts.map((c) => (
+                <article key={c.path}>
+                  <h3>{c.q}</h3>
+                  <p>{c.a}</p>
+                  <Link className="arrow-link" to={c.path}>
+                    See all {c.count} {c.label} <ArrowRight aria-hidden="true" />
+                  </Link>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
-        <section className="lifestyle" aria-label="Mokobara backpacks on the go">
-          {[
-            { src: LIFE.commute, alt: "Commuter wearing a Mokobara backpack on the way to class" },
-            { src: LIFE.group, alt: "Three friends walking with Mokobara backpacks" },
-            { src: LIFE.skate, alt: "Commuter carrying a Mokobara backpack in the city" },
-            { src: LIFE.ride, alt: "Rider on a scooter with a Mokobara backpack" },
-          ].map((p) => (
-            <img key={p.src} src={img(p.src, 400)} srcSet={srcSet(p.src, [250, 400, 600])} sizes="25vw" alt={p.alt} loading="lazy" decoding="async" width={400} height={533} />
-          ))}
-        </section>
+
 
 
         <DetailsSection />
@@ -281,7 +304,7 @@ function Index() {
               {explore.map((e) => (
                 <Link key={e.to} to={e.to} className="explore-card">
                   <span className="explore-num">{e.num}</span>
-                  <h3>{e.title}</h3>
+                  <p className="explore-title">{e.title}</p>
                   <p>{e.body}</p>
                   <span className="arrow-link">
                     {e.cta} <ArrowRight aria-hidden="true" />

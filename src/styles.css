@@ -910,3 +910,6 @@
 .facts-intro { max-width: 68ch; margin: 14px 0 0; color: #333; font-size: 16px; line-height: 1.6; }
 .home-table { margin-top: 28px; background: var(--mk-grey); }
 .compare-table caption { caption-side: top; padding: 14px 16px 6px; color: var(--mk-slate); font-size: 14px; font-weight: 600; text-align: left; }
+
+.explore-title { margin: 0; color: var(--mk-slate); font-size: 22px; font-weight: 500; letter-spacing: -0.02em; }
+.facts-grid .arrow-link { margin-top: 12px; }
